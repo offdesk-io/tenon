@@ -1,6 +1,7 @@
+import type { CSSProperties } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Card } from '../../src';
-import { THEMES, cssName, themeScope, tokens } from './data';
+import { THEMES, cssName, themeNames, themeScope, tokens } from './data';
 import './tokens.css';
 
 const meta = {
@@ -19,14 +20,14 @@ export const Elevation: Story = {
     <div className="tk-page">
       <h1 className="tenon-heading-1">Elevation</h1>
       <p>
-        {elevations.length} shadows, each on a Card in light, dark and 1984. Each panel is painted in its own
+        {elevations.length} shadows, each on a Card in {themeNames}. Each panel is painted in its own
         theme whatever the toolbar says, because a shadow is a theme token and changes with the theme.
       </p>
       {elevations.map((k) => (
         <section key={k} className="tk-section">
           <h2 className="tenon-heading-2">{k}</h2>
           <div className="tk-scroll">
-            <div className="tk-elev">
+            <div className="tk-elev" style={{ '--tk-themes': THEMES.length } as CSSProperties}>
               {THEMES.map((t) => (
                 <div key={t} className="tk-elev__panel" style={themeScope(t, true)}>
                   <span className="tenon-label">{t}</span>

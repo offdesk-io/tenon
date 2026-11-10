@@ -49,6 +49,14 @@ and Tenon collapses both onto the single scale. Radius keeps names (`radius.md`,
 `radius.full`) because a radius is the one measurement a component should not
 pick freely, but those names alias the same scale everything else reads.
 
+The names are also what lets a theme change its corners. A
+`tokens/semantic/radius.<theme>.json` points any of them at a different step,
+and the build writes those picks at the end of that theme's block, so a theme
+can be squarer or rounder while every component reads the same
+`--tenon-radius-lg` it always did. The file may only replace names the shared
+file already has, which keeps a new radius a decision for every theme at once.
+No theme has one yet.
+
 If a compact or scaled density ever arrives, the dimension scale itself becomes
 mode-aware. Every `var()` call site stays exactly as it is.
 
@@ -106,8 +114,8 @@ Weights collapse from the task board's thirteen — which included 520, 560, 570
 Text styles are shared by every theme, and a theme can replace some of them.
 `tokens/semantic/typography.<theme>.json` holds only the styles that differ, and
 the build writes them at the end of that theme's block, so every class and
-component that reads a text style follows. Today only `1984` has
-one: Fraunces for `title`, `stat` and `heading-1` to `heading-5`, Inter for the rest,
+component that reads a text style follows. Light never has one, since light
+is the shared styles, and today only `1984` does: Fraunces for `title`, `stat` and `heading-1` to `heading-5`, Inter for the rest,
 and the site's fluid `clamp()` sizes, which sit off the ladder above on purpose.
 Inter is Tenon's intended font. `tenon.css` loads Inter and Fraunces from Google
 Fonts with an `@import` on its first line, so a consumer needs no font setup
@@ -132,9 +140,10 @@ npm run dev        # Storybook, localhost:5199
 ```
 
 `scripts/build.mjs` writes `dist/tenon.css` and `dist/tenon.tokens.json`, and
-refuses to write either if any of six checks fail: light, dark and 1984
-must hold the identical key set, a theme's typography file may only replace text
-styles the shared file has, every `{alias}` must resolve, no semantic token may
+refuses to write either if any of seven checks fail: every theme in
+`tokens/themes.json` must hold light's key set, a theme's typography file may
+only replace text styles the shared file has, its radius file may only replace
+radii the shared file has, every `{alias}` must resolve, no semantic token may
 alias another semantic token, no component CSS may name a colour primitive,
 and every `--tenon-` name a component reads must be one the build emits.
 
@@ -256,9 +265,11 @@ Above the components, Storybook's Tokens section has five pages, in
 elevation. They draw every token from `dist/tenon.tokens.json`, and read the
 source files in `tokens/` only for which primitive a token aliases, so a token
 change shows up there after `npm run tokens` with nothing to edit. The theme
-colour and elevation pages paint light, dark and 1984 side by side by setting a
-theme's resolved values as custom properties on a wrapper, which is why they
-read the same whatever the toolbar is set to.
+colour and elevation pages paint every theme in `tokens/themes.json` side by
+side by setting a theme's resolved values as custom properties on a wrapper,
+which is why they read the same whatever the toolbar is set to. The toolbar's
+switch reads the same list, so a new theme gets its column and its switch entry
+from the build's own file.
 
 **The last seven came from two apps that had each drawn their own.** The chat
 engine supplied the `Modal` (its window), `Textarea` (its composer), `Spinner`
@@ -370,8 +381,13 @@ preview had been rendering on browser defaults and looked plausible.
 
 `:root` carries light. Dark applies when the system asks for it, unless
 `[data-theme="light"]` is set, and applies unconditionally under
-`[data-theme="dark"]`. A manual toggle needs no rebuild. The 1984 theme is never
-automatic: it applies only under `:root[data-theme="1984"]`.
+`[data-theme="dark"]`. A manual toggle needs no rebuild. Light and dark are the
+only automatic themes, and `tokens/themes.json` lists the rest. Each of those,
+`1984` today, is never automatic: it applies only under
+`:root[data-theme="<name>"]`, written with `:root` so it outranks the automatic
+dark rule on a system set to dark. Adding one is a line in that list and a
+`tokens/semantic/color.<name>.json` holding light's keys, and the build writes
+its block and checks it like the others.
 
 ```css
 .card {

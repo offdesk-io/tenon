@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 import type { CSSProperties } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import {
-  THEMES, groupBy, shortAlias, themeAlias, themeDescription, themeScope, tokens,
+  THEMES, groupBy, shortAlias, themeAlias, themeDescription, themeNames, themeScope, tokens,
   type ThemeName,
 } from './data';
 import './tokens.css';
@@ -76,7 +76,7 @@ export const ThemeColours: Story = {
     <div className="tk-page">
       <h1 className="tenon-heading-1">Theme colours</h1>
       <p>
-        Every semantic colour, {keys.length} of them, in light, dark and 1984 side by side. Each column is
+        Every semantic colour, {keys.length} of them, in {themeNames} side by side. Each column is
         painted in its own theme whatever the toolbar says. Under each value is the primitive it aliases,
         or literal where it carries an alpha no ramp step has. Shadows are on the Elevation page.
       </p>
@@ -85,7 +85,7 @@ export const ThemeColours: Story = {
           <h2 className="tenon-heading-2">{family}</h2>
           {FAMILY_NOTES[family] && <p>{FAMILY_NOTES[family]}</p>}
           <div className="tk-scroll">
-            <div className="tk-table">
+            <div className="tk-table" style={{ '--tk-themes': THEMES.length } as CSSProperties}>
               <span className="tk-table__head tenon-label">Token</span>
               {THEMES.map((t) => <span key={t} className="tk-table__head tenon-label">{t}</span>)}
               {list.map((k) => (

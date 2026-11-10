@@ -35,7 +35,8 @@
 .tk-swatch .tk-code { font-size: var(--tenon-text-caption-sm-size); white-space: nowrap; }
 
 /* ---- theme colours ---- */
-.tk-table { display: grid; grid-template-columns: minmax(12rem, 1.1fr) repeat(3, minmax(11rem, 1fr)); min-width: 48rem; }
+/* --tk-themes is the number of themes, set by the page from the theme list. */
+.tk-table { display: grid; grid-template-columns: minmax(12rem, 1.1fr) repeat(var(--tk-themes, 3), minmax(11rem, 1fr)); min-width: 48rem; }
 .tk-table__head {
   background: var(--tenon-background-default);
   padding: var(--tenon-dimension-100) var(--tenon-dimension-150);
@@ -104,6 +105,12 @@
 .tk-bar--zero { background: none; border-left: 1px dashed var(--tenon-stroke-strong); }
 .tk-radii { display: grid; grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr)); gap: var(--tenon-dimension-200); }
 .tk-radius { display: flex; flex-direction: column; gap: var(--tenon-dimension-075); }
+.tk-radius--theme {
+  border-radius: var(--tenon-radius-md);
+  padding: var(--tenon-dimension-100);
+  background: var(--tenon-background-default);
+  color: var(--tenon-text-default);
+}
 .tk-radius__shape {
   width: var(--tenon-dimension-1200); height: var(--tenon-dimension-1200);
   background: var(--tenon-background-selected);
@@ -111,7 +118,7 @@
 }
 
 /* ---- elevation ---- */
-.tk-elev { display: grid; grid-template-columns: repeat(3, minmax(14rem, 1fr)); gap: var(--tenon-dimension-200); min-width: 44rem; }
+.tk-elev { display: grid; grid-template-columns: repeat(var(--tk-themes, 3), minmax(14rem, 1fr)); gap: var(--tenon-dimension-200); min-width: 44rem; }
 .tk-elev__panel {
   background: var(--tenon-background-default);
   color: var(--tenon-text-default);
