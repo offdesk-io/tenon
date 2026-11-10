@@ -118,6 +118,23 @@ primitives.base = {
   soon:   { $type: 'color', $value: '{color.amber.600}', $description: 'In the amber ramp, at a step legible as text. Fills the timeline\'s due-soon bar and a tag\'s text colour.' },
 };
 
+/* OFFDESK's brand palette, exactly as its brand book prints it, for the two
+   OFFDESK themes. A group of its own rather than more base colours, because
+   these are one brand's values and not Tenon's: nothing outside the OFFDESK
+   themes should read them, and they sit off the ramps on purpose. Source:
+   OFFDESK's brand stylesheet, brand/AGENTS/design-md/assets/ofd-brand.css,
+   5 Nov 2026. White is base.white, which is the same #ffffff. */
+primitives.offdesk = {
+  ink:          { $type: 'color', $value: '#141414', $description: 'Ink. All type, all rules, and the contrast surface. The light theme\'s actions and links.' },
+  concrete:     { $type: 'color', $value: '#e7e5e0', $description: 'Concrete. The default page ground, and type on Ink.' },
+  orange:       { $type: 'color', $value: '#e2481c', $description: 'Safety orange, the one signal per layout. Never a button, a link or text.' },
+  yellow:       { $type: 'color', $value: '#f2c500', $description: 'Signal yellow. Full-bleed grounds only, which Tenon has no token for, so no theme reads it yet.' },
+  steel:        { $type: 'color', $value: '#9a9a96', $description: 'Raw steel. Hairlines, inactive bars, and captions on Ink.' },
+  'steel-dark': { $type: 'color', $value: '#4a4a48', $description: 'Raw steel\'s stand-in on Concrete, for secondary text and borders.' },
+  blue:         { $type: 'color', $value: '#2440a8', $description: 'IBM blue. Technical diagrams and dense data, never beside orange.' },
+  'ink-raised': { $type: 'color', $value: '#1f1f1f', $description: 'Panels on Ink in the dark theme. The brand sheet marks this one derived itself: Ink lifted one step.' },
+};
+
 writeFileSync(OUT, JSON.stringify({
   $schema: 'https://www.designtokens.org/schemas/2025.10/format.json',
   $description: 'Tenon colour primitives. Generated, not authored.',

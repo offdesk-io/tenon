@@ -21,6 +21,16 @@
       "mono": {
         "$type": "fontFamily",
         "$value": ["ui-monospace", "SFMono-Regular", "SF Mono", "Menlo", "Consolas", "monospace"]
+      },
+      "archivo": {
+        "$type": "fontFamily",
+        "$value": ["Archivo", "Helvetica Neue", "Arial", "sans-serif"],
+        "$description": "OFFDESK's sans, with the fallback stack its brand book prints. Loaded by dist/tenon-fonts-offdesk.css, which tenon.css does not import."
+      },
+      "plex-mono": {
+        "$type": "fontFamily",
+        "$value": ["IBM Plex Mono", "ui-monospace", "Menlo", "monospace"],
+        "$description": "OFFDESK's mono, for labels, metadata and code only. Loaded by dist/tenon-fonts-offdesk.css."
       }
     },
     "size": {

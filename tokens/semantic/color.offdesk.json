@@ -1,0 +1,494 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "$description": "Tenon semantic colour, OFFDESK theme: Concrete ground, Ink type and actions, and Safety orange kept to the one signal, never a button or a link. Brand roles come from OFFDESK's brand stylesheet (brand/AGENTS/design-md/assets/ofd-brand.css, 5 Nov 2026) and its DESIGN.md. Every value the brand does not state says \"Derived\" and what from. OFFDESK has no status colours, so those take Tenon ramps, stepped from the light theme's picks until the build's contrast rules pass. Corners and shadows are in radius.offdesk.json and below. Same key set as light; scripts/build.mjs fails if it drifts.",
+  "color": {
+    "background": {
+      "default": {
+        "$type": "color",
+        "$value": "{color.offdesk.concrete}",
+        "$description": "Brand: Concrete, the default page ground (--ofd-surface)."
+      },
+      "raised": {
+        "$type": "color",
+        "$value": "{color.base.white}",
+        "$description": "Brand: white, the neutral surface for panels (--ofd-surface-neutral)."
+      },
+      "sunken": {
+        "$type": "color",
+        "$value": "{color.grey.200}",
+        "$description": "Derived: OFFDESK has no tint ladder. Concrete sits at grey.150 on Tenon's zero-chroma grey ramp, so this keeps the light theme's distance from its page ground on that ramp (neutral.100 in light)."
+      },
+      "subtle": {
+        "$type": "color",
+        "$value": "{color.grey.200}",
+        "$description": "Derived: OFFDESK has no tint ladder. Concrete sits at grey.150 on Tenon's zero-chroma grey ramp, so this keeps the light theme's distance from its page ground on that ramp (neutral.100 in light)."
+      },
+      "hovered": {
+        "$type": "color",
+        "$value": "{color.grey.200}",
+        "$description": "Derived: OFFDESK has no tint ladder. Concrete sits at grey.150 on Tenon's zero-chroma grey ramp, so this keeps the light theme's distance from its page ground on that ramp (neutral.100 in light)."
+      },
+      "active": {
+        "$type": "color",
+        "$value": "{color.grey.250}",
+        "$description": "Derived: OFFDESK has no tint ladder. Concrete sits at grey.150 on Tenon's zero-chroma grey ramp, so this keeps the light theme's distance from its page ground on that ramp (neutral.150 in light)."
+      },
+      "selected": {
+        "$type": "color",
+        "$value": "{color.grey.250}",
+        "$description": "Derived: OFFDESK has no tint ladder. Concrete sits at grey.150 on Tenon's zero-chroma grey ramp, so this keeps the light theme's distance from its page ground on that ramp (blue.100 in light)."
+      },
+      "accent": {
+        "$type": "color",
+        "$value": "{color.offdesk.ink}",
+        "$description": "Brand: action is Ink, never orange (--ofd-action)."
+      },
+      "accent-hovered": {
+        "$type": "color",
+        "$value": "{color.offdesk.steel-dark}",
+        "$description": "Brand: --ofd-action-hovered."
+      },
+      "accent-active": {
+        "$type": "color",
+        "$value": "{color.grey.800}",
+        "$description": "Derived: the brand sheet has no pressed state. grey.800 sits between Ink and Raw steel dark."
+      },
+      "neutral": {
+        "$type": "color",
+        "$value": "{color.grey.250}",
+        "$description": "Derived: OFFDESK has no tint ladder. Concrete sits at grey.150 on Tenon's zero-chroma grey ramp, so this keeps the light theme's distance from its page ground on that ramp (neutral.150 in light)."
+      },
+      "neutral-hovered": {
+        "$type": "color",
+        "$value": "{color.grey.300}",
+        "$description": "Derived: OFFDESK has no tint ladder. Concrete sits at grey.150 on Tenon's zero-chroma grey ramp, so this keeps the light theme's distance from its page ground on that ramp (neutral.200 in light)."
+      },
+      "neutral-active": {
+        "$type": "color",
+        "$value": "{color.grey.350}",
+        "$description": "Derived: OFFDESK has no tint ladder. Concrete sits at grey.150 on Tenon's zero-chroma grey ramp, so this keeps the light theme's distance from its page ground on that ramp (neutral.250 in light)."
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "{color.offdesk.ink}",
+        "$description": "Brand: the Ink contrast surface (--ofd-surface-contrast)."
+      },
+      "inverse-hovered": {
+        "$type": "color",
+        "$value": "{color.grey.900}",
+        "$description": "Derived: one grey step lighter than Ink, as light steps its inverse."
+      },
+      "inverse-active": {
+        "$type": "color",
+        "$value": "{color.grey.850}",
+        "$description": "Derived: two grey steps lighter than Ink, as light steps its inverse."
+      },
+      "input": {
+        "$type": "color",
+        "$value": "{color.base.white}",
+        "$description": "Brand: --ofd-surface-input."
+      },
+      "input-hovered": {
+        "$type": "color",
+        "$value": "{color.grey.50}",
+        "$description": "Derived: the brand sheet has no input hover. grey.50 is the step off white, as light uses neutral.50."
+      },
+      "input-active": {
+        "$type": "color",
+        "$value": "{color.base.white}",
+        "$description": "Brand: --ofd-surface-input."
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{color.grey.200}",
+        "$description": "Derived: OFFDESK has no tint ladder. Concrete sits at grey.150 on Tenon's zero-chroma grey ramp, so this keeps the light theme's distance from its page ground on that ramp (neutral.100 in light)."
+      },
+      "skeleton": {
+        "$type": "color",
+        "$value": "{color.grey.250}",
+        "$description": "Derived: OFFDESK has no tint ladder. Concrete sits at grey.150 on Tenon's zero-chroma grey ramp, so this keeps the light theme's distance from its page ground on that ramp (neutral.150 in light)."
+      },
+      "success": {
+        "$type": "color",
+        "$value": "{color.green.650}",
+        "$description": "Derived: OFFDESK has no status colours. The light theme's green.600, moved darker until Concrete text on it clears 4.5:1."
+      },
+      "success-subtle": {
+        "$type": "color",
+        "$value": "{color.green.100}",
+        "$description": "Derived: the light theme's tint."
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "{color.amber.650}",
+        "$description": "Derived: OFFDESK has no status colours. The light theme's amber.600, moved darker until Concrete text on it clears 4.5:1."
+      },
+      "warning-subtle": {
+        "$type": "color",
+        "$value": "{color.amber.100}",
+        "$description": "Derived: the light theme's tint."
+      },
+      "error": {
+        "$type": "color",
+        "$value": "{color.red.600}",
+        "$description": "Derived: OFFDESK has no status colours. The light theme's red.550, moved darker until Concrete text on it clears 4.5:1."
+      },
+      "error-subtle": {
+        "$type": "color",
+        "$value": "{color.red.100}",
+        "$description": "Derived: the light theme's tint."
+      },
+      "info": {
+        "$type": "color",
+        "$value": "{color.blue.650}",
+        "$description": "Derived: OFFDESK has no status colours. The light theme's blue.550, moved darker until Concrete text on it clears 4.5:1."
+      },
+      "info-subtle": {
+        "$type": "color",
+        "$value": "{color.blue.100}",
+        "$description": "Derived: the light theme's tint."
+      },
+      "running": {
+        "$type": "color",
+        "$value": "{color.orange.650}",
+        "$description": "Derived: OFFDESK has no status colours. The light theme's orange.550, moved darker until Concrete text on it clears 4.5:1."
+      },
+      "running-subtle": {
+        "$type": "color",
+        "$value": "{color.orange.100}",
+        "$description": "Derived: the light theme's tint."
+      },
+      "overlay": {
+        "$type": "color",
+        "$value": "#141414a6",
+        "$description": "Derived: Ink at the light theme's overlay alpha. Literal, since no primitive carries alpha."
+      }
+    },
+    "text": {
+      "default": {
+        "$type": "color",
+        "$value": "{color.offdesk.ink}",
+        "$description": "Brand: --ofd-text-primary."
+      },
+      "subtle": {
+        "$type": "color",
+        "$value": "{color.offdesk.steel-dark}",
+        "$description": "Brand: --ofd-text-secondary, Raw steel's stand-in on Concrete."
+      },
+      "faint": {
+        "$type": "color",
+        "$value": "{color.grey.650}",
+        "$description": "Derived: the brand has two text greys. grey.650 is the lightest grey step that still clears 4.5:1 on Concrete."
+      },
+      "accent": {
+        "$type": "color",
+        "$value": "{color.offdesk.ink}",
+        "$description": "Brand: headings and actions are Ink, never orange."
+      },
+      "on-accent": {
+        "$type": "color",
+        "$value": "{color.offdesk.concrete}",
+        "$description": "Brand: --ofd-text-on-action."
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "{color.offdesk.concrete}",
+        "$description": "Brand: --ofd-text-on-contrast."
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{color.offdesk.steel}",
+        "$description": "Brand: --ofd-text-disabled."
+      },
+      "link": {
+        "$type": "color",
+        "$value": "{color.offdesk.ink}",
+        "$description": "Brand: --ofd-link, Ink and underlined on the site."
+      },
+      "link-hovered": {
+        "$type": "color",
+        "$value": "{color.offdesk.steel-dark}",
+        "$description": "Brand: --ofd-link-hovered."
+      },
+      "success": {
+        "$type": "color",
+        "$value": "{color.green.650}",
+        "$description": "Derived: the light theme's pick, which already clears 4.5:1 on Concrete, the raised panel and its own tint."
+      },
+      "on-success": {
+        "$type": "color",
+        "$value": "{color.offdesk.concrete}",
+        "$description": "Derived: Concrete, since the brand never sets pure white or black text."
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "{color.amber.650}",
+        "$description": "Derived: the light theme's amber.600, moved darker until it clears 4.5:1 on Concrete, the raised panel and its own tint."
+      },
+      "on-warning": {
+        "$type": "color",
+        "$value": "{color.offdesk.concrete}",
+        "$description": "Derived: Concrete, since the brand never sets pure white or black text."
+      },
+      "error": {
+        "$type": "color",
+        "$value": "{color.red.600}",
+        "$description": "Derived: the light theme's pick, which already clears 4.5:1 on Concrete, the raised panel and its own tint."
+      },
+      "on-error": {
+        "$type": "color",
+        "$value": "{color.offdesk.concrete}",
+        "$description": "Derived: Concrete, since the brand never sets pure white or black text."
+      },
+      "info": {
+        "$type": "color",
+        "$value": "{color.blue.650}",
+        "$description": "Derived: the light theme's pick, which already clears 4.5:1 on Concrete, the raised panel and its own tint."
+      },
+      "on-info": {
+        "$type": "color",
+        "$value": "{color.offdesk.concrete}",
+        "$description": "Derived: Concrete, since the brand never sets pure white or black text."
+      },
+      "running": {
+        "$type": "color",
+        "$value": "{color.orange.650}",
+        "$description": "Derived: the light theme's pick, which already clears 4.5:1 on Concrete, the raised panel and its own tint."
+      },
+      "on-running": {
+        "$type": "color",
+        "$value": "{color.offdesk.concrete}",
+        "$description": "Derived: Concrete, since the brand never sets pure white or black text."
+      }
+    },
+    "icon": {
+      "default": {
+        "$type": "color",
+        "$value": "{color.offdesk.steel-dark}",
+        "$description": "Brand: as text.subtle."
+      },
+      "subtle": {
+        "$type": "color",
+        "$value": "{color.grey.650}",
+        "$description": "Derived: as text.faint."
+      },
+      "strong": {
+        "$type": "color",
+        "$value": "{color.offdesk.ink}",
+        "$description": "Brand: as text.default."
+      },
+      "accent": {
+        "$type": "color",
+        "$value": "{color.offdesk.ink}",
+        "$description": "Brand: as text.accent."
+      },
+      "on-accent": {
+        "$type": "color",
+        "$value": "{color.offdesk.concrete}",
+        "$description": "Brand: as text.on-accent."
+      },
+      "inverse": {
+        "$type": "color",
+        "$value": "{color.offdesk.concrete}",
+        "$description": "Brand: as text.inverse."
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{color.offdesk.steel}",
+        "$description": "Brand: as text.disabled."
+      },
+      "success": {
+        "$type": "color",
+        "$value": "{color.green.650}",
+        "$description": "Derived: the light theme's pick, which already clears 4.5:1 on Concrete and the raised panel."
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "{color.amber.650}",
+        "$description": "Derived: the light theme's pick, which already clears 4.5:1 on Concrete and the raised panel."
+      },
+      "error": {
+        "$type": "color",
+        "$value": "{color.red.650}",
+        "$description": "Derived: the light theme's pick, which already clears 4.5:1 on Concrete and the raised panel."
+      },
+      "info": {
+        "$type": "color",
+        "$value": "{color.blue.650}",
+        "$description": "Derived: the light theme's pick, which already clears 4.5:1 on Concrete and the raised panel."
+      },
+      "running": {
+        "$type": "color",
+        "$value": "{color.orange.650}",
+        "$description": "Derived: the light theme's pick, which already clears 4.5:1 on Concrete and the raised panel."
+      }
+    },
+    "stroke": {
+      "default": {
+        "$type": "color",
+        "$value": "{color.offdesk.steel-dark}",
+        "$description": "Brand: --ofd-border-default."
+      },
+      "subtle": {
+        "$type": "color",
+        "$value": "{color.offdesk.steel}",
+        "$description": "Brand: --ofd-border-subtle, Raw steel hairlines."
+      },
+      "strong": {
+        "$type": "color",
+        "$value": "{color.offdesk.ink}",
+        "$description": "Brand: --ofd-border-strong, the Ink hairline."
+      },
+      "accent": {
+        "$type": "color",
+        "$value": "{color.offdesk.ink}",
+        "$description": "Brand: action is Ink."
+      },
+      "focus": {
+        "$type": "color",
+        "$value": "{color.offdesk.ink}",
+        "$description": "Brand: --ofd-focus."
+      },
+      "disabled": {
+        "$type": "color",
+        "$value": "{color.offdesk.steel}",
+        "$description": "Brand: a disabled button's border is --ofd-text-disabled."
+      },
+      "hovered": {
+        "$type": "color",
+        "$value": "{color.offdesk.ink}",
+        "$description": "Derived: a field's border in the brand sheet is the strong Ink hairline, so hover goes there."
+      },
+      "success": {
+        "$type": "color",
+        "$value": "{color.green.550}",
+        "$description": "Derived: the light theme's pick."
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "{color.amber.550}",
+        "$description": "Derived: the light theme's pick."
+      },
+      "error": {
+        "$type": "color",
+        "$value": "{color.red.550}",
+        "$description": "Derived: the light theme's pick."
+      },
+      "info": {
+        "$type": "color",
+        "$value": "{color.blue.550}",
+        "$description": "Derived: the light theme's pick."
+      },
+      "running": {
+        "$type": "color",
+        "$value": "{color.orange.550}",
+        "$description": "Derived: the light theme's pick."
+      }
+    },
+    "chart": {
+      "1": {
+        "$type": "color",
+        "$value": "{color.offdesk.orange}",
+        "$description": "Brand: --ofd-chart-signal, Safety orange for the one series the reader looks at."
+      },
+      "2": {
+        "$type": "color",
+        "$value": "{color.offdesk.steel}",
+        "$description": "Brand: --ofd-chart-base, Raw steel for the rest."
+      },
+      "3": {
+        "$type": "color",
+        "$value": "{color.offdesk.blue}",
+        "$description": "Brand: --ofd-chart-data, IBM blue for dense data. Kept one place away from orange, which it never sits beside."
+      },
+      "4": {
+        "$type": "color",
+        "$value": "{color.green.600}",
+        "$description": "Derived: the light theme's chart picks in their order, leaving out blue, indigo, orange and red as too near IBM blue and Safety orange, then lime to make ten."
+      },
+      "5": {
+        "$type": "color",
+        "$value": "{color.purple.600}",
+        "$description": "Derived: the light theme's purple.600, as chart.4 explains."
+      },
+      "6": {
+        "$type": "color",
+        "$value": "{color.teal.600}",
+        "$description": "Derived: the light theme's teal.600, as chart.4 explains."
+      },
+      "7": {
+        "$type": "color",
+        "$value": "{color.magenta.600}",
+        "$description": "Derived: the light theme's magenta.600, as chart.4 explains."
+      },
+      "8": {
+        "$type": "color",
+        "$value": "{color.brown.600}",
+        "$description": "Derived: the light theme's brown.600, as chart.4 explains."
+      },
+      "9": {
+        "$type": "color",
+        "$value": "{color.slate.600}",
+        "$description": "Derived: the light theme's slate.600, as chart.4 explains."
+      },
+      "10": {
+        "$type": "color",
+        "$value": "{color.lime.600}",
+        "$description": "Derived: lime.600, added to make ten once four of the light theme's hues were left out."
+      }
+    },
+    "status": {
+      "over": {
+        "$type": "color",
+        "$value": "{color.red.700}",
+        "$description": "Derived: the light theme's red.650, moved darker until it clears 4.5:1 on background.neutral."
+      },
+      "soon": {
+        "$type": "color",
+        "$value": "{color.amber.700}",
+        "$description": "Derived: the light theme's pick."
+      }
+    }
+  },
+  "elevation": {
+    "raised": {
+      "$type": "shadow",
+      "$value": [
+        {
+          "color": "#00000000",
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "0px",
+          "spread": "0px"
+        }
+      ],
+      "$description": "None. The brand book separates with space first, then an Ink hairline, and never a shadow, so all three are a transparent zero shadow that keeps the token's type."
+    },
+    "overlay": {
+      "$type": "shadow",
+      "$value": [
+        {
+          "color": "#00000000",
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "0px",
+          "spread": "0px"
+        }
+      ],
+      "$description": "None, as elevation.raised explains."
+    },
+    "modal": {
+      "$type": "shadow",
+      "$value": [
+        {
+          "color": "#00000000",
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "0px",
+          "spread": "0px"
+        }
+      ],
+      "$description": "None, as elevation.raised explains."
+    }
+  }
+}

@@ -15,6 +15,7 @@
       "import": "./dist/tenon-react.js"
     },
     "./tenon.css": "./dist/tenon.css",
+    "./tenon-fonts-offdesk.css": "./dist/tenon-fonts-offdesk.css",
     "./tenon-react.css": "./dist/tenon-react.css",
     "./tn-page.css": "./design-md/assets/tn-page.css",
     "./tokens": "./dist/tenon.tokens.json",
