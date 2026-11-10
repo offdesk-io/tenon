@@ -140,12 +140,14 @@ npm run dev        # Storybook, localhost:5199
 ```
 
 `scripts/build.mjs` writes `dist/tenon.css` and `dist/tenon.tokens.json`, and
-refuses to write either if any of seven checks fail: every theme in
-`tokens/themes.json` must hold light's key set, a theme's typography file may
-only replace text styles the shared file has, its radius file may only replace
-radii the shared file has, every `{alias}` must resolve, no semantic token may
-alias another semantic token, no component CSS may name a colour primitive,
-and every `--tenon-` name a component reads must be one the build emits.
+refuses to write either if any of eight checks fail: `tokens/themes.json` must
+list light first with light and dark as the only automatic themes, every theme
+in it must hold light's key set, a theme's typography file may only replace
+text styles the shared file has, its radius file may only replace radii the
+shared file has and only with a dimension, every `{alias}` must resolve, no
+semantic token may alias another semantic token, no component CSS may name a
+colour primitive, and every `--tenon-` name a component reads must be one the
+build emits.
 
 The first is the reason a token pipeline exists here at all. A stylesheet had
 `--accent` missing from its dark block for months, used as a `color:` in

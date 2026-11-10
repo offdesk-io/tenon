@@ -1,20 +1,25 @@
 /* Reads the token JSON, checks it, and writes dist/.
    Run: node scripts/build.mjs   (add --quiet to drop the contrast table)
 
-   Five checks run before anything is written, and any of them failing
+   Eight checks run before anything is written, and any of them failing
    stops the build:
-     1. theme parity, every theme in tokens/themes.json holds light's key set
-     2. every {alias} resolves to something that exists
-     3. no semantic token aliases another semantic token
-     4. a theme's typography file only replaces text styles the shared file
+     1. tokens/themes.json is a list the build can write: light first, light
+        and dark the only automatic themes, a colour file for each
+     2. theme parity, every theme in tokens/themes.json holds light's key set
+     3. every {alias} resolves to something that exists
+     4. no semantic token aliases another semantic token
+     5. a theme's typography file only replaces text styles the shared file
         has, and gives all five parts of each
-     5. a theme's radius file only replaces radii the shared file has
-   The first is the one that matters. A stylesheet had --accent missing from
+     6. a theme's radius file only replaces radii the shared file has, with
+        a dimension
+     7. no component CSS reads a colour primitive
+     8. every --tenon- name a component reads is one this build emits
+   Parity is the one that matters. A stylesheet had --accent missing from
    its dark block for months and nothing said a word, because a hand-written
    stylesheet has no way to know a key is absent.
 
-   A fifth check, contrast, reports and does not fail. Some tokens are
-   meant to sit below 4.5:1 and the token file says which.
+   A ninth, contrast, reports and does not fail. Some tokens are meant to
+   sit below 4.5:1 and the token file says which.
    ------------------------------------------------------------------- */
 
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync } from 'node:fs';
@@ -140,6 +145,17 @@ function resolve(value, seen = []) {
   return resolve(node.$value, [...seen, target]);
 }
 
+/* The theme files are covered by the primitive-only rule below, which an
+   alias to nothing fails as well. Primitives and the shared file are not,
+   and resolve() is otherwise only reached while the resolved copy is written,
+   which is after the last chance to stop. So both are walked here. */
+for (const flat of [flatPrimitives, flatShared]) {
+  for (const node of Object.values(flat)) {
+    const parts = node.$type === 'typography' ? Object.values(node.$value) : [node.$value];
+    for (const v of parts) resolve(v);
+  }
+}
+
 /* A semantic aliasing another semantic is the chain that makes a rename
    break in two places instead of one. */
 for (const [theme, flat] of Object.entries(flatThemes)) {
@@ -188,6 +204,10 @@ for (const [theme, flat] of Object.entries(flatRadiusThemes)) {
     const m = typeof node.$value === 'string' && node.$value.match(ALIAS);
     if (m && !(m[1] in flatPrimitives)) {
       errors.push(`${theme} radius: ${key} aliases {${m[1]}}, which is not a primitive`);
+    } else if (m && flatPrimitives[m[1]].$type !== 'dimension') {
+      errors.push(`${theme} radius: ${key} aliases {${m[1]}}, which is a ${flatPrimitives[m[1]].$type} rather than a dimension`);
+    } else if (!m && !(node.$value && typeof node.$value === 'object' && 'value' in node.$value && 'unit' in node.$value)) {
+      errors.push(`${theme} radius: ${key} is neither an alias nor a dimension with a value and a unit`);
     }
   }
 }
@@ -475,7 +495,7 @@ for (const { name: theme } of THEMES) {
 console.log(`${STAMP}`);
 console.log(`dist/tenon.css          ${primitiveVars.length} primitives, ${lightKeys.length} semantics x ${THEMES.length} themes`);
 console.log(`dist/tenon.tokens.json  resolved values`);
-console.log(`\nChecks passed: theme parity (${THEMES.map((t) => t.name).join(', ')}), alias targets, no semantic-to-semantic aliases,\n               theme typography files replace only styles that exist, with all five parts,\n               theme radius files replace only radii that exist,\n               no component CSS reading a colour primitive,\n               every --tenon- name a component reads is one this build emits.`);
+console.log(`\nChecks passed: a theme list the build can write, theme parity (${THEMES.map((t) => t.name).join(', ')}),\n               alias targets, no semantic-to-semantic aliases,\n               theme typography files replace only styles that exist, with all five parts,\n               theme radius files replace only radii that exist, with a dimension,\n               no component CSS reading a colour primitive,\n               every --tenon- name a component reads is one this build emits.`);
 if (!QUIET) {
   if (rows.length) {
     console.log(`\n${rows.length} text or icon tokens below 4.5:1 on their own background:`);
