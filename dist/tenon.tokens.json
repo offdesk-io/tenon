@@ -1188,49 +1188,49 @@
     "offdesk": {
       "text.title": {
         "family": "Archivo,Helvetica Neue,Arial,sans-serif",
-        "size": "clamp(32px, 4.4vw, 56px)",
+        "size": "56px",
         "weight": "800",
-        "line-height": "1.1",
+        "line-height": "1.2",
         "letter-spacing": "-0.01em"
       },
       "text.stat": {
         "family": "Archivo,Helvetica Neue,Arial,sans-serif",
-        "size": "40px",
+        "size": "28px",
         "weight": "900",
-        "line-height": "1",
+        "line-height": "1.2",
         "letter-spacing": "-0.02em"
       },
       "text.heading-1": {
         "family": "Archivo,Helvetica Neue,Arial,sans-serif",
-        "size": "32px",
+        "size": "28px",
         "weight": "800",
-        "line-height": "1.1",
+        "line-height": "1.2",
         "letter-spacing": "-0.01em"
       },
       "text.heading-2": {
         "family": "Archivo,Helvetica Neue,Arial,sans-serif",
-        "size": "25px",
+        "size": "24px",
         "weight": "800",
-        "line-height": "1.2",
+        "line-height": "1.3",
         "letter-spacing": "-0.01em"
       },
       "text.heading-3": {
         "family": "Archivo,Helvetica Neue,Arial,sans-serif",
         "size": "20px",
         "weight": "600",
-        "line-height": "1.2",
+        "line-height": "1.3",
         "letter-spacing": "0rem"
       },
       "text.heading-4": {
         "family": "Archivo,Helvetica Neue,Arial,sans-serif",
-        "size": "17px",
+        "size": "16px",
         "weight": "600",
         "line-height": "1.4",
         "letter-spacing": "0rem"
       },
       "text.heading-5": {
         "family": "Archivo,Helvetica Neue,Arial,sans-serif",
-        "size": "15px",
+        "size": "14px",
         "weight": "600",
         "line-height": "1.4",
         "letter-spacing": "0rem"
@@ -1244,42 +1244,42 @@
       },
       "text.body": {
         "family": "Archivo,Helvetica Neue,Arial,sans-serif",
-        "size": "17px",
+        "size": "14px",
         "weight": "400",
-        "line-height": "1.5",
+        "line-height": "1.4",
         "letter-spacing": "0rem"
       },
       "text.body-sm": {
         "family": "Archivo,Helvetica Neue,Arial,sans-serif",
-        "size": "15px",
+        "size": "12px",
         "weight": "400",
         "line-height": "1.4",
         "letter-spacing": "0rem"
       },
       "text.label": {
         "family": "Archivo,Helvetica Neue,Arial,sans-serif",
-        "size": "15px",
+        "size": "12px",
         "weight": "600",
         "line-height": "1.4",
         "letter-spacing": "0rem"
       },
       "text.caption": {
         "family": "IBM Plex Mono,ui-monospace,Menlo,monospace",
-        "size": "12px",
+        "size": "10px",
         "weight": "400",
         "line-height": "1.4",
         "letter-spacing": "0rem"
       },
       "text.caption-sm": {
         "family": "IBM Plex Mono,ui-monospace,Menlo,monospace",
-        "size": "12px",
+        "size": "8px",
         "weight": "400",
         "line-height": "1.4",
         "letter-spacing": "0.1em"
       },
       "text.code": {
         "family": "IBM Plex Mono,ui-monospace,Menlo,monospace",
-        "size": "15px",
+        "size": "12px",
         "weight": "400",
         "line-height": "1.5",
         "letter-spacing": "0rem"
@@ -1288,49 +1288,49 @@
     "offdesk-dark": {
       "text.title": {
         "family": "Archivo,Helvetica Neue,Arial,sans-serif",
-        "size": "clamp(32px, 4.4vw, 56px)",
+        "size": "56px",
         "weight": "800",
-        "line-height": "1.1",
+        "line-height": "1.2",
         "letter-spacing": "-0.01em"
       },
       "text.stat": {
         "family": "Archivo,Helvetica Neue,Arial,sans-serif",
-        "size": "40px",
+        "size": "28px",
         "weight": "900",
-        "line-height": "1",
+        "line-height": "1.2",
         "letter-spacing": "-0.02em"
       },
       "text.heading-1": {
         "family": "Archivo,Helvetica Neue,Arial,sans-serif",
-        "size": "32px",
+        "size": "28px",
         "weight": "800",
-        "line-height": "1.1",
+        "line-height": "1.2",
         "letter-spacing": "-0.01em"
       },
       "text.heading-2": {
         "family": "Archivo,Helvetica Neue,Arial,sans-serif",
-        "size": "25px",
+        "size": "24px",
         "weight": "800",
-        "line-height": "1.2",
+        "line-height": "1.3",
         "letter-spacing": "-0.01em"
       },
       "text.heading-3": {
         "family": "Archivo,Helvetica Neue,Arial,sans-serif",
         "size": "20px",
         "weight": "600",
-        "line-height": "1.2",
+        "line-height": "1.3",
         "letter-spacing": "0rem"
       },
       "text.heading-4": {
         "family": "Archivo,Helvetica Neue,Arial,sans-serif",
-        "size": "17px",
+        "size": "16px",
         "weight": "600",
         "line-height": "1.4",
         "letter-spacing": "0rem"
       },
       "text.heading-5": {
         "family": "Archivo,Helvetica Neue,Arial,sans-serif",
-        "size": "15px",
+        "size": "14px",
         "weight": "600",
         "line-height": "1.4",
         "letter-spacing": "0rem"
@@ -1344,42 +1344,42 @@
       },
       "text.body": {
         "family": "Archivo,Helvetica Neue,Arial,sans-serif",
-        "size": "17px",
+        "size": "14px",
         "weight": "400",
-        "line-height": "1.5",
+        "line-height": "1.4",
         "letter-spacing": "0rem"
       },
       "text.body-sm": {
         "family": "Archivo,Helvetica Neue,Arial,sans-serif",
-        "size": "15px",
+        "size": "12px",
         "weight": "400",
         "line-height": "1.4",
         "letter-spacing": "0rem"
       },
       "text.label": {
         "family": "Archivo,Helvetica Neue,Arial,sans-serif",
-        "size": "15px",
+        "size": "12px",
         "weight": "600",
         "line-height": "1.4",
         "letter-spacing": "0rem"
       },
       "text.caption": {
         "family": "IBM Plex Mono,ui-monospace,Menlo,monospace",
-        "size": "12px",
+        "size": "10px",
         "weight": "400",
         "line-height": "1.4",
         "letter-spacing": "0rem"
       },
       "text.caption-sm": {
         "family": "IBM Plex Mono,ui-monospace,Menlo,monospace",
-        "size": "12px",
+        "size": "8px",
         "weight": "400",
         "line-height": "1.4",
         "letter-spacing": "0.1em"
       },
       "text.code": {
         "family": "IBM Plex Mono,ui-monospace,Menlo,monospace",
-        "size": "15px",
+        "size": "12px",
         "weight": "400",
         "line-height": "1.5",
         "letter-spacing": "0rem"

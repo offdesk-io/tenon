@@ -447,7 +447,11 @@ spinner still read, and there are no shadows. OFFDESK has no status colours, so
 success, warning, error, info and running take Tenon's own ramps, stepped from
 the light and dark themes' picks until they clear the same contrast rules.
 
-Type is Archivo, with IBM Plex Mono for captions, small labels and code. Two
+Type is Archivo, with IBM Plex Mono for captions, small labels and code, at the
+brand's weights and letter spacing. Sizes and line heights are Tenon's own,
+because these themes dress dense app screens such as the board, where the
+brand's page sizes (a 17px body, 32px headings) read bulky. Those page sizes
+live in OFFDESK's own brand stylesheet, for documents and marketing pages. Two
 things the brand sets have no place in a text style and are left out: the width
 axis that makes its display cut wide, and the capitals on its mono labels.
 
