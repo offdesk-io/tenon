@@ -1,6 +1,6 @@
 {
   "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
-  "$description": "Tenon semantic colour, OFFDESK dark theme, from the brand book's Ink pairings: Ink ground, Concrete type and actions, Raw steel for captions and hairlines. Brand roles come from OFFDESK's brand stylesheet (brand/AGENTS/design-md/assets/ofd-brand.css, 5 Nov 2026) and its DESIGN.md. Every value the brand does not state says \"Derived\" and what from. OFFDESK has no status colours, so those take Tenon ramps, stepped from the dark theme's picks until the build's contrast rules pass. Corners and shadows are in radius.offdesk-dark.json and below. Same key set as light; scripts/build.mjs fails if it drifts.",
+  "$description": "Tenon semantic colour, OFFDESK dark theme, from the brand book's Ink pairings: Ink ground, Concrete type and actions, Raw steel for captions and hairlines. Brand roles come from OFFDESK's brand stylesheet (brand/AGENTS/design-md/assets/ofd-brand.css, 5 Nov 2026) and its DESIGN.md. Every value the brand does not state says \"Derived\" and what from. OFFDESK has no status colours, so those take Tenon ramps, stepped from the dark theme's picks until the build's contrast rules pass. In-between surfaces and greys come from the brand's own ramps: Concrete's and Ink's for surfaces, Raw steel's for the faint text greys. Corners and shadows are in radius.offdesk-dark.json and below. Same key set as light; scripts/build.mjs fails if it drifts.",
   "color": {
     "background": {
       "default": {
@@ -20,23 +20,23 @@
       },
       "subtle": {
         "$type": "color",
-        "$value": "{color.grey.850}",
-        "$description": "Derived: Ink sits at grey.950 on Tenon's zero-chroma grey ramp, so this keeps the dark theme's distance from its page ground on that ramp (neutral.850 in dark)."
+        "$value": "{color.offdesk-ink.850}",
+        "$description": "Derived: Ink is step 950 of its own ramp, so this keeps the dark theme's distance from its page ground on that ramp (neutral.850 in dark)."
       },
       "hovered": {
         "$type": "color",
-        "$value": "{color.grey.850}",
-        "$description": "Derived: Ink sits at grey.950 on Tenon's zero-chroma grey ramp, so this keeps the dark theme's distance from its page ground on that ramp (neutral.850 in dark)."
+        "$value": "{color.offdesk-ink.850}",
+        "$description": "Derived: Ink is step 950 of its own ramp, so this keeps the dark theme's distance from its page ground on that ramp (neutral.850 in dark)."
       },
       "active": {
         "$type": "color",
-        "$value": "{color.grey.800}",
-        "$description": "Derived: Ink sits at grey.950 on Tenon's zero-chroma grey ramp, so this keeps the dark theme's distance from its page ground on that ramp (neutral.800 in dark)."
+        "$value": "{color.offdesk-ink.800}",
+        "$description": "Derived: Ink is step 950 of its own ramp, so this keeps the dark theme's distance from its page ground on that ramp (neutral.800 in dark)."
       },
       "selected": {
         "$type": "color",
-        "$value": "{color.grey.800}",
-        "$description": "Derived: Ink sits at grey.950 on Tenon's zero-chroma grey ramp, so this keeps the dark theme's distance from its page ground on that ramp (blue.900 in dark)."
+        "$value": "{color.offdesk-ink.800}",
+        "$description": "Derived: Ink is step 950 of its own ramp, so this keeps the dark theme's distance from its page ground on that ramp (blue.900 in dark)."
       },
       "accent": {
         "$type": "color",
@@ -50,23 +50,23 @@
       },
       "accent-active": {
         "$type": "color",
-        "$value": "{color.grey.300}",
-        "$description": "Derived: the brand sheet has no pressed state. grey.300 sits between Concrete and Raw steel."
+        "$value": "{color.offdesk-concrete.300}",
+        "$description": "Derived: the brand sheet has no pressed state. offdesk-concrete.300 sits between Concrete and Raw steel."
       },
       "neutral": {
         "$type": "color",
-        "$value": "{color.grey.800}",
-        "$description": "Derived: Ink sits at grey.950 on Tenon's zero-chroma grey ramp, so this keeps the dark theme's distance from its page ground on that ramp (neutral.800 in dark)."
+        "$value": "{color.offdesk-ink.800}",
+        "$description": "Derived: Ink is step 950 of its own ramp, so this keeps the dark theme's distance from its page ground on that ramp (neutral.800 in dark)."
       },
       "neutral-hovered": {
         "$type": "color",
-        "$value": "{color.grey.750}",
-        "$description": "Derived: Ink sits at grey.950 on Tenon's zero-chroma grey ramp, so this keeps the dark theme's distance from its page ground on that ramp (neutral.750 in dark)."
+        "$value": "{color.offdesk-ink.750}",
+        "$description": "Derived: Ink is step 950 of its own ramp, so this keeps the dark theme's distance from its page ground on that ramp (neutral.750 in dark)."
       },
       "neutral-active": {
         "$type": "color",
-        "$value": "{color.grey.700}",
-        "$description": "Derived: Ink sits at grey.950 on Tenon's zero-chroma grey ramp, so this keeps the dark theme's distance from its page ground on that ramp (neutral.700 in dark)."
+        "$value": "{color.offdesk-ink.700}",
+        "$description": "Derived: Ink is step 950 of its own ramp, so this keeps the dark theme's distance from its page ground on that ramp (neutral.700 in dark)."
       },
       "inverse": {
         "$type": "color",
@@ -75,13 +75,13 @@
       },
       "inverse-hovered": {
         "$type": "color",
-        "$value": "{color.grey.200}",
-        "$description": "Derived: one grey step darker than Concrete, as dark steps its inverse."
+        "$value": "{color.offdesk-concrete.200}",
+        "$description": "Derived: one step darker than Concrete on its ramp, as dark steps its inverse."
       },
       "inverse-active": {
         "$type": "color",
-        "$value": "{color.grey.250}",
-        "$description": "Derived: two grey steps darker than Concrete, as dark steps its inverse."
+        "$value": "{color.offdesk-concrete.250}",
+        "$description": "Derived: two steps darker than Concrete on its ramp, as dark steps its inverse."
       },
       "input": {
         "$type": "color",
@@ -90,8 +90,8 @@
       },
       "input-hovered": {
         "$type": "color",
-        "$value": "{color.grey.850}",
-        "$description": "Derived: Ink sits at grey.950 on Tenon's zero-chroma grey ramp, so this keeps the dark theme's distance from its page ground on that ramp (neutral.850 in dark)."
+        "$value": "{color.offdesk-ink.850}",
+        "$description": "Derived: Ink is step 950 of its own ramp, so this keeps the dark theme's distance from its page ground on that ramp (neutral.850 in dark)."
       },
       "input-active": {
         "$type": "color",
@@ -100,13 +100,13 @@
       },
       "disabled": {
         "$type": "color",
-        "$value": "{color.grey.850}",
-        "$description": "Derived: Ink sits at grey.950 on Tenon's zero-chroma grey ramp, so this keeps the dark theme's distance from its page ground on that ramp (neutral.850 in dark)."
+        "$value": "{color.offdesk-ink.850}",
+        "$description": "Derived: Ink is step 950 of its own ramp, so this keeps the dark theme's distance from its page ground on that ramp (neutral.850 in dark)."
       },
       "skeleton": {
         "$type": "color",
-        "$value": "{color.grey.800}",
-        "$description": "Derived: Ink sits at grey.950 on Tenon's zero-chroma grey ramp, so this keeps the dark theme's distance from its page ground on that ramp (neutral.800 in dark)."
+        "$value": "{color.offdesk-ink.800}",
+        "$description": "Derived: Ink is step 950 of its own ramp, so this keeps the dark theme's distance from its page ground on that ramp (neutral.800 in dark)."
       },
       "success": {
         "$type": "color",
@@ -177,8 +177,8 @@
       },
       "faint": {
         "$type": "color",
-        "$value": "{color.grey.500}",
-        "$description": "Derived: the brand has two text greys. grey.500 is the darkest grey step that still clears 4.5:1 on Ink and on the raised panel."
+        "$value": "{color.offdesk-steel.500}",
+        "$description": "Derived: the brand has two text greys. offdesk-steel.500 is the darkest step of Raw steel's ramp that still clears 4.5:1 on Ink and on the raised panel."
       },
       "accent": {
         "$type": "color",
@@ -269,7 +269,7 @@
       },
       "subtle": {
         "$type": "color",
-        "$value": "{color.grey.500}",
+        "$value": "{color.offdesk-steel.500}",
         "$description": "Derived: as text.faint."
       },
       "strong": {

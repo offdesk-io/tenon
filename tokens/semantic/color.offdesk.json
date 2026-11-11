@@ -1,6 +1,6 @@
 {
   "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
-  "$description": "Tenon semantic colour, OFFDESK theme: Concrete ground, Ink type and actions, and Safety orange kept to the one signal, never a button or a link. Brand roles come from OFFDESK's brand stylesheet (brand/AGENTS/design-md/assets/ofd-brand.css, 5 Nov 2026) and its DESIGN.md. Every value the brand does not state says \"Derived\" and what from. OFFDESK has no status colours, so those take Tenon ramps, stepped from the light theme's picks until the build's contrast rules pass. Corners and shadows are in radius.offdesk.json and below. Same key set as light; scripts/build.mjs fails if it drifts.",
+  "$description": "Tenon semantic colour, OFFDESK theme: Concrete ground, Ink type and actions, and Safety orange kept to the one signal, never a button or a link. Brand roles come from OFFDESK's brand stylesheet (brand/AGENTS/design-md/assets/ofd-brand.css, 5 Nov 2026) and its DESIGN.md. Every value the brand does not state says \"Derived\" and what from. OFFDESK has no status colours, so those take Tenon ramps, stepped from the light theme's picks until the build's contrast rules pass. In-between surfaces and greys come from the brand's own ramps: Concrete's and Ink's for surfaces, Raw steel's for the faint text greys. Corners and shadows are in radius.offdesk.json and below. Same key set as light; scripts/build.mjs fails if it drifts.",
   "color": {
     "background": {
       "default": {
@@ -15,28 +15,28 @@
       },
       "sunken": {
         "$type": "color",
-        "$value": "{color.grey.200}",
-        "$description": "Derived: OFFDESK has no tint ladder. Concrete sits at grey.150 on Tenon's zero-chroma grey ramp, so this keeps the light theme's distance from its page ground on that ramp (neutral.100 in light)."
+        "$value": "{color.offdesk-concrete.200}",
+        "$description": "Derived: OFFDESK has no tint ladder. Concrete is step 150 of its own ramp, so this keeps the light theme's distance from its page ground on that ramp (neutral.100 in light)."
       },
       "subtle": {
         "$type": "color",
-        "$value": "{color.grey.200}",
-        "$description": "Derived: OFFDESK has no tint ladder. Concrete sits at grey.150 on Tenon's zero-chroma grey ramp, so this keeps the light theme's distance from its page ground on that ramp (neutral.100 in light)."
+        "$value": "{color.offdesk-concrete.200}",
+        "$description": "Derived: OFFDESK has no tint ladder. Concrete is step 150 of its own ramp, so this keeps the light theme's distance from its page ground on that ramp (neutral.100 in light)."
       },
       "hovered": {
         "$type": "color",
-        "$value": "{color.grey.200}",
-        "$description": "Derived: OFFDESK has no tint ladder. Concrete sits at grey.150 on Tenon's zero-chroma grey ramp, so this keeps the light theme's distance from its page ground on that ramp (neutral.100 in light)."
+        "$value": "{color.offdesk-concrete.200}",
+        "$description": "Derived: OFFDESK has no tint ladder. Concrete is step 150 of its own ramp, so this keeps the light theme's distance from its page ground on that ramp (neutral.100 in light)."
       },
       "active": {
         "$type": "color",
-        "$value": "{color.grey.250}",
-        "$description": "Derived: OFFDESK has no tint ladder. Concrete sits at grey.150 on Tenon's zero-chroma grey ramp, so this keeps the light theme's distance from its page ground on that ramp (neutral.150 in light)."
+        "$value": "{color.offdesk-concrete.250}",
+        "$description": "Derived: OFFDESK has no tint ladder. Concrete is step 150 of its own ramp, so this keeps the light theme's distance from its page ground on that ramp (neutral.150 in light)."
       },
       "selected": {
         "$type": "color",
-        "$value": "{color.grey.250}",
-        "$description": "Derived: OFFDESK has no tint ladder. Concrete sits at grey.150 on Tenon's zero-chroma grey ramp, so this keeps the light theme's distance from its page ground on that ramp (blue.100 in light)."
+        "$value": "{color.offdesk-concrete.250}",
+        "$description": "Derived: OFFDESK has no tint ladder. Concrete is step 150 of its own ramp, so this keeps the light theme's distance from its page ground on that ramp (blue.100 in light)."
       },
       "accent": {
         "$type": "color",
@@ -50,23 +50,23 @@
       },
       "accent-active": {
         "$type": "color",
-        "$value": "{color.grey.800}",
-        "$description": "Derived: the brand sheet has no pressed state. grey.800 sits between Ink and Raw steel dark."
+        "$value": "{color.offdesk-ink.800}",
+        "$description": "Derived: the brand sheet has no pressed state. offdesk-ink.800 sits between Ink and Raw steel dark."
       },
       "neutral": {
         "$type": "color",
-        "$value": "{color.grey.250}",
-        "$description": "Derived: OFFDESK has no tint ladder. Concrete sits at grey.150 on Tenon's zero-chroma grey ramp, so this keeps the light theme's distance from its page ground on that ramp (neutral.150 in light)."
+        "$value": "{color.offdesk-concrete.250}",
+        "$description": "Derived: OFFDESK has no tint ladder. Concrete is step 150 of its own ramp, so this keeps the light theme's distance from its page ground on that ramp (neutral.150 in light)."
       },
       "neutral-hovered": {
         "$type": "color",
-        "$value": "{color.grey.300}",
-        "$description": "Derived: OFFDESK has no tint ladder. Concrete sits at grey.150 on Tenon's zero-chroma grey ramp, so this keeps the light theme's distance from its page ground on that ramp (neutral.200 in light)."
+        "$value": "{color.offdesk-concrete.300}",
+        "$description": "Derived: OFFDESK has no tint ladder. Concrete is step 150 of its own ramp, so this keeps the light theme's distance from its page ground on that ramp (neutral.200 in light)."
       },
       "neutral-active": {
         "$type": "color",
-        "$value": "{color.grey.350}",
-        "$description": "Derived: OFFDESK has no tint ladder. Concrete sits at grey.150 on Tenon's zero-chroma grey ramp, so this keeps the light theme's distance from its page ground on that ramp (neutral.250 in light)."
+        "$value": "{color.offdesk-concrete.350}",
+        "$description": "Derived: OFFDESK has no tint ladder. Concrete is step 150 of its own ramp, so this keeps the light theme's distance from its page ground on that ramp (neutral.250 in light)."
       },
       "inverse": {
         "$type": "color",
@@ -75,13 +75,13 @@
       },
       "inverse-hovered": {
         "$type": "color",
-        "$value": "{color.grey.900}",
-        "$description": "Derived: one grey step lighter than Ink, as light steps its inverse."
+        "$value": "{color.offdesk-ink.900}",
+        "$description": "Derived: one step lighter than Ink on its ramp, as light steps its inverse."
       },
       "inverse-active": {
         "$type": "color",
-        "$value": "{color.grey.850}",
-        "$description": "Derived: two grey steps lighter than Ink, as light steps its inverse."
+        "$value": "{color.offdesk-ink.850}",
+        "$description": "Derived: two steps lighter than Ink on its ramp, as light steps its inverse."
       },
       "input": {
         "$type": "color",
@@ -90,8 +90,8 @@
       },
       "input-hovered": {
         "$type": "color",
-        "$value": "{color.grey.50}",
-        "$description": "Derived: the brand sheet has no input hover. grey.50 is the step off white, as light uses neutral.50."
+        "$value": "{color.offdesk-concrete.50}",
+        "$description": "Derived: the brand sheet has no input hover. offdesk-concrete.50 is the step off white on Concrete's ramp, as light uses neutral.50."
       },
       "input-active": {
         "$type": "color",
@@ -100,13 +100,13 @@
       },
       "disabled": {
         "$type": "color",
-        "$value": "{color.grey.200}",
-        "$description": "Derived: OFFDESK has no tint ladder. Concrete sits at grey.150 on Tenon's zero-chroma grey ramp, so this keeps the light theme's distance from its page ground on that ramp (neutral.100 in light)."
+        "$value": "{color.offdesk-concrete.200}",
+        "$description": "Derived: OFFDESK has no tint ladder. Concrete is step 150 of its own ramp, so this keeps the light theme's distance from its page ground on that ramp (neutral.100 in light)."
       },
       "skeleton": {
         "$type": "color",
-        "$value": "{color.grey.250}",
-        "$description": "Derived: OFFDESK has no tint ladder. Concrete sits at grey.150 on Tenon's zero-chroma grey ramp, so this keeps the light theme's distance from its page ground on that ramp (neutral.150 in light)."
+        "$value": "{color.offdesk-concrete.250}",
+        "$description": "Derived: OFFDESK has no tint ladder. Concrete is step 150 of its own ramp, so this keeps the light theme's distance from its page ground on that ramp (neutral.150 in light)."
       },
       "success": {
         "$type": "color",
@@ -177,8 +177,8 @@
       },
       "faint": {
         "$type": "color",
-        "$value": "{color.grey.650}",
-        "$description": "Derived: the brand has two text greys. grey.650 is the lightest grey step that still clears 4.5:1 on Concrete."
+        "$value": "{color.offdesk-steel.650}",
+        "$description": "Derived: the brand has two text greys. offdesk-steel.650 is the lightest step of Raw steel's ramp that still clears 4.5:1 on Concrete."
       },
       "accent": {
         "$type": "color",
@@ -269,7 +269,7 @@
       },
       "subtle": {
         "$type": "color",
-        "$value": "{color.grey.650}",
+        "$value": "{color.offdesk-steel.650}",
         "$description": "Derived: as text.faint."
       },
       "strong": {

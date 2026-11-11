@@ -1449,40 +1449,520 @@
         "$description": "In the amber ramp, at a step legible as text. Fills the timeline's due-soon bar and a tag's text colour."
       }
     },
+    "offdesk-orange": {
+      "50": {
+        "$type": "color",
+        "$value": "#fff4f1"
+      },
+      "100": {
+        "$type": "color",
+        "$value": "#ffe9e3"
+      },
+      "150": {
+        "$type": "color",
+        "$value": "#ffdbd2"
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#ffcbbe"
+      },
+      "250": {
+        "$type": "color",
+        "$value": "#ffb8a6"
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#ffa289"
+      },
+      "350": {
+        "$type": "color",
+        "$value": "#ff8a6b"
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#fd704c"
+      },
+      "450": {
+        "$type": "color",
+        "$value": "#f15c35"
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#e2481c",
+        "$description": "Safety orange, the brand hex."
+      },
+      "550": {
+        "$type": "color",
+        "$value": "#d43903"
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#be3100"
+      },
+      "650": {
+        "$type": "color",
+        "$value": "#a92b00"
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#942400"
+      },
+      "750": {
+        "$type": "color",
+        "$value": "#7f1e00"
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#6c1800"
+      },
+      "850": {
+        "$type": "color",
+        "$value": "#561100"
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#420a00"
+      },
+      "950": {
+        "$type": "color",
+        "$value": "#2d0500"
+      },
+      "$description": "OFFDESK Safety orange, generated from #e2481c, which is pinned at step 500. Do not hand-edit; run scripts/generate-ramps.mjs."
+    },
+    "offdesk-yellow": {
+      "50": {
+        "$type": "color",
+        "$value": "#fff7de"
+      },
+      "100": {
+        "$type": "color",
+        "$value": "#fdeec0"
+      },
+      "150": {
+        "$type": "color",
+        "$value": "#fbe39b"
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#f8d66c"
+      },
+      "250": {
+        "$type": "color",
+        "$value": "#f2c500",
+        "$description": "Signal yellow, the brand hex."
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#e3b900"
+      },
+      "350": {
+        "$type": "color",
+        "$value": "#d3ab00"
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#c29d00"
+      },
+      "450": {
+        "$type": "color",
+        "$value": "#b29000"
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#a28300"
+      },
+      "550": {
+        "$type": "color",
+        "$value": "#927600"
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#826900"
+      },
+      "650": {
+        "$type": "color",
+        "$value": "#735c00"
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#645000"
+      },
+      "750": {
+        "$type": "color",
+        "$value": "#564400"
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#483900"
+      },
+      "850": {
+        "$type": "color",
+        "$value": "#392c00"
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#2a2000"
+      },
+      "950": {
+        "$type": "color",
+        "$value": "#1b1400"
+      },
+      "$description": "OFFDESK Signal yellow, generated from #f2c500, which is pinned at step 250. Do not hand-edit; run scripts/generate-ramps.mjs."
+    },
+    "offdesk-blue": {
+      "50": {
+        "$type": "color",
+        "$value": "#f3f7ff"
+      },
+      "100": {
+        "$type": "color",
+        "$value": "#e7eeff"
+      },
+      "150": {
+        "$type": "color",
+        "$value": "#d9e5ff"
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#c9d9ff"
+      },
+      "250": {
+        "$type": "color",
+        "$value": "#b6cbff"
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#a1bcff"
+      },
+      "350": {
+        "$type": "color",
+        "$value": "#8cacff"
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#779cff"
+      },
+      "450": {
+        "$type": "color",
+        "$value": "#638bff"
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#507afd"
+      },
+      "550": {
+        "$type": "color",
+        "$value": "#446bee"
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#395edc"
+      },
+      "650": {
+        "$type": "color",
+        "$value": "#2f51c8"
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#2440a8",
+        "$description": "IBM blue, the brand hex."
+      },
+      "750": {
+        "$type": "color",
+        "$value": "#203a9b"
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#1a3083"
+      },
+      "850": {
+        "$type": "color",
+        "$value": "#132569"
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#0d1b4f"
+      },
+      "950": {
+        "$type": "color",
+        "$value": "#071135"
+      },
+      "$description": "OFFDESK IBM blue, generated from #2440a8, which is pinned at step 700. Do not hand-edit; run scripts/generate-ramps.mjs."
+    },
+    "offdesk-concrete": {
+      "50": {
+        "$type": "color",
+        "$value": "#f7f7f5"
+      },
+      "100": {
+        "$type": "color",
+        "$value": "#f0eeeb"
+      },
+      "150": {
+        "$type": "color",
+        "$value": "#e7e5e0",
+        "$description": "Concrete, the brand hex."
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#dcd9d2"
+      },
+      "250": {
+        "$type": "color",
+        "$value": "#cfccc3"
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#c2bdb3"
+      },
+      "350": {
+        "$type": "color",
+        "$value": "#b4afa3"
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#a6a194"
+      },
+      "450": {
+        "$type": "color",
+        "$value": "#999386"
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#8b8678"
+      },
+      "550": {
+        "$type": "color",
+        "$value": "#7e786b"
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#716b5e"
+      },
+      "650": {
+        "$type": "color",
+        "$value": "#645f52"
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#575247"
+      },
+      "750": {
+        "$type": "color",
+        "$value": "#4a463c"
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#3e3a32"
+      },
+      "850": {
+        "$type": "color",
+        "$value": "#302e27"
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#24211c"
+      },
+      "950": {
+        "$type": "color",
+        "$value": "#161511"
+      },
+      "$description": "OFFDESK Concrete, generated from #e7e5e0, which is pinned at step 150. Do not hand-edit; run scripts/generate-ramps.mjs."
+    },
+    "offdesk-steel": {
+      "50": {
+        "$type": "color",
+        "$value": "#f7f7f6"
+      },
+      "100": {
+        "$type": "color",
+        "$value": "#eeeeed"
+      },
+      "150": {
+        "$type": "color",
+        "$value": "#e5e5e3"
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#d9d9d7"
+      },
+      "250": {
+        "$type": "color",
+        "$value": "#ccccc9"
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#bebebb"
+      },
+      "350": {
+        "$type": "color",
+        "$value": "#b0b0ac"
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#a2a29e"
+      },
+      "450": {
+        "$type": "color",
+        "$value": "#9a9a96",
+        "$description": "Raw steel, the brand hex."
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#868682"
+      },
+      "550": {
+        "$type": "color",
+        "$value": "#797975"
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#6c6c68"
+      },
+      "650": {
+        "$type": "color",
+        "$value": "#5f5f5c"
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#53534f"
+      },
+      "750": {
+        "$type": "color",
+        "$value": "#464644"
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#3b3b38"
+      },
+      "850": {
+        "$type": "color",
+        "$value": "#2e2e2c"
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#222220"
+      },
+      "950": {
+        "$type": "color",
+        "$value": "#151514"
+      },
+      "$description": "OFFDESK Raw steel, generated from #9a9a96, which is pinned at step 450. Do not hand-edit; run scripts/generate-ramps.mjs."
+    },
+    "offdesk-ink": {
+      "50": {
+        "$type": "color",
+        "$value": "#f7f7f7"
+      },
+      "100": {
+        "$type": "color",
+        "$value": "#eeeeee"
+      },
+      "150": {
+        "$type": "color",
+        "$value": "#e4e4e4"
+      },
+      "200": {
+        "$type": "color",
+        "$value": "#d9d9d9"
+      },
+      "250": {
+        "$type": "color",
+        "$value": "#cccccc"
+      },
+      "300": {
+        "$type": "color",
+        "$value": "#bebebe"
+      },
+      "350": {
+        "$type": "color",
+        "$value": "#afafaf"
+      },
+      "400": {
+        "$type": "color",
+        "$value": "#a1a1a1"
+      },
+      "450": {
+        "$type": "color",
+        "$value": "#949494"
+      },
+      "500": {
+        "$type": "color",
+        "$value": "#868686"
+      },
+      "550": {
+        "$type": "color",
+        "$value": "#797979"
+      },
+      "600": {
+        "$type": "color",
+        "$value": "#6c6c6c"
+      },
+      "650": {
+        "$type": "color",
+        "$value": "#5f5f5f"
+      },
+      "700": {
+        "$type": "color",
+        "$value": "#525252"
+      },
+      "750": {
+        "$type": "color",
+        "$value": "#464646"
+      },
+      "800": {
+        "$type": "color",
+        "$value": "#3a3a3a"
+      },
+      "850": {
+        "$type": "color",
+        "$value": "#2e2e2e"
+      },
+      "900": {
+        "$type": "color",
+        "$value": "#222222"
+      },
+      "950": {
+        "$type": "color",
+        "$value": "#141414",
+        "$description": "Ink, the brand hex."
+      },
+      "$description": "OFFDESK Ink, generated from #141414, which is pinned at step 950. Do not hand-edit; run scripts/generate-ramps.mjs."
+    },
     "offdesk": {
       "ink": {
         "$type": "color",
-        "$value": "#141414",
+        "$value": "{color.offdesk-ink.950}",
         "$description": "Ink. All type, all rules, and the contrast surface. The light theme's actions and links."
       },
       "concrete": {
         "$type": "color",
-        "$value": "#e7e5e0",
+        "$value": "{color.offdesk-concrete.150}",
         "$description": "Concrete. The default page ground, and type on Ink."
       },
       "orange": {
         "$type": "color",
-        "$value": "#e2481c",
+        "$value": "{color.offdesk-orange.500}",
         "$description": "Safety orange, the one signal per layout. Never a button, a link or text."
       },
       "yellow": {
         "$type": "color",
-        "$value": "#f2c500",
+        "$value": "{color.offdesk-yellow.250}",
         "$description": "Signal yellow. Full-bleed grounds only, which Tenon has no token for, so no theme reads it yet."
       },
       "steel": {
         "$type": "color",
-        "$value": "#9a9a96",
+        "$value": "{color.offdesk-steel.450}",
         "$description": "Raw steel. Hairlines, inactive bars, and captions on Ink."
       },
       "steel-dark": {
         "$type": "color",
         "$value": "#4a4a48",
-        "$description": "Raw steel's stand-in on Concrete, for secondary text and borders."
+        "$description": "Raw steel's stand-in on Concrete, for secondary text and borders. Literal: it is not on the steel ramp."
       },
       "blue": {
         "$type": "color",
-        "$value": "#2440a8",
+        "$value": "{color.offdesk-blue.700}",
         "$description": "IBM blue. Technical diagrams and dense data, never beside orange."
       },
       "ink-raised": {
