@@ -463,5 +463,12 @@
         }
       ]
     }
+  },
+  "text-transform": {
+    "tag": {
+      "$type": "string",
+      "$value": "none",
+      "$description": "How a Tag, a Pill and a TagChip set their case. A text style has no part for capitals, so the theme says it here, beside elevation, and parity makes every theme state it. none keeps the words as written."
+    }
   }
 }

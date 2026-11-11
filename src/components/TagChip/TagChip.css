@@ -7,9 +7,14 @@
   border-radius: var(--tenon-radius-default);
   background: var(--tenon-background-neutral);
   color: var(--tenon-text-subtle);
-  font-family: inherit;
+  /* The tag style's voice, so a theme's small labels reach the chip too.
+     Size and weight stay the chip's own, which is larger and heavier than
+     a Tag because it is something to click. */
+  font-family: var(--tenon-text-tag-family);
   font-size: var(--tenon-text-label-size);
   font-weight: 600;
+  letter-spacing: var(--tenon-text-tag-letter-spacing);
+  text-transform: var(--tenon-text-transform-tag);
   cursor: pointer;
 }
 .tenon-tag-chip:not(:disabled):hover { border-color: var(--tenon-stroke-default); }

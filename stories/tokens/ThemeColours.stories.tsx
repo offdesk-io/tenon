@@ -15,8 +15,9 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-/* Elevation is a shadow rather than a colour, so it has a page of its own. */
-const keys = Object.keys(tokens.themes.light).filter((k) => !k.startsWith('elevation.'));
+/* Elevation is a shadow rather than a colour, so it has a page of its own,
+   and text-transform is a word, not a colour, so it is not drawn here. */
+const keys = Object.keys(tokens.themes.light).filter((k) => !/^(elevation|text-transform)\./.test(k));
 const families = groupBy(keys);
 
 const FAMILY_NOTES: Record<string, string> = {

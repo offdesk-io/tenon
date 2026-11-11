@@ -129,8 +129,20 @@ uses, rounded off the half-pixels it had drifted into; above it the ratio is
 1.2, which is the range a page that is not the task board will want.
 
 Six headings, `heading-1` through `heading-6`, plus stat, body, body-sm, label,
-caption, caption-sm and code. `stat` is the figure in a Stat, and it is the one
-style the build writes no class for, since the component owns `.tenon-stat`. They land at the small end of the ramp because the task board is a
+tag, caption, caption-sm and code. `stat` is the figure in a Stat and `tag` the
+words on a Tag, and they are the two styles the build writes no class for,
+since those components own `.tenon-stat` and `.tenon-tag`.
+
+`tag` exists so a theme can give its small labels a voice without touching the
+buttons and fields that share `label`. Tag and Pill read all of it, and TagChip
+reads its family, spacing and case while keeping its own larger size and
+weight. In light, dark and 1984 it is the mix those components set before it
+existed, caption's family, size and line height with label's weight, so they
+draw as they did. Case is the one thing a text style cannot say, so it is a
+theme token of its own, `text-transform.tag`, kept in each theme's colour file
+beside elevation, which is `none` everywhere but OFFDESK. A page that wants its
+own small labels or metadata to match reads the same variables:
+`--tenon-text-tag-family` and its siblings, and `--tenon-text-transform-tag`. They land at the small end of the ramp because the task board is a
 dense UI: `heading-1` is 28px, not 49px. When Tenon goes into a project with
 room to breathe, the headings move up the ramp and nothing else changes.
 
@@ -467,9 +479,11 @@ Type is Archivo, with IBM Plex Mono for captions, small labels and code, at the
 brand's weights and letter spacing. Sizes and line heights are Tenon's own,
 because these themes dress dense app screens such as the board, where the
 brand's page sizes (a 17px body, 32px headings) read bulky. Those page sizes
-live in OFFDESK's own brand stylesheet, for documents and marketing pages. Two
-things the brand sets have no place in a text style and are left out: the width
-axis that makes its display cut wide, and the capitals on its mono labels.
+live in OFFDESK's own brand stylesheet, for documents and marketing pages. Tags,
+pills and tag chips follow the brand's label rule: IBM Plex Mono in capitals,
+12px with 0.1em tracking, through `text.tag` and `text-transform.tag`. Buttons,
+field labels and running text stay in Archivo. The one thing the brand sets
+that has no place here is the width axis that makes its display cut wide.
 
 The fonts are opt in. `tenon.css` keeps loading only Inter and Fraunces, so a
 page using an OFFDESK theme links the second file itself:

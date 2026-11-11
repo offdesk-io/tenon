@@ -280,8 +280,9 @@ const partVars = (path, v, opts) => Object.entries({
 
 /* A text style whose name a component already uses as its own class. The
    vars are still written, and the component reads them, but a .tenon-stat
-   text class would put the figure's font on the whole Stat box. */
-const OWNED_BY_COMPONENT = new Set(['text.stat']);
+   text class would put the figure's font on the whole Stat box, and a
+   .tenon-tag text class would be a second rule on Tag's own class. */
+const OWNED_BY_COMPONENT = new Set(['text.stat', 'text.tag']);
 
 const textVars = [];
 const textClasses = [];

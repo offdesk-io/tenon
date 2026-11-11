@@ -460,5 +460,11 @@
         }
       ]
     }
+  },
+  "text-transform": {
+    "tag": {
+      "$type": "string",
+      "$value": "none"
+    }
   }
 }

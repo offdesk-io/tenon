@@ -13,6 +13,13 @@ const meta = {
   component: Tag,
   tags: ['autodocs'],
   args: { children: 'Tag' },
+  parameters: {
+    docs: {
+      description: {
+        component: 'The words take the text.tag style and text-transform.tag, so a theme can give its tags a voice of their own. Set the toolbar to OFFDESK to see the brand label: IBM Plex Mono in capitals at 0.1em. Pill and TagChip read the same two.',
+      },
+    },
+  },
 } satisfies Meta<typeof Tag>;
 
 export default meta;

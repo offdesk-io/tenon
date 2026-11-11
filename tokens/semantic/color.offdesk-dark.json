@@ -540,5 +540,12 @@
       ],
       "$description": "None, as elevation.raised explains."
     }
+  },
+  "text-transform": {
+    "tag": {
+      "$type": "string",
+      "$value": "uppercase",
+      "$description": "The brand sets its mono labels in capitals (DESIGN.md, Labels)."
+    }
   }
 }

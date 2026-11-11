@@ -12,10 +12,12 @@
   border-radius: var(--tenon-radius-full);
   background: transparent;
   color: var(--tenon-text-subtle);
-  font-family: var(--tenon-text-caption-family);
-  font-size: var(--tenon-text-caption-size);
-  font-weight: var(--tenon-text-label-weight);
-  line-height: var(--tenon-text-caption-line-height);
+  font-family: var(--tenon-text-tag-family);
+  font-size: var(--tenon-text-tag-size);
+  font-weight: var(--tenon-text-tag-weight);
+  line-height: var(--tenon-text-tag-line-height);
+  letter-spacing: var(--tenon-text-tag-letter-spacing);
+  text-transform: var(--tenon-text-transform-tag);
   white-space: nowrap;
 }
 

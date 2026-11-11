@@ -1,6 +1,6 @@
 {
   "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
-  "$description": "Text styles for the OFFDESK dark theme, identical to typography.offdesk.json, since the build reads one file per theme. Change both together. Each style here replaces the shared style of the same name inside that theme's CSS block, and every shared style is replaced. Family, weight and letter spacing are OFFDESK's: Archivo for everything, IBM Plex Mono for labels, captions and code, from OFFDESK's brand stylesheet (brand/AGENTS/design-md/assets/ofd-brand.css, 5 Nov 2026). Size and line height are Tenon's own, aliasing the same primitives as the shared style, so the theme sits at Tenon's density for app screens. The brand's page sizes (17px body, 32px headings) stay in OFFDESK's stylesheet. Letter spacings are literal ems where the brand sets one, and the 800 and 900 weights are literal because Tenon's weight scale stops at 700. Two things the brand sets are left out because a text style has no part for them: the width axis (125 for display and stat values) and the capitals on mono labels. Archivo and Plex Mono load from dist/tenon-fonts-offdesk.css, which a consumer links itself.",
+  "$description": "Text styles for the OFFDESK dark theme, identical to typography.offdesk.json, since the build reads one file per theme. Change both together. Each style here replaces the shared style of the same name inside that theme's CSS block, and every shared style is replaced. Family, weight and letter spacing are OFFDESK's: Archivo for everything, IBM Plex Mono for labels, captions and code, from OFFDESK's brand stylesheet (brand/AGENTS/design-md/assets/ofd-brand.css, 5 Nov 2026). Size and line height are Tenon's own, aliasing the same primitives as the shared style, so the theme sits at Tenon's density for app screens. The brand's page sizes (17px body, 32px headings) stay in OFFDESK's stylesheet. Letter spacings are literal ems where the brand sets one, and the 800 and 900 weights are literal because Tenon's weight scale stops at 700. Two things the brand sets are left out because a text style has no part for them: the width axis (125 for display and stat values) and the capitals on mono labels. Tags are the exception: text.tag gets its capitals from text-transform.tag in the theme's colour file. Archivo and Plex Mono load from dist/tenon-fonts-offdesk.css, which a consumer links itself.",
   "text": {
     "title": {
       "$description": "Family, weight and letter spacing from the brand's title role (ofd-title), Archivo 800 at -0.01em, taken over the display role, whose width 125 a text style cannot carry. Size and line height from the shared title.",
@@ -136,6 +136,20 @@
         "fontWeight": "{typography.weight.semibold}",
         "lineHeight": "{typography.line-height.normal}",
         "letterSpacing": "{typography.letter-spacing.normal}"
+      }
+    },
+    "tag": {
+      "$description": "The brand's label rule (ofd-label, ofd-tag): IBM Plex Mono 400 at 0.1em, set in capitals through text-transform.tag. Size and line height from the shared label, 12px on 1.4, since the brand sets its labels at 12px.",
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{typography.family.plex-mono}",
+        "fontSize": "{typography.size.sm}",
+        "fontWeight": "{typography.weight.regular}",
+        "lineHeight": "{typography.line-height.normal}",
+        "letterSpacing": {
+          "value": 0.1,
+          "unit": "em"
+        }
       }
     },
     "caption": {
