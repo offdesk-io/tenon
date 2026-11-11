@@ -1,6 +1,6 @@
 {
   "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
-  "$description": "Tenon semantic colour, OFFDESK dark theme, from the brand book's Ink pairings: Ink ground, Concrete type and actions, Raw steel for captions and hairlines. Brand roles come from OFFDESK's brand stylesheet (brand/AGENTS/design-md/assets/ofd-brand.css, 5 Nov 2026) and its DESIGN.md. Every value the brand does not state says \"Derived\" and what from. OFFDESK has no status colours, so those take Tenon ramps, stepped from the dark theme's picks until the build's contrast rules pass. In-between surfaces and greys come from the brand's own ramps: Concrete's and Ink's for surfaces, Raw steel's for the faint text greys. Corners and shadows are in radius.offdesk-dark.json and below. Same key set as light; scripts/build.mjs fails if it drifts.",
+  "$description": "Tenon semantic colour, OFFDESK dark theme, from the brand book's Ink pairings: Ink ground, Concrete type and actions, Raw steel for captions and hairlines, and Safety orange as the highlight (focus, the selected marker and one chart colour). Brand roles come from OFFDESK's brand stylesheet (brand/AGENTS/design-md/assets/ofd-brand.css, 5 Nov 2026) and its DESIGN.md. Every value the brand does not state says \"Derived\" and what from. OFFDESK has no status colours, so those take Tenon ramps, stepped from the dark theme's picks until the build's contrast rules pass. In-between surfaces and greys come from the brand's own ramps: Concrete's for surfaces near Concrete, Raw steel's (which ends in Ink at 950) for surfaces near Ink and for the faint text greys. Corners and shadows are in radius.offdesk-dark.json and below. Same key set as light; scripts/build.mjs fails if it drifts.",
   "color": {
     "background": {
       "default": {
@@ -20,23 +20,23 @@
       },
       "subtle": {
         "$type": "color",
-        "$value": "{color.offdesk-ink.850}",
-        "$description": "Derived: Ink is step 950 of its own ramp, so this keeps the dark theme's distance from its page ground on that ramp (neutral.850 in dark)."
+        "$value": "{color.offdesk-steel.850}",
+        "$description": "Derived: Ink is step 950 of Raw steel's ramp, the brand's one neutral scale, so this keeps the dark theme's distance from its page ground on that ramp (neutral.850 in dark)."
       },
       "hovered": {
         "$type": "color",
-        "$value": "{color.offdesk-ink.850}",
-        "$description": "Derived: Ink is step 950 of its own ramp, so this keeps the dark theme's distance from its page ground on that ramp (neutral.850 in dark)."
+        "$value": "{color.offdesk-steel.850}",
+        "$description": "Derived: Ink is step 950 of Raw steel's ramp, the brand's one neutral scale, so this keeps the dark theme's distance from its page ground on that ramp (neutral.850 in dark)."
       },
       "active": {
         "$type": "color",
-        "$value": "{color.offdesk-ink.800}",
-        "$description": "Derived: Ink is step 950 of its own ramp, so this keeps the dark theme's distance from its page ground on that ramp (neutral.800 in dark)."
+        "$value": "{color.offdesk-steel.800}",
+        "$description": "Derived: Ink is step 950 of Raw steel's ramp, the brand's one neutral scale, so this keeps the dark theme's distance from its page ground on that ramp (neutral.800 in dark)."
       },
       "selected": {
         "$type": "color",
-        "$value": "{color.offdesk-ink.800}",
-        "$description": "Derived: Ink is step 950 of its own ramp, so this keeps the dark theme's distance from its page ground on that ramp (blue.900 in dark)."
+        "$value": "{color.offdesk-orange.900}",
+        "$description": "Derived: the highlight behind a selected item, so it takes Safety orange's ramp. A tint (900) rather than the brand hex, because a Tag or Pill sets text.accent on it and Concrete on the full orange would not clear 4.5:1. As dark uses blue.900."
       },
       "accent": {
         "$type": "color",
@@ -55,18 +55,18 @@
       },
       "neutral": {
         "$type": "color",
-        "$value": "{color.offdesk-ink.800}",
-        "$description": "Derived: Ink is step 950 of its own ramp, so this keeps the dark theme's distance from its page ground on that ramp (neutral.800 in dark)."
+        "$value": "{color.offdesk-steel.800}",
+        "$description": "Derived: Ink is step 950 of Raw steel's ramp, the brand's one neutral scale, so this keeps the dark theme's distance from its page ground on that ramp (neutral.800 in dark)."
       },
       "neutral-hovered": {
         "$type": "color",
-        "$value": "{color.offdesk-ink.750}",
-        "$description": "Derived: Ink is step 950 of its own ramp, so this keeps the dark theme's distance from its page ground on that ramp (neutral.750 in dark)."
+        "$value": "{color.offdesk-steel.750}",
+        "$description": "Derived: Ink is step 950 of Raw steel's ramp, the brand's one neutral scale, so this keeps the dark theme's distance from its page ground on that ramp (neutral.750 in dark)."
       },
       "neutral-active": {
         "$type": "color",
-        "$value": "{color.offdesk-ink.700}",
-        "$description": "Derived: Ink is step 950 of its own ramp, so this keeps the dark theme's distance from its page ground on that ramp (neutral.700 in dark)."
+        "$value": "{color.offdesk-steel.700}",
+        "$description": "Derived: Ink is step 950 of Raw steel's ramp, the brand's one neutral scale, so this keeps the dark theme's distance from its page ground on that ramp (neutral.700 in dark)."
       },
       "inverse": {
         "$type": "color",
@@ -90,8 +90,8 @@
       },
       "input-hovered": {
         "$type": "color",
-        "$value": "{color.offdesk-ink.850}",
-        "$description": "Derived: Ink is step 950 of its own ramp, so this keeps the dark theme's distance from its page ground on that ramp (neutral.850 in dark)."
+        "$value": "{color.offdesk-steel.850}",
+        "$description": "Derived: Ink is step 950 of Raw steel's ramp, the brand's one neutral scale, so this keeps the dark theme's distance from its page ground on that ramp (neutral.850 in dark)."
       },
       "input-active": {
         "$type": "color",
@@ -100,13 +100,13 @@
       },
       "disabled": {
         "$type": "color",
-        "$value": "{color.offdesk-ink.850}",
-        "$description": "Derived: Ink is step 950 of its own ramp, so this keeps the dark theme's distance from its page ground on that ramp (neutral.850 in dark)."
+        "$value": "{color.offdesk-steel.850}",
+        "$description": "Derived: Ink is step 950 of Raw steel's ramp, the brand's one neutral scale, so this keeps the dark theme's distance from its page ground on that ramp (neutral.850 in dark)."
       },
       "skeleton": {
         "$type": "color",
-        "$value": "{color.offdesk-ink.800}",
-        "$description": "Derived: Ink is step 950 of its own ramp, so this keeps the dark theme's distance from its page ground on that ramp (neutral.800 in dark)."
+        "$value": "{color.offdesk-steel.800}",
+        "$description": "Derived: Ink is step 950 of Raw steel's ramp, the brand's one neutral scale, so this keeps the dark theme's distance from its page ground on that ramp (neutral.800 in dark)."
       },
       "success": {
         "$type": "color",
@@ -341,13 +341,13 @@
       },
       "accent": {
         "$type": "color",
-        "$value": "{color.offdesk.concrete}",
-        "$description": "Brand: --ofd-action in dark."
+        "$value": "{color.offdesk.orange}",
+        "$description": "Safety orange, the brand hex. A highlight: the selected marker, a focused field's border and an interactive card's hover border. Actions stay on background.accent."
       },
       "focus": {
         "$type": "color",
-        "$value": "{color.offdesk.concrete}",
-        "$description": "Brand: --ofd-focus in dark."
+        "$value": "{color.offdesk.orange}",
+        "$description": "Safety orange, the brand hex, so focus is the one signal on the page. The brand sheet's --ofd-focus is Concrete; this is a deliberate change. Clears 3:1 on the page ground and the raised panel."
       },
       "disabled": {
         "$type": "color",
@@ -388,18 +388,18 @@
     "chart": {
       "1": {
         "$type": "color",
-        "$value": "{color.offdesk.orange}",
-        "$description": "Brand: --ofd-chart-signal, Safety orange for the one series the reader looks at."
+        "$value": "{color.offdesk-yellow.250}",
+        "$description": "A chart colour is read as text on background.neutral, which is how a chart Tag draws it. chart.4 to chart.10 clear 4.5:1 there in this theme (the lowest is 4.81), so the brand three take the step nearest their anchor that clears the same. Signal yellow, the brand hex at 250, 6.83:1 on background.neutral."
       },
       "2": {
         "$type": "color",
-        "$value": "{color.offdesk.steel}",
-        "$description": "Brand: --ofd-chart-base, Raw steel for the rest."
+        "$value": "{color.offdesk-blue.350}",
+        "$description": "Derived: IBM blue's ramp at 350, 5.06:1 on background.neutral. IBM blue sits at 700, which gives 1.27 on the dark chip, and 400 gives 4.27."
       },
       "3": {
         "$type": "color",
-        "$value": "{color.offdesk.blue}",
-        "$description": "Brand: --ofd-chart-data, IBM blue for dense data. Kept one place away from orange, which it never sits beside. The brand sheet keeps it in dark, where it is quiet on Ink."
+        "$value": "{color.offdesk-orange.350}",
+        "$description": "Derived: Safety orange's ramp at 350, 4.87:1 on background.neutral. Safety orange sits at 500, which gives 2.77, and 400 gives 4.07."
       },
       "4": {
         "$type": "color",

@@ -68,18 +68,19 @@ anchor hex, in OKLCh, so that blue-600 and green-600 are the same weight on the
 page. Eleven of the anchors are colours the task board already used; five fill gaps
 in the wheel so there is a distinct hue available per bucket as the task board grows.
 
-Six of OFFDESK's brand colours get ramps of their own, made the same way, for
+OFFDESK's brand colours get five ramps of their own, made the same way, for
 the two OFFDESK themes further down: `offdesk-orange`, `offdesk-yellow`,
-`offdesk-blue`, `offdesk-concrete`, `offdesk-steel` and `offdesk-ink`. The
-prefix keeps them apart from Tenon's own orange, yellow and blue. The method
-only lands near an anchor, and a brand hex is not negotiable, so the step
-nearest each anchor is pinned to the hex exactly: Safety orange at 500, Signal
-yellow at 250, IBM blue at 700, Concrete at 150, Raw steel at 450 and Ink at
-950. `color.offdesk` names them, so `color.offdesk.ink` is Ink wherever a theme
-states a brand role. It also holds the two values that are not on a ramp: Raw
-steel dark, which falls between steel's 700 and 750 and matches neither, and
-`ink-raised`, the dark panel colour the brand's own stylesheet derives from
-Ink. The brand's white is `base.white`.
+`offdesk-blue`, `offdesk-concrete` and `offdesk-steel`. The prefix keeps them
+apart from Tenon's own orange, yellow and blue. The method only lands near an
+anchor, and a brand hex is not negotiable, so the step nearest each anchor is
+pinned to the hex exactly: Safety orange at 500, Signal yellow at 250, IBM blue
+at 700, Concrete at 150 and Raw steel at 450. Ink has no ramp of its own. It is
+the dark end of Raw steel's, pinned at 950, so the brand's neutrals are one
+scale from steel's lightest tint down to Ink. `color.offdesk` names them, so
+`color.offdesk.ink` is Ink wherever a theme states a brand role. It also holds
+the two values that are on no ramp: Raw steel dark, which falls between steel's
+700 and 750 and matches neither, and `ink-raised`, the dark panel colour the
+brand's own stylesheet derives from Ink. The brand's white is `base.white`.
 
 The generated ramps are consistent enough to state a rule: **every hue clears
 4.5:1 against white by step 550 or 600, and against a dark panel by step 450 or
@@ -429,13 +430,18 @@ token says either which brand role it is or, where the brand is silent,
 "Derived" and what it was worked out from. Brand roles read the brand hexes
 by name from `color.offdesk`. The surfaces and greys in between, such as a
 hover fill or the faint text colour, come from the brand's own ramps:
-Concrete's and Ink's for surfaces, and Raw steel's for text. Only these two
-themes read any of it.
+Concrete's for surfaces near Concrete, and Raw steel's for surfaces near Ink
+and for text. Only these two themes read any of it.
 
 The rules that make it look like OFFDESK are carried by the tokens. Actions and
 links are Ink in the light theme and Concrete in the dark one, because the brand
-keeps Safety orange for one signal per layout and never for a button, so orange
-reaches Tenon only as `chart.1`. Borders are Raw steel. Every corner is square
+never makes a button orange. Safety orange is the highlight instead, in both
+themes: the focus ring, the selected marker (`stroke.accent`) and, as a tint,
+the fill behind a selected item. The brand's own stylesheet draws focus in Ink,
+so the focus ring is the one place the themes depart from it on purpose.
+Borders are Raw steel. The first three bucket colours are the brand's yellow,
+blue and orange, each at the step of its ramp nearest the brand hex that reads
+as well on a tag as the seven after it. Every corner is square
 except `radius.full`, which stays round so a status dot, a switch thumb and a
 spinner still read, and there are no shadows. OFFDESK has no status colours, so
 success, warning, error, info and running take Tenon's own ramps, stepped from

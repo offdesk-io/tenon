@@ -1527,7 +1527,7 @@
         "$type": "color",
         "$value": "#2d0500"
       },
-      "$description": "OFFDESK Safety orange, generated from #e2481c, which is pinned at step 500. Do not hand-edit; run scripts/generate-ramps.mjs."
+      "$description": "OFFDESK Safety orange, generated from #e2481c, with the brand hex pinned for Safety orange at 500. Do not hand-edit; run scripts/generate-ramps.mjs."
     },
     "offdesk-yellow": {
       "50": {
@@ -1607,7 +1607,7 @@
         "$type": "color",
         "$value": "#1b1400"
       },
-      "$description": "OFFDESK Signal yellow, generated from #f2c500, which is pinned at step 250. Do not hand-edit; run scripts/generate-ramps.mjs."
+      "$description": "OFFDESK Signal yellow, generated from #f2c500, with the brand hex pinned for Signal yellow at 250. Do not hand-edit; run scripts/generate-ramps.mjs."
     },
     "offdesk-blue": {
       "50": {
@@ -1687,7 +1687,7 @@
         "$type": "color",
         "$value": "#071135"
       },
-      "$description": "OFFDESK IBM blue, generated from #2440a8, which is pinned at step 700. Do not hand-edit; run scripts/generate-ramps.mjs."
+      "$description": "OFFDESK IBM blue, generated from #2440a8, with the brand hex pinned for IBM blue at 700. Do not hand-edit; run scripts/generate-ramps.mjs."
     },
     "offdesk-concrete": {
       "50": {
@@ -1767,7 +1767,7 @@
         "$type": "color",
         "$value": "#161511"
       },
-      "$description": "OFFDESK Concrete, generated from #e7e5e0, which is pinned at step 150. Do not hand-edit; run scripts/generate-ramps.mjs."
+      "$description": "OFFDESK Concrete, generated from #e7e5e0, with the brand hex pinned for Concrete at 150. Do not hand-edit; run scripts/generate-ramps.mjs."
     },
     "offdesk-steel": {
       "50": {
@@ -1845,94 +1845,15 @@
       },
       "950": {
         "$type": "color",
-        "$value": "#151514"
-      },
-      "$description": "OFFDESK Raw steel, generated from #9a9a96, which is pinned at step 450. Do not hand-edit; run scripts/generate-ramps.mjs."
-    },
-    "offdesk-ink": {
-      "50": {
-        "$type": "color",
-        "$value": "#f7f7f7"
-      },
-      "100": {
-        "$type": "color",
-        "$value": "#eeeeee"
-      },
-      "150": {
-        "$type": "color",
-        "$value": "#e4e4e4"
-      },
-      "200": {
-        "$type": "color",
-        "$value": "#d9d9d9"
-      },
-      "250": {
-        "$type": "color",
-        "$value": "#cccccc"
-      },
-      "300": {
-        "$type": "color",
-        "$value": "#bebebe"
-      },
-      "350": {
-        "$type": "color",
-        "$value": "#afafaf"
-      },
-      "400": {
-        "$type": "color",
-        "$value": "#a1a1a1"
-      },
-      "450": {
-        "$type": "color",
-        "$value": "#949494"
-      },
-      "500": {
-        "$type": "color",
-        "$value": "#868686"
-      },
-      "550": {
-        "$type": "color",
-        "$value": "#797979"
-      },
-      "600": {
-        "$type": "color",
-        "$value": "#6c6c6c"
-      },
-      "650": {
-        "$type": "color",
-        "$value": "#5f5f5f"
-      },
-      "700": {
-        "$type": "color",
-        "$value": "#525252"
-      },
-      "750": {
-        "$type": "color",
-        "$value": "#464646"
-      },
-      "800": {
-        "$type": "color",
-        "$value": "#3a3a3a"
-      },
-      "850": {
-        "$type": "color",
-        "$value": "#2e2e2e"
-      },
-      "900": {
-        "$type": "color",
-        "$value": "#222222"
-      },
-      "950": {
-        "$type": "color",
         "$value": "#141414",
         "$description": "Ink, the brand hex."
       },
-      "$description": "OFFDESK Ink, generated from #141414, which is pinned at step 950. Do not hand-edit; run scripts/generate-ramps.mjs."
+      "$description": "OFFDESK Raw steel, generated from #9a9a96, with the brand hex pinned for Raw steel at 450 and Ink at 950. Do not hand-edit; run scripts/generate-ramps.mjs."
     },
     "offdesk": {
       "ink": {
         "$type": "color",
-        "$value": "{color.offdesk-ink.950}",
+        "$value": "{color.offdesk-steel.950}",
         "$description": "Ink. All type, all rules, and the contrast surface. The light theme's actions and links."
       },
       "concrete": {
@@ -1943,12 +1864,12 @@
       "orange": {
         "$type": "color",
         "$value": "{color.offdesk-orange.500}",
-        "$description": "Safety orange, the one signal per layout. Never a button, a link or text."
+        "$description": "Safety orange, the signal. In the themes it marks focus, the selected thing and one chart colour. Never a button or a link."
       },
       "yellow": {
         "$type": "color",
         "$value": "{color.offdesk-yellow.250}",
-        "$description": "Signal yellow. Full-bleed grounds only, which Tenon has no token for, so no theme reads it yet."
+        "$description": "Signal yellow. Full-bleed grounds in the brand, which Tenon has no token for. The themes read its ramp for one chart colour only."
       },
       "steel": {
         "$type": "color",

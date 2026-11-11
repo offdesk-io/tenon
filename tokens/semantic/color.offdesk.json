@@ -1,6 +1,6 @@
 {
   "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
-  "$description": "Tenon semantic colour, OFFDESK theme: Concrete ground, Ink type and actions, and Safety orange kept to the one signal, never a button or a link. Brand roles come from OFFDESK's brand stylesheet (brand/AGENTS/design-md/assets/ofd-brand.css, 5 Nov 2026) and its DESIGN.md. Every value the brand does not state says \"Derived\" and what from. OFFDESK has no status colours, so those take Tenon ramps, stepped from the light theme's picks until the build's contrast rules pass. In-between surfaces and greys come from the brand's own ramps: Concrete's and Ink's for surfaces, Raw steel's for the faint text greys. Corners and shadows are in radius.offdesk.json and below. Same key set as light; scripts/build.mjs fails if it drifts.",
+  "$description": "Tenon semantic colour, OFFDESK theme: Concrete ground, Ink type and actions, and Safety orange as the highlight (focus, the selected marker and one chart colour), never a button or a link. Brand roles come from OFFDESK's brand stylesheet (brand/AGENTS/design-md/assets/ofd-brand.css, 5 Nov 2026) and its DESIGN.md. Every value the brand does not state says \"Derived\" and what from. OFFDESK has no status colours, so those take Tenon ramps, stepped from the light theme's picks until the build's contrast rules pass. In-between surfaces and greys come from the brand's own ramps: Concrete's for surfaces near Concrete, Raw steel's (which ends in Ink at 950) for surfaces near Ink and for the faint text greys. Corners and shadows are in radius.offdesk.json and below. Same key set as light; scripts/build.mjs fails if it drifts.",
   "color": {
     "background": {
       "default": {
@@ -35,8 +35,8 @@
       },
       "selected": {
         "$type": "color",
-        "$value": "{color.offdesk-concrete.250}",
-        "$description": "Derived: OFFDESK has no tint ladder. Concrete is step 150 of its own ramp, so this keeps the light theme's distance from its page ground on that ramp (blue.100 in light)."
+        "$value": "{color.offdesk-orange.100}",
+        "$description": "Derived: the highlight behind a selected item, so it takes Safety orange's ramp. A tint (100) rather than the brand hex, because a Tag or Pill sets text.accent on it and Ink on the full orange would not clear 4.5:1. As light uses blue.100."
       },
       "accent": {
         "$type": "color",
@@ -50,8 +50,8 @@
       },
       "accent-active": {
         "$type": "color",
-        "$value": "{color.offdesk-ink.800}",
-        "$description": "Derived: the brand sheet has no pressed state. offdesk-ink.800 sits between Ink and Raw steel dark."
+        "$value": "{color.offdesk-steel.800}",
+        "$description": "Derived: the brand sheet has no pressed state. offdesk-steel.800 sits between Ink and Raw steel dark on Raw steel's ramp."
       },
       "neutral": {
         "$type": "color",
@@ -75,13 +75,13 @@
       },
       "inverse-hovered": {
         "$type": "color",
-        "$value": "{color.offdesk-ink.900}",
-        "$description": "Derived: one step lighter than Ink on its ramp, as light steps its inverse."
+        "$value": "{color.offdesk-steel.900}",
+        "$description": "Derived: one step lighter than Ink on Raw steel's ramp, as light steps its inverse."
       },
       "inverse-active": {
         "$type": "color",
-        "$value": "{color.offdesk-ink.850}",
-        "$description": "Derived: two steps lighter than Ink on its ramp, as light steps its inverse."
+        "$value": "{color.offdesk-steel.850}",
+        "$description": "Derived: two steps lighter than Ink on Raw steel's ramp, as light steps its inverse."
       },
       "input": {
         "$type": "color",
@@ -341,13 +341,13 @@
       },
       "accent": {
         "$type": "color",
-        "$value": "{color.offdesk.ink}",
-        "$description": "Brand: action is Ink."
+        "$value": "{color.offdesk.orange}",
+        "$description": "Safety orange, the brand hex. A highlight: the selected marker, a focused field's border and an interactive card's hover border. Actions stay on background.accent."
       },
       "focus": {
         "$type": "color",
-        "$value": "{color.offdesk.ink}",
-        "$description": "Brand: --ofd-focus."
+        "$value": "{color.offdesk.orange}",
+        "$description": "Safety orange, the brand hex, so focus is the one signal on the page. The brand sheet's --ofd-focus is Ink; this is a deliberate change. Clears 3:1 on the page ground and the raised panel."
       },
       "disabled": {
         "$type": "color",
@@ -388,18 +388,18 @@
     "chart": {
       "1": {
         "$type": "color",
-        "$value": "{color.offdesk.orange}",
-        "$description": "Brand: --ofd-chart-signal, Safety orange for the one series the reader looks at."
+        "$value": "{color.offdesk-yellow.600}",
+        "$description": "A chart colour is read as text on background.neutral, which is how a chart Tag draws it. chart.4 to chart.10 clear 3:1 there in this theme (the lowest is 3.11), so the brand three take the step nearest their anchor that clears the same. Derived: Signal yellow's ramp at 600, 3.29:1 on background.neutral. Signal yellow sits at 250, which no step lighter than 600 clears."
       },
       "2": {
         "$type": "color",
-        "$value": "{color.offdesk.steel}",
-        "$description": "Brand: --ofd-chart-base, Raw steel for the rest."
+        "$value": "{color.offdesk-blue.700}",
+        "$description": "IBM blue, the brand hex at 700, 5.51:1 on background.neutral."
       },
       "3": {
         "$type": "color",
-        "$value": "{color.offdesk.blue}",
-        "$description": "Brand: --ofd-chart-data, IBM blue for dense data. Kept one place away from orange, which it never sits beside."
+        "$value": "{color.offdesk-orange.600}",
+        "$description": "Derived: Safety orange's ramp at 600, 3.60:1 on background.neutral. Safety orange sits at 500, which gives 2.53, and 550 gives 2.98."
       },
       "4": {
         "$type": "color",
