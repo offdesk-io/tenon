@@ -143,14 +143,26 @@ heavier weight. In light, dark and 1984 it is the mix those components set befor
 existed, caption's family, size and line height with label's weight, so they
 draw as they did. Case is the one thing a text style cannot say, so it is a
 theme token of its own, `text-transform.tag`, kept in each theme's colour file
-beside elevation, which is `none` everywhere but OFFDESK. A page that wants its
-own small labels or metadata to match reads the same variables:
-`--tenon-text-tag-family` and its siblings, and `--tenon-text-transform-tag`.
-Two more settings sit in the colour file for the same reason, each the old
-fixed value outside OFFDESK: `font-weight.tag-chip`, the chip's heavier weight,
-which is 500 in OFFDESK because Plex Mono is loaded at 400 and 500 only, and
-`letter-spacing.pill-caps`, the tracking on a Pill in capitals, which keeps the
-brand's 0.1em in OFFDESK.
+beside elevation, and TagChip's font is another, `font-family.tag-chip`.
+
+Before the style existed Tag and Pill took their letter spacing and case from
+the text around them, and TagChip its font, so a Tag in a Card eyebrow carried
+the eyebrow's tracking. Outside OFFDESK those three values are `inherit` so
+that still happens. TagChip's button kept the browser's own button spacing and
+case, so it reads the two with a fallback of `normal` and `none`, which is
+what it gets when they have no value. A custom property set to `inherit` has nothing
+to inherit at `:root`, so the `var()` that reads it is invalid when the browser
+computes it, and letter spacing, case and font family are all properties that
+then inherit from the parent. OFFDESK sets real values, Plex Mono in capitals at
+0.1em, and those apply wherever the theme does.
+
+A page that wants its own small labels or metadata to match reads the same
+variables: `--tenon-text-tag-family` and its siblings, and
+`--tenon-text-transform-tag`. Two more settings sit in the colour file for the
+same reason, each the old fixed value outside OFFDESK: `font-weight.tag-chip`,
+the chip's heavier weight, which is 500 in OFFDESK because Plex Mono is loaded
+at 400 and 500 only, and `letter-spacing.pill-caps`, the tracking on a Pill in
+capitals, which keeps the brand's 0.1em in OFFDESK.
 
 Weights collapse from the task board's thirteen — which included 520, 560, 570 and
 680, the kind of value that gets typed once and copied forever — to four.

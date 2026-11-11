@@ -16,9 +16,9 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 /* Elevation is a shadow rather than a colour, so it has a page of its own.
-   text-transform, font-weight and letter-spacing are the few type settings
+   text-transform, font-family, font-weight and letter-spacing are the type settings
    a theme file carries beside its colours, and are not drawn here. */
-const keys = Object.keys(tokens.themes.light).filter((k) => !/^(elevation|text-transform|font-weight|letter-spacing)\./.test(k));
+const keys = Object.keys(tokens.themes.light).filter((k) => !/^(elevation|text-transform|font-family|font-weight|letter-spacing)\./.test(k));
 const families = groupBy(keys);
 
 const FAMILY_NOTES: Record<string, string> = {

@@ -124,14 +124,14 @@
       }
     },
     "tag": {
-      "$description": "Caption's 13px Inter with label's regular weight, which is what a Tag and a Pill set in this theme before text.tag existed, so they draw as they did.",
+      "$description": "Caption's 13px Inter with label's regular weight, which is what a Tag and a Pill set in this theme before text.tag existed, so they draw as they did. Letter spacing inherit, as in the shared style.",
       "$type": "typography",
       "$value": {
         "fontFamily": "{typography.family.inter}",
         "fontSize": { "value": 13, "unit": "px" },
         "fontWeight": "{typography.weight.regular}",
         "lineHeight": "{typography.line-height.normal}",
-        "letterSpacing": "{typography.letter-spacing.normal}"
+        "letterSpacing": "inherit"
       }
     },
     "caption": {

@@ -116,14 +116,14 @@
       }
     },
     "tag": {
-      "$description": "The words on a Tag, a Pill, and the font, spacing and case of a TagChip. Caption's family, size and line height with label's weight, which is what those components set before the style existed, so they draw as they did. A theme replaces it to give its small labels a voice of their own, and its case comes from text-transform.tag in the theme's colour file, since a text style has no part for capitals. No .tenon-tag class is written for it, because Tag owns that class.",
+      "$description": "The words on a Tag, a Pill, and the font, spacing and case of a TagChip. Caption's family, size and line height with label's weight, which is what those components set before the style existed, so they draw as they did. Its letter spacing is inherit for the same reason: those components took the tracking of the text around them, such as a Card eyebrow's. A theme replaces it to give its small labels a voice of their own, and its case comes from text-transform.tag in the theme's colour file, since a text style has no part for capitals. No .tenon-tag class is written for it, because Tag owns that class.",
       "$type": "typography",
       "$value": {
         "fontFamily": "{typography.family.sans}",
         "fontSize": "{typography.size.xs}",
         "fontWeight": "{typography.weight.medium}",
         "lineHeight": "{typography.line-height.normal}",
-        "letterSpacing": "{typography.letter-spacing.normal}"
+        "letterSpacing": "inherit"
       }
     },
     "caption": {

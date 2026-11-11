@@ -548,6 +548,13 @@
       "$description": "The brand sets its mono labels in capitals (DESIGN.md, Labels)."
     }
   },
+  "font-family": {
+    "tag-chip": {
+      "$type": "fontFamily",
+      "$value": "{typography.family.plex-mono}",
+      "$description": "The brand's label face, the same family as text.tag."
+    }
+  },
   "font-weight": {
     "tag-chip": {
       "$type": "fontWeight",

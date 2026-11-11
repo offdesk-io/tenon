@@ -464,7 +464,13 @@
   "text-transform": {
     "tag": {
       "$type": "string",
-      "$value": "none"
+      "$value": "inherit"
+    }
+  },
+  "font-family": {
+    "tag-chip": {
+      "$type": "fontFamily",
+      "$value": "inherit"
     }
   },
   "font-weight": {

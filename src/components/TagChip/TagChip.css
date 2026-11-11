@@ -7,16 +7,27 @@
   border-radius: var(--tenon-radius-default);
   background: var(--tenon-background-neutral);
   color: var(--tenon-text-subtle);
-  /* The tag style's voice, so a theme's small labels reach the chip too.
-     Size stays the chip's own, larger than a Tag's because it is something
-     to click, and so does the heavier weight, which is a theme token so a
-     theme can pick a weight its face is loaded at. */
-  font-family: var(--tenon-text-tag-family);
+  /* The tag style's spacing and case, and a font of the chip's own, so a
+     theme's small labels reach the chip too. Outside OFFDESK the three are
+     inherit, so they have no value and the chip takes them from the text
+     around it, as it did before. Size stays the chip's own, larger than a
+     Tag's because it is something to click, and so does the heavier weight,
+     a theme token so a theme can pick a weight its face is loaded at. */
+  font-family: var(--tenon-font-family-tag-chip);
   font-size: var(--tenon-text-label-size);
   font-weight: var(--tenon-font-weight-tag-chip);
   letter-spacing: var(--tenon-text-tag-letter-spacing);
   text-transform: var(--tenon-text-transform-tag);
   cursor: pointer;
+}
+/* The chip is a button until it is being edited. A browser's own button
+   style sets letter spacing to normal and case to none, which is what the
+   button showed before these tokens existed. Outside OFFDESK the tokens
+   have no value, so the fallback after the comma is used and the button
+   keeps those two; the editing span has no such style and inherits. */
+button.tenon-tag-chip {
+  letter-spacing: var(--tenon-text-tag-letter-spacing, normal);
+  text-transform: var(--tenon-text-transform-tag, none);
 }
 .tenon-tag-chip:not(:disabled):hover { border-color: var(--tenon-stroke-default); }
 .tenon-tag-chip:focus-visible { outline: 2px solid var(--tenon-stroke-focus); outline-offset: 1px; }

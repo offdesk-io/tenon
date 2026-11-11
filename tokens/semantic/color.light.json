@@ -467,8 +467,15 @@
   "text-transform": {
     "tag": {
       "$type": "string",
-      "$value": "none",
-      "$description": "How a Tag, a Pill and a TagChip set their case. A text style has no part for capitals, so the theme says it here, beside elevation, and parity makes every theme state it. none keeps the words as written."
+      "$value": "inherit",
+      "$description": "How a Tag, a Pill and a TagChip set their case. A text style has no part for capitals, so the theme says it here, beside elevation, and parity makes every theme state it. Here it is inherit, so the component takes whatever the text around it sets, as it did before the token existed. A custom property set to inherit has no value at :root, so the var() that reads it is invalid when computed, and an inherited property such as this one then inherits."
+    }
+  },
+  "font-family": {
+    "tag-chip": {
+      "$type": "fontFamily",
+      "$value": "inherit",
+      "$description": "A TagChip's font. Here it is inherit, so the component takes whatever the text around it sets, as it did before the token existed. A custom property set to inherit has no value at :root, so the var() that reads it is invalid when computed, and an inherited property such as this one then inherits."
     }
   },
   "font-weight": {
