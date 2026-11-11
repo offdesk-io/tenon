@@ -8,11 +8,12 @@
   background: var(--tenon-background-neutral);
   color: var(--tenon-text-subtle);
   /* The tag style's voice, so a theme's small labels reach the chip too.
-     Size and weight stay the chip's own, which is larger and heavier than
-     a Tag because it is something to click. */
+     Size stays the chip's own, larger than a Tag's because it is something
+     to click, and so does the heavier weight, which is a theme token so a
+     theme can pick a weight its face is loaded at. */
   font-family: var(--tenon-text-tag-family);
   font-size: var(--tenon-text-label-size);
-  font-weight: 600;
+  font-weight: var(--tenon-font-weight-tag-chip);
   letter-spacing: var(--tenon-text-tag-letter-spacing);
   text-transform: var(--tenon-text-transform-tag);
   cursor: pointer;
@@ -41,5 +42,5 @@
   background: transparent;
   color: inherit;
   font: inherit;
-  font-weight: 600;
+  font-weight: var(--tenon-font-weight-tag-chip);
 }

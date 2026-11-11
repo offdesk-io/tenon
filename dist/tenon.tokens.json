@@ -864,7 +864,9 @@
       "elevation.raised": "0px 1px 2px 0px #0000004d",
       "elevation.overlay": "0px 1px 2px 0px #0000004d, 0px 6px 16px 0px #00000040",
       "elevation.modal": "0px 4px 8px 0px #00000059, 0px 16px 32px 0px #00000059",
-      "text-transform.tag": "none"
+      "text-transform.tag": "none",
+      "font-weight.tag-chip": "600",
+      "letter-spacing.pill-caps": "0.04rem"
     },
     "light": {
       "background.default": "#f6f7f8",
@@ -967,7 +969,9 @@
       "elevation.raised": "0px 1px 2px 0px #101c2c10",
       "elevation.overlay": "0px 1px 2px 0px #101c2c0f, 0px 4px 12px 0px #101c2c0d",
       "elevation.modal": "0px 4px 8px 0px #101c2c14, 0px 16px 32px 0px #101c2c14",
-      "text-transform.tag": "none"
+      "text-transform.tag": "none",
+      "font-weight.tag-chip": "600",
+      "letter-spacing.pill-caps": "0.04rem"
     },
     "dark": {
       "background.default": "#131518",
@@ -1070,7 +1074,9 @@
       "elevation.raised": "0px 1px 2px 0px #0000004d",
       "elevation.overlay": "0px 1px 2px 0px #0000004d, 0px 6px 16px 0px #00000040",
       "elevation.modal": "0px 4px 8px 0px #00000059, 0px 16px 32px 0px #00000059",
-      "text-transform.tag": "none"
+      "text-transform.tag": "none",
+      "font-weight.tag-chip": "600",
+      "letter-spacing.pill-caps": "0.04rem"
     },
     "offdesk": {
       "background.default": "#e7e5e0",
@@ -1173,7 +1179,9 @@
       "elevation.raised": "0px 0px 0px 0px #00000000",
       "elevation.overlay": "0px 0px 0px 0px #00000000",
       "elevation.modal": "0px 0px 0px 0px #00000000",
-      "text-transform.tag": "uppercase"
+      "text-transform.tag": "uppercase",
+      "font-weight.tag-chip": "500",
+      "letter-spacing.pill-caps": "0.1em"
     },
     "offdesk-dark": {
       "background.default": "#141414",
@@ -1276,7 +1284,9 @@
       "elevation.raised": "0px 0px 0px 0px #00000000",
       "elevation.overlay": "0px 0px 0px 0px #00000000",
       "elevation.modal": "0px 0px 0px 0px #00000000",
-      "text-transform.tag": "uppercase"
+      "text-transform.tag": "uppercase",
+      "font-weight.tag-chip": "500",
+      "letter-spacing.pill-caps": "0.1em"
     }
   },
   "themeTypography": {

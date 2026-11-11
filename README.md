@@ -131,20 +131,26 @@ uses, rounded off the half-pixels it had drifted into; above it the ratio is
 Six headings, `heading-1` through `heading-6`, plus stat, body, body-sm, label,
 tag, caption, caption-sm and code. `stat` is the figure in a Stat and `tag` the
 words on a Tag, and they are the two styles the build writes no class for,
-since those components own `.tenon-stat` and `.tenon-tag`.
+since those components own `.tenon-stat` and `.tenon-tag`. They land at the
+small end of the ramp because the task board is a dense UI: `heading-1` is
+28px, not 49px. When Tenon goes into a project with room to breathe, the
+headings move up the ramp and nothing else changes.
 
 `tag` exists so a theme can give its small labels a voice without touching the
 buttons and fields that share `label`. Tag and Pill read all of it, and TagChip
-reads its family, spacing and case while keeping its own larger size and
-weight. In light, dark and 1984 it is the mix those components set before it
+reads its family, spacing and case while keeping its own larger size and a
+heavier weight. In light, dark and 1984 it is the mix those components set before it
 existed, caption's family, size and line height with label's weight, so they
 draw as they did. Case is the one thing a text style cannot say, so it is a
 theme token of its own, `text-transform.tag`, kept in each theme's colour file
 beside elevation, which is `none` everywhere but OFFDESK. A page that wants its
 own small labels or metadata to match reads the same variables:
-`--tenon-text-tag-family` and its siblings, and `--tenon-text-transform-tag`. They land at the small end of the ramp because the task board is a
-dense UI: `heading-1` is 28px, not 49px. When Tenon goes into a project with
-room to breathe, the headings move up the ramp and nothing else changes.
+`--tenon-text-tag-family` and its siblings, and `--tenon-text-transform-tag`.
+Two more settings sit in the colour file for the same reason, each the old
+fixed value outside OFFDESK: `font-weight.tag-chip`, the chip's heavier weight,
+which is 500 in OFFDESK because Plex Mono is loaded at 400 and 500 only, and
+`letter-spacing.pill-caps`, the tracking on a Pill in capitals, which keeps the
+brand's 0.1em in OFFDESK.
 
 Weights collapse from the task board's thirteen — which included 520, 560, 570 and
 680, the kind of value that gets typed once and copied forever — to four.

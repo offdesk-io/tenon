@@ -466,5 +466,17 @@
       "$type": "string",
       "$value": "none"
     }
+  },
+  "font-weight": {
+    "tag-chip": {
+      "$type": "fontWeight",
+      "$value": "{typography.weight.semibold}"
+    }
+  },
+  "letter-spacing": {
+    "pill-caps": {
+      "$type": "dimension",
+      "$value": "{typography.letter-spacing.wider}"
+    }
   }
 }

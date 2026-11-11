@@ -26,7 +26,7 @@
 .tenon-pill--warning { border-color: var(--tenon-stroke-warning); background: var(--tenon-background-warning-subtle);  color: var(--tenon-text-warning); }
 .tenon-pill--error   { border-color: var(--tenon-stroke-error);   background: var(--tenon-background-error-subtle);    color: var(--tenon-text-error); }
 
-.tenon-pill--caps { text-transform: uppercase; letter-spacing: var(--tenon-typography-letter-spacing-wider); }
+.tenon-pill--caps { text-transform: uppercase; letter-spacing: var(--tenon-letter-spacing-pill-caps); }
 
 .tenon-pill__dot {
   width: var(--tenon-dimension-050);

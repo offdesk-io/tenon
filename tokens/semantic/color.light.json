@@ -470,5 +470,19 @@
       "$value": "none",
       "$description": "How a Tag, a Pill and a TagChip set their case. A text style has no part for capitals, so the theme says it here, beside elevation, and parity makes every theme state it. none keeps the words as written."
     }
+  },
+  "font-weight": {
+    "tag-chip": {
+      "$type": "fontWeight",
+      "$value": "{typography.weight.semibold}",
+      "$description": "A TagChip's weight. Heavier than a Tag because it is something to click. Themeable so a theme whose label face is not loaded at 600 can ask for a weight it has."
+    }
+  },
+  "letter-spacing": {
+    "pill-caps": {
+      "$type": "dimension",
+      "$value": "{typography.letter-spacing.wider}",
+      "$description": "The tracking on a Pill set in capitals (its caps variant). Themeable so a theme whose tags already have tracking of their own keeps it."
+    }
   }
 }
