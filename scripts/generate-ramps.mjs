@@ -138,6 +138,16 @@ const BRAND = {
   blue:     { hex: '#2440a8', name: 'IBM blue' },
   concrete: { hex: '#e7e5e0', name: 'Concrete' },
   steel:    { hex: '#9a9a96', name: 'Raw steel', also: { ink: { step: 950, hex: '#141414', name: 'Ink' } } },
+  /* Bucket colours 4 to 10, chosen for OFFDESK's board with Tiago,
+     11 Nov 2026. Not in the brand book, which has three colours beside its
+     neutrals; these extend it for a board that needs ten buckets. */
+  cyan:     { hex: '#1a9bd7', name: 'Blueprint cyan' },
+  purple:   { hex: '#6d3fc8', name: 'Radiation purple' },
+  magenta:  { hex: '#c21e8a', name: 'Marker magenta' },
+  teal:     { hex: '#12877b', name: 'Patina teal' },
+  olive:    { hex: '#7f7a1f', name: 'Workwear olive' },
+  kraft:    { hex: '#ae8250', name: 'Kraft' },
+  pink:     { hex: '#ec6f9f', name: 'Hi-vis pink' },
 };
 const anchorStep = {};
 for (const [key, { hex, name, also = {} }] of Object.entries(BRAND)) {

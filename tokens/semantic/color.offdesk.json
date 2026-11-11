@@ -403,38 +403,88 @@
       },
       "4": {
         "$type": "color",
-        "$value": "{color.green.600}",
-        "$description": "Derived: the light theme's chart picks in their order, leaving out blue, indigo, orange and red as too near IBM blue and Safety orange, then lime to make ten."
+        "$value": "{color.offdesk-cyan.650}",
+        "$description": "Bucket colours 4 to 10 are OFFDESK's own extension of the brand's three, each on a ramp of its own, at the step nearest its brand hex that reads as text on the page. Derived: Blueprint cyan's ramp at 650, the step nearest the brand hex (450) that clears 4.5:1 as text on Concrete (4.97) and on the raised panel (6.26)."
       },
       "5": {
         "$type": "color",
-        "$value": "{color.purple.600}",
-        "$description": "Derived: the light theme's purple.600, as chart.4 explains."
+        "$value": "{color.offdesk-purple.650}",
+        "$description": "Radiation purple, the brand hex at 650: 5.22:1 on Concrete and 6.57:1 on the raised panel."
       },
       "6": {
         "$type": "color",
-        "$value": "{color.teal.600}",
-        "$description": "Derived: the light theme's teal.600, as chart.4 explains."
+        "$value": "{color.offdesk-magenta.650}",
+        "$description": "Derived: Marker magenta's ramp at 650, the step nearest the brand hex (600) that clears 4.5:1 as text on Concrete (5.71) and on the raised panel (7.19)."
       },
       "7": {
         "$type": "color",
-        "$value": "{color.magenta.600}",
-        "$description": "Derived: the light theme's magenta.600, as chart.4 explains."
+        "$value": "{color.offdesk-teal.650}",
+        "$description": "Derived: Patina teal's ramp at 650, the step nearest the brand hex (550) that clears 4.5:1 as text on Concrete (4.89) and on the raised panel (6.15)."
       },
       "8": {
         "$type": "color",
-        "$value": "{color.brown.600}",
-        "$description": "Derived: the light theme's brown.600, as chart.4 explains."
+        "$value": "{color.offdesk-olive.650}",
+        "$description": "Derived: Workwear olive's ramp at 650, the step nearest the brand hex (550) that clears 4.5:1 as text on Concrete (5.02) and on the raised panel (6.32)."
       },
       "9": {
         "$type": "color",
-        "$value": "{color.slate.600}",
-        "$description": "Derived: the light theme's slate.600, as chart.4 explains."
+        "$value": "{color.offdesk-kraft.650}",
+        "$description": "Derived: Kraft's ramp at 650, the step nearest the brand hex (500) that clears 4.5:1 as text on Concrete (5.16) and on the raised panel (6.50)."
       },
       "10": {
         "$type": "color",
-        "$value": "{color.lime.600}",
-        "$description": "Derived: lime.600, added to make ten once four of the light theme's hues were left out."
+        "$value": "{color.offdesk-pink.600}",
+        "$description": "Derived: Hi-vis pink's ramp at 600, the step nearest the brand hex (400) that clears 4.5:1 as text on Concrete (4.62) and on the raised panel (5.82)."
+      },
+      "1-solid": {
+        "$type": "color",
+        "$value": "{color.offdesk-yellow.250}",
+        "$description": "The full-strength colour of chart.N, for a mark that carries no text, such as a card's bucket stripe or a legend dot. Not measured as text by the build's contrast report, which reads only text, icon and status tokens. In both OFFDESK themes each is the brand hex of its ramp. Signal yellow, the brand hex."
+      },
+      "2-solid": {
+        "$type": "color",
+        "$value": "{color.offdesk-blue.700}",
+        "$description": "IBM blue, the brand hex."
+      },
+      "3-solid": {
+        "$type": "color",
+        "$value": "{color.offdesk-orange.500}",
+        "$description": "Safety orange, the brand hex."
+      },
+      "4-solid": {
+        "$type": "color",
+        "$value": "{color.offdesk-cyan.450}",
+        "$description": "Blueprint cyan, the brand hex."
+      },
+      "5-solid": {
+        "$type": "color",
+        "$value": "{color.offdesk-purple.650}",
+        "$description": "Radiation purple, the brand hex."
+      },
+      "6-solid": {
+        "$type": "color",
+        "$value": "{color.offdesk-magenta.600}",
+        "$description": "Marker magenta, the brand hex."
+      },
+      "7-solid": {
+        "$type": "color",
+        "$value": "{color.offdesk-teal.550}",
+        "$description": "Patina teal, the brand hex."
+      },
+      "8-solid": {
+        "$type": "color",
+        "$value": "{color.offdesk-olive.550}",
+        "$description": "Workwear olive, the brand hex."
+      },
+      "9-solid": {
+        "$type": "color",
+        "$value": "{color.offdesk-kraft.500}",
+        "$description": "Kraft, the brand hex."
+      },
+      "10-solid": {
+        "$type": "color",
+        "$value": "{color.offdesk-pink.400}",
+        "$description": "Hi-vis pink, the brand hex."
       }
     },
     "status": {

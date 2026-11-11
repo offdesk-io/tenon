@@ -70,7 +70,12 @@ in the wheel so there is a distinct hue available per bucket as the task board g
 
 OFFDESK's brand colours get five ramps of their own, made the same way, for
 the two OFFDESK themes further down: `offdesk-orange`, `offdesk-yellow`,
-`offdesk-blue`, `offdesk-concrete` and `offdesk-steel`. The prefix keeps them
+`offdesk-blue`, `offdesk-concrete` and `offdesk-steel`. Seven more carry its
+bucket colours 4 to 10, each pinned to its own hex the same way:
+`offdesk-cyan` (Blueprint cyan), `offdesk-purple` (Radiation purple),
+`offdesk-magenta` (Marker magenta), `offdesk-teal` (Patina teal),
+`offdesk-olive` (Workwear olive), `offdesk-kraft` (Kraft) and `offdesk-pink`
+(Hi-vis pink). The prefix keeps them
 apart from Tenon's own orange, yellow and blue. The method only lands near an
 anchor, and a brand hex is not negotiable, so the step nearest each anchor is
 pinned to the hex exactly: Safety orange at 500, Signal yellow at 250, IBM blue
@@ -95,7 +100,14 @@ reads, `status.over` and `status.soon`, take a red and an amber ramp step per
 theme instead, since one hex cannot clear 4.5:1 on a light fill and a dark one.
 
 The ten categorical `chart.1`–`chart.10` tokens are one step off ten different
-ramps. They do the job the task board's bucket colours do.
+ramps. They do the job the task board's bucket colours do. Each is picked to be
+read as text, which is how a chart `Tag` draws it, so a theme may darken or
+lighten it away from the colour it is named for. `chart.1-solid` to
+`chart.10-solid` are the full-strength colours beside them, for a mark that
+carries no words, such as a card's bucket stripe or a legend dot. In light, dark
+and 1984 each is the same colour as its `chart.N`; the OFFDESK themes are where
+the two part. The build's contrast report leaves the solid tokens out, since it
+only measures text, icon and status tokens.
 
 The five status colours — success, warning, error, info and running — are one
 family and behave like accent. `background.X` is the solid fill with
@@ -119,7 +131,7 @@ uses, rounded off the half-pixels it had drifted into; above it the ratio is
 Six headings, `heading-1` through `heading-6`, plus stat, body, body-sm, label,
 caption, caption-sm and code. `stat` is the figure in a Stat, and it is the one
 style the build writes no class for, since the component owns `.tenon-stat`. They land at the small end of the ramp because the task board is a
-dense UI: `heading-1` is 19px, not 49px. When Tenon goes into a project with
+dense UI: `heading-1` is 28px, not 49px. When Tenon goes into a project with
 room to breathe, the headings move up the ramp and nothing else changes.
 
 Weights collapse from the task board's thirteen — which included 520, 560, 570 and
@@ -439,9 +451,13 @@ never makes a button orange. Safety orange is the highlight instead, in both
 themes: the focus ring, the selected marker (`stroke.accent`) and, as a tint,
 the fill behind a selected item. The brand's own stylesheet draws focus in Ink,
 so the focus ring is the one place the themes depart from it on purpose.
-Borders are Raw steel. The first three bucket colours are the brand's yellow,
-blue and orange, each at the step of its ramp nearest the brand hex that reads
-as well on a tag as the seven after it. Every corner is square
+Borders are Raw steel. The ten bucket colours are OFFDESK's own. The first
+three are the brand's yellow, blue and orange; the other seven, cyan, purple,
+magenta, teal, olive, kraft and pink, extend them for a board that needs ten
+buckets. As text each sits at the step of its own ramp nearest its hex that still
+reads on the page, which is a darker step on Concrete and a lighter one on Ink,
+and its `-solid` twin is the hex itself in both themes, so a card's stripe shows
+the colour the bucket is named for. Every corner is square
 except `radius.full`, which stays round so a status dot, a switch thumb and a
 spinner still read, and there are no shadows. OFFDESK has no status colours, so
 success, warning, error, info and running take Tenon's own ramps, stepped from
