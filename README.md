@@ -109,11 +109,21 @@ the build writes them at the end of that theme's block, so every class and
 component that reads a text style follows. Today only `1984` has
 one: Fraunces for `title`, `stat` and `heading-1` to `heading-5`, Inter for the rest,
 and the site's fluid `clamp()` sizes, which sit off the ladder above on purpose.
-Inter is Tenon's intended font. `tenon.css` loads Inter and Fraunces from Google
-Fonts with an `@import` on its first line, so a consumer needs no font setup
-(Storybook keeps its own link in
-`.storybook/preview-head.html`). The trial faces the site really uses stay out of the repo. Storybook picks
-them up from a gitignored `.storybook/fonts-private/` when it is there.
+Inter is Tenon's intended font. `tenon.css` loads it from Google Fonts with an
+`@import` on its first line, so an app on light and dark needs no font setup.
+A theme's own fonts load from a stylesheet of their own, `dist/fonts/<theme>.css`,
+because an `@import` cannot depend on `data-theme`: while Fraunces sat in
+`tenon.css`, every app downloaded it whether or not it ever set the 1984 theme.
+Each typography file names the fonts it needs under `$extensions.tenon.fonts`,
+one Google Fonts family per entry as the css2 address writes it
+(`"Fraunces:wght@400"`). The shared file's list becomes the `@import` in
+`tenon.css`, and each theme's list becomes its own sheet, so a new theme gets
+one by declaring its fonts in its typography file, with no edit to the build or
+to `package.json`. A theme may not list a family `tenon.css` already loads.
+Storybook imports every theme's sheet from `.storybook/preview.ts`, so it loads
+exactly what a consumer would. The trial faces the site really uses stay out of
+the repo. Storybook picks them up from a gitignored `.storybook/fonts-private/`
+when it is there.
 
 One Figma constraint worth knowing before the library gets built. Figma
 variables cannot hold a composite value, so the six headings land there as
@@ -131,11 +141,13 @@ npm run check      # tokens quietly plus a typecheck, for a pre-commit hook
 npm run dev        # Storybook, localhost:5199
 ```
 
-`scripts/build.mjs` writes `dist/tenon.css` and `dist/tenon.tokens.json`, and
-refuses to write either if any of six checks fail: light, dark and 1984
+`scripts/build.mjs` writes `dist/tenon.css`, `dist/tenon.tokens.json` and one
+`dist/fonts/<theme>.css` for each theme with fonts of its own, and refuses to
+write any of them if any of seven checks fail: light, dark and 1984
 must hold the identical key set, a theme's typography file may only replace text
 styles the shared file has, every `{alias}` must resolve, no semantic token may
-alias another semantic token, no component CSS may name a colour primitive,
+alias another semantic token, every font list must name Google Fonts families
+and none twice, no component CSS may name a colour primitive,
 and every `--tenon-` name a component reads must be one the build emits.
 
 The first is the reason a token pipeline exists here at all. A stylesheet had
@@ -389,6 +401,18 @@ preview had been rendering on browser defaults and looked plausible.
 `[data-theme="dark"]`. A manual toggle needs no rebuild. The 1984 theme is never
 automatic: it applies only under `:root[data-theme="1984"]`.
 
+An app that sets a theme with fonts of its own imports that theme's sheet
+after `tenon.css`. Today that is only 1984, which adds Fraunces:
+
+```css
+@import "@tiagopedras/tenon/tenon.css";
+@import "@tiagopedras/tenon/fonts/1984.css";
+```
+
+Until v0.19.0 `tenon.css` loaded Fraunces itself, so an app on the 1984 theme
+that upgrades past it falls back to Georgia for the serif styles until it adds
+that line.
+
 ```css
 .card {
   background: var(--tenon-background-raised);
@@ -419,6 +443,7 @@ npm runs no build on a git dependency, which is why `dist/` is committed.
 
 ```js
 import '@tiagopedras/tenon/tenon.css';        // tokens, everything needs this
+import '@tiagopedras/tenon/fonts/1984.css';   // only if the app sets data-theme="1984"
 import '@tiagopedras/tenon/tenon-react.css';  // component styles
 import { Button, Card } from '@tiagopedras/tenon';
 ```

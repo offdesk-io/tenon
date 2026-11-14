@@ -3,6 +3,11 @@ import { addons } from 'storybook/preview-api';
 import '../dist/tenon.css';
 import './preview.css';
 
+/* Every theme's font stylesheet, since the toolbar can switch to any of
+   them. A glob rather than one import each, so a theme that gains a font
+   list in its typography file shows up here with no edit. */
+import.meta.glob('../dist/fonts/*.css', { eager: true });
+
 /* Stories render against the built token file consumers get, so
    `npm run storybook` builds it first. The toolbar switch sets data-theme
    on the root, the same way a consumer's own toggle would.

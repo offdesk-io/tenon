@@ -1,6 +1,12 @@
 {
   "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
   "$description": "Assembled text styles. Not themed: a heading is the same size in dark mode, so there is one file rather than one per theme. Every value here aliases a primitive, so a size change happens once.",
+  "$extensions": {
+    "tenon": {
+      "$description": "The web fonts every theme loads. Each entry is one Google Fonts family as css2 writes it after family=, and the build turns the list into the @import on the first line of tenon.css. A theme that needs more adds its own list to its typography.<theme>.json and gets a stylesheet of its own in dist/fonts/.",
+      "fonts": ["Inter:wght@400;500;600;700"]
+    }
+  },
   "text": {
     "title": {
       "$description": "One step above heading-1, for a single figure or word that is the whole point of the page. The Reports headline is the only thing reading it.",
