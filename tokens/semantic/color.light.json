@@ -398,6 +398,56 @@
       "10-solid": {
         "$type": "color",
         "$value": "{color.slate.600}"
+      },
+      "1-strong": {
+        "$type": "color",
+        "$value": "{color.blue.700}",
+        "$description": "chart.N one step deeper on its own ramp (100 further from the page), for a mark that sits on or beside chart.N and has to read as the same colour, darker: a sub-task bar inside its task's bar. Not measured as text."
+      },
+      "2-strong": {
+        "$type": "color",
+        "$value": "{color.orange.700}",
+        "$description": "chart.N one step deeper on its own ramp."
+      },
+      "3-strong": {
+        "$type": "color",
+        "$value": "{color.purple.700}",
+        "$description": "chart.N one step deeper on its own ramp."
+      },
+      "4-strong": {
+        "$type": "color",
+        "$value": "{color.green.700}",
+        "$description": "chart.N one step deeper on its own ramp."
+      },
+      "5-strong": {
+        "$type": "color",
+        "$value": "{color.magenta.700}",
+        "$description": "chart.N one step deeper on its own ramp."
+      },
+      "6-strong": {
+        "$type": "color",
+        "$value": "{color.teal.700}",
+        "$description": "chart.N one step deeper on its own ramp."
+      },
+      "7-strong": {
+        "$type": "color",
+        "$value": "{color.brown.700}",
+        "$description": "chart.N one step deeper on its own ramp."
+      },
+      "8-strong": {
+        "$type": "color",
+        "$value": "{color.indigo.700}",
+        "$description": "chart.N one step deeper on its own ramp."
+      },
+      "9-strong": {
+        "$type": "color",
+        "$value": "{color.red.700}",
+        "$description": "chart.N one step deeper on its own ramp."
+      },
+      "10-strong": {
+        "$type": "color",
+        "$value": "{color.slate.700}",
+        "$description": "chart.N one step deeper on its own ramp."
       }
     },
     "status": {
@@ -409,6 +459,13 @@
       "soon": {
         "$type": "color",
         "$value": "{color.amber.700}"
+      }
+    },
+    "brand": {
+      "ink": {
+        "$type": "color",
+        "$value": "{color.offdesk.ink}",
+        "$description": "The colour an app's wordmark is drawn in: OFFDESK Ink on a light theme, Concrete on a dark one. For a logo or wordmark only, never for text, which is text.default. tn-identity's svg reads it as its fill."
       }
     }
   },
@@ -443,6 +500,26 @@
           "spread": "0px"
         }
       ]
+    },
+    "popover": {
+      "$type": "shadow",
+      "$value": [
+        {
+          "color": "#0a0c103d",
+          "offsetX": "0px",
+          "offsetY": "10px",
+          "blur": "28px",
+          "spread": "0px"
+        },
+        {
+          "color": "#0a0c1024",
+          "offsetX": "0px",
+          "offsetY": "2px",
+          "blur": "6px",
+          "spread": "0px"
+        }
+      ],
+      "$description": "A panel that floats over the page and is not tied to the surface under it: a menu, a toast, a hover preview. Heavier than overlay, which a column or dropdown sits on. Taken from the task board, which used this value for every popover and a slightly heavier copy for toasts, folded in here."
     },
     "modal": {
       "$type": "shadow",

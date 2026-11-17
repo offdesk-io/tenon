@@ -144,6 +144,36 @@
         "letterSpacing": "{typography.letter-spacing.normal}"
       }
     },
+    "overline": {
+      "$description": "The brand's mono label in capitals, as tag is: IBM Plex Mono at 0.1em. Medium rather than the shared overline's bold, since Plex Mono is loaded at 400 and 500 only. Size and line height from the shared overline.",
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{typography.family.plex-mono}",
+        "fontSize": "{typography.size.sm}",
+        "fontWeight": "{typography.weight.medium}",
+        "lineHeight": "{typography.line-height.normal}",
+        "letterSpacing": {
+          "value": 0.1,
+          "unit": "em"
+        }
+      },
+      "$extensions": { "tenon": { "textCase": "uppercase" } }
+    },
+    "overline-sm": {
+      "$description": "overline at the shared overline-sm's size.",
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{typography.family.plex-mono}",
+        "fontSize": "{typography.size.xs}",
+        "fontWeight": "{typography.weight.medium}",
+        "lineHeight": "{typography.line-height.normal}",
+        "letterSpacing": {
+          "value": 0.1,
+          "unit": "em"
+        }
+      },
+      "$extensions": { "tenon": { "textCase": "uppercase" } }
+    },
     "tag": {
       "$description": "The brand's label rule (ofd-label, ofd-tag): IBM Plex Mono 400 at 0.1em, set in capitals through text-transform.tag. Size and line height from the shared label, 12px on 1.4, since the brand sets its labels at 12px.",
       "$type": "typography",

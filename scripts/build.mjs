@@ -14,7 +14,8 @@
         a dimension
      7. every font list is a list of Google Fonts families, and no theme
         loads a family tenon.css already loads
-     8. no component CSS reads a colour primitive
+     8. no component CSS reads a colour primitive, and none names a font
+        family or a weight Inter is not loaded at
      9. every --tenon- name a component reads is one this build emits
    Parity is the one that matters. A stylesheet had --accent missing from
    its dark block for months and nothing said a word, because a hand-written
@@ -249,6 +250,21 @@ for (const [theme, fonts] of Object.entries(themeFonts)) {
   }
 }
 
+/* A text style's case is one of the four values text-transform and Figma's
+   text case share. A theme replacing a style in capitals has to say so
+   again, since its file replaces the style whole. */
+const caseOf = (node) => node.$extensions?.tenon?.textCase;
+const CASES = new Set(['uppercase', 'lowercase', 'capitalize', 'none']);
+for (const [where, flat] of [['typography.json', flatShared], ...Object.entries(flatTextThemes).map(([t, f]) => [`typography.${t}.json`, f])]) {
+  for (const [key, node] of Object.entries(flat)) {
+    const c = caseOf(node);
+    if (c !== undefined && !CASES.has(c)) errors.push(`${where}: ${key} has textCase ${JSON.stringify(c)}, not one of ${[...CASES].join(', ')}`);
+    if (where !== 'typography.json' && caseOf(flatShared[key] ?? {}) && c === undefined) {
+      errors.push(`${where}: ${key} replaces a style set in capitals and says nothing about its case`);
+    }
+  }
+}
+
 /* Component CSS may read the dimension scale directly, because that scale
    has one tier on purpose. It may not read a colour primitive: a component
    naming --tenon-color-blue-600 is a component that will not follow a
@@ -270,6 +286,33 @@ const componentCss = cssFiles(join(ROOT, 'src')).map((f) => [f, readFileSync(f, 
 for (const [file, text] of componentCss) {
   for (const m of text.matchAll(/var\(\s*(--tenon-color-[a-z0-9-]+)/g)) {
     errors.push(`${file.replace(ROOT + '/', '')} reads the primitive ${m[1]}`);
+  }
+}
+
+/* Fonts come from the theme and nowhere else. A component or the page layer
+   that names a family is one the theme cannot change, and one that asks for
+   a weight between the four Inter is loaded at gets a weight the browser
+   rounds or fakes, so the two apps that share these styles would draw the
+   same label differently. A family is read from a text style's -family var
+   or a font-family token, or inherited; a weight is a var or 400 to 700 in
+   hundreds. Comments are dropped first so an explanation can name a font. */
+const PAGE_CSS = join(ROOT, 'design-md/assets/tn-page.css');
+const LOADED_WEIGHTS = new Set(['400', '500', '600', '700', 'normal', 'bold', 'inherit']);
+for (const [file, raw] of [...componentCss, [PAGE_CSS, readFileSync(PAGE_CSS, 'utf8')]]) {
+  const text = raw.replace(/\/\*[\s\S]*?\*\//g, '');
+  const where = file.replace(ROOT + '/', '');
+  for (const m of text.matchAll(/(?<![-\w])font-family\s*:\s*([^;}]+)/g)) {
+    const v = m[1].trim();
+    if (!/^(inherit|var\(--tenon-(text-[a-z0-9-]+-family|font-family-[a-z0-9-]+)\)(,\s*inherit)?)$/.test(v)) {
+      errors.push(`${where} sets font-family: ${v}, rather than reading a text style's family`);
+    }
+  }
+  for (const m of text.matchAll(/(?<![-\w])font\s*:\s*([^;}]+)/g)) {
+    if (m[1].trim() !== 'inherit') errors.push(`${where} sets font: ${m[1].trim()}; only font: inherit is allowed`);
+  }
+  for (const m of text.matchAll(/(?<![-\w])font-weight\s*:\s*([^;}]+)/g)) {
+    const v = m[1].trim();
+    if (!v.startsWith('var(') && !LOADED_WEIGHTS.has(v)) errors.push(`${where} sets font-weight: ${v}, which Inter is not loaded at`);
   }
 }
 
@@ -309,11 +352,20 @@ const primitiveVars = Object.entries(flatPrimitives)
 
 /* A composite text style becomes one var per part plus a shorthand, since
    `font:` cannot carry letter-spacing and a class is the only place the
-   five parts sit together. */
-const partVars = (path, v, opts) => Object.entries({
-  family: v.fontFamily, size: v.fontSize, weight: v.fontWeight,
-  'line-height': v.lineHeight, 'letter-spacing': v.letterSpacing,
-}).map(([part, val]) => [`${cssName(path)}-${part}`, cssValue({ $value: val }, opts)]);
+   five parts sit together.
+
+   A style set in capitals has a sixth, its case, which DTCG's typography
+   type has no part for, so it rides in $extensions.tenon.textCase and comes
+   out as -case. Figma's text styles carry case too, so it is part of the
+   style there as well, and the resolved copy below writes it beside the
+   other five. */
+const partVars = (path, node, opts) => [
+  ...Object.entries({
+    family: node.$value.fontFamily, size: node.$value.fontSize, weight: node.$value.fontWeight,
+    'line-height': node.$value.lineHeight, 'letter-spacing': node.$value.letterSpacing,
+  }).map(([part, val]) => [`${cssName(path)}-${part}`, cssValue({ $value: val }, opts)]),
+  ...(caseOf(node) ? [[`${cssName(path)}-case`, caseOf(node)]] : []),
+];
 
 /* A text style whose name a component already uses as its own class. The
    vars are still written, and the component reads them, but a .tenon-stat
@@ -328,7 +380,7 @@ for (const [path, node] of Object.entries(flatShared)) {
     textVars.push([cssName(path), cssValue(node)]);
     continue;
   }
-  textVars.push(...partVars(path, node.$value));
+  textVars.push(...partVars(path, node));
   if (OWNED_BY_COMPONENT.has(path)) continue;
   const cls = path.replace(/^text\./, '').replace(/\./g, '-');
   textClasses.push(
@@ -337,7 +389,9 @@ for (const [path, node] of Object.entries(flatShared)) {
     `  font-size: var(${cssName(path)}-size);\n` +
     `  font-weight: var(${cssName(path)}-weight);\n` +
     `  line-height: var(${cssName(path)}-line-height);\n` +
-    `  letter-spacing: var(${cssName(path)}-letter-spacing);\n}`
+    `  letter-spacing: var(${cssName(path)}-letter-spacing);\n` +
+    (caseOf(node) ? `  text-transform: var(${cssName(path)}-case);\n` : '') +
+    '}'
   );
 }
 
@@ -360,7 +414,7 @@ const replaced = (name, own) => {
   return [...Object.entries(mine), ...fill];
 };
 const themeTextVars = (name) =>
-  replaced(name, flatTextThemes).flatMap(([p, n]) => partVars(p, n.$value));
+  replaced(name, flatTextThemes).flatMap(([p, n]) => partVars(p, n));
 const themeRadiusVars = (name) =>
   replaced(name, flatRadiusThemes).map(([p, n]) => [cssName(p), cssValue(n)]);
 
@@ -474,7 +528,10 @@ const resolved = {
   shared: Object.fromEntries(
     Object.entries(flatShared).map(([p, n]) =>
       [p, n.$type === 'typography'
-        ? Object.fromEntries(Object.entries(n.$value).map(([k, v]) => [k, cssValue({ $value: v }, { literal: true })]))
+        ? Object.fromEntries([
+          ...Object.entries(n.$value).map(([k, v]) => [k, cssValue({ $value: v }, { literal: true })]),
+          ...(caseOf(n) ? [['textCase', caseOf(n)]] : []),
+        ])
         : cssValue(n, { literal: true })])
   ),
   themes: Object.fromEntries(
@@ -484,7 +541,7 @@ const resolved = {
   themeTypography: Object.fromEntries(
     Object.entries(flatTextThemes).map(([t, f]) =>
       [t, Object.fromEntries(Object.entries(f).map(([p, n]) =>
-        [p, Object.fromEntries(partVars(p, n.$value, { literal: true }).map(([k, v]) => [k.replace(`${cssName(p)}-`, ''), v]))]))])
+        [p, Object.fromEntries(partVars(p, n, { literal: true }).map(([k, v]) => [k.replace(`${cssName(p)}-`, ''), v]))]))])
   ),
   themeRadius: Object.fromEntries(
     Object.entries(flatRadiusThemes).map(([t, f]) =>
@@ -548,7 +605,7 @@ console.log(`dist/tenon.tokens.json       resolved values`);
 for (const [theme, fonts] of Object.entries(themeFonts)) {
   console.log(`${`dist/fonts/${theme}.css`.padEnd(28)} ${fonts.map(familyName).join(', ')}`);
 }
-console.log(`\nChecks passed: a theme list the build can write, theme parity (${THEMES.map((t) => t.name).join(', ')}),\n               alias targets, no semantic-to-semantic aliases,\n               theme typography files replace only styles that exist, with all five parts,\n               theme radius files replace only radii that exist, with a dimension,\n               font lists name Google Fonts families, none loaded twice,\n               no component CSS reading a colour primitive,\n               every --tenon- name a component reads is one this build emits.`);
+console.log(`\nChecks passed: a theme list the build can write, theme parity (${THEMES.map((t) => t.name).join(', ')}),\n               alias targets, no semantic-to-semantic aliases,\n               theme typography files replace only styles that exist, with all five parts,\n               theme radius files replace only radii that exist, with a dimension,\n               font lists name Google Fonts families, none loaded twice,\n               text case one of four values, and restated by a theme that replaces a style in capitals,\n               no component CSS reading a colour primitive, naming a font family or an unloaded weight,\n               every --tenon- name a component reads is one this build emits.`);
 if (!QUIET) {
   if (rows.length) {
     console.log(`\n${rows.length} text or icon tokens below 4.5:1 on their own background:`);

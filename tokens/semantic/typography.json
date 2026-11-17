@@ -121,6 +121,30 @@
         "letterSpacing": "{typography.letter-spacing.normal}"
       }
     },
+    "overline": {
+      "$description": "A short label in capitals that names what sits under it: a column head, a field label, the name of a Stat. Bold, at label's size, with the tracking capitals need. The capitals are part of the style, under $extensions.tenon.textCase, so the .tenon-overline class, Figma's text style and every component reading the style agree: the build writes --tenon-text-overline-case beside the five parts, and a component sets text-transform from it.",
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{typography.family.sans}",
+        "fontSize": "{typography.size.sm}",
+        "fontWeight": "{typography.weight.bold}",
+        "lineHeight": "{typography.line-height.normal}",
+        "letterSpacing": "{typography.letter-spacing.caps}"
+      },
+      "$extensions": { "tenon": { "textCase": "uppercase" } }
+    },
+    "overline-sm": {
+      "$description": "overline one size down, for a label inside something small: a card's eyebrow, an axis label.",
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{typography.family.sans}",
+        "fontSize": "{typography.size.xs}",
+        "fontWeight": "{typography.weight.bold}",
+        "lineHeight": "{typography.line-height.normal}",
+        "letterSpacing": "{typography.letter-spacing.caps}"
+      },
+      "$extensions": { "tenon": { "textCase": "uppercase" } }
+    },
     "tag": {
       "$description": "The words on a Tag, a Pill, and the font, spacing and case of a TagChip. Caption's family, size and line height with label's weight, which is what those components set before the style existed, so they draw as they did. Its letter spacing is inherit for the same reason: those components took the tracking of the text around them, such as a Card eyebrow's. A theme replaces it to give its small labels a voice of their own, and its case comes from text-transform.tag in the theme's colour file, since a text style has no part for capitals. No .tenon-tag class is written for it, because Tag owns that class.",
       "$type": "typography",
@@ -162,6 +186,14 @@
         "lineHeight": "{typography.line-height.relaxed}",
         "letterSpacing": "{typography.letter-spacing.normal}"
       }
+    }
+  },
+  "layout": {
+    "$description": "Widths a layout is built from, as against the spacing between things. Not themed.",
+    "column-width": {
+      "$type": "dimension",
+      "$value": { "value": 320, "unit": "px" },
+      "$description": "The narrowest a board column gets, and the width it is on a board too wide for the window. 320, on the 8px grid. tn-board reads it, and so does any app that lays out its own row of columns. A literal because the dimension scale stops at 112."
     }
   },
   "radius": {

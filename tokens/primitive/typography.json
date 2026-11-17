@@ -67,7 +67,8 @@
       "tight":  { "$type": "dimension", "$value": { "value": -0.01, "unit": "rem" } },
       "normal": { "$type": "dimension", "$value": { "value": 0, "unit": "rem" } },
       "wide":   { "$type": "dimension", "$value": { "value": 0.02, "unit": "rem" } },
-      "wider":  { "$type": "dimension", "$value": { "value": 0.04, "unit": "rem" } }
+      "wider":  { "$type": "dimension", "$value": { "value": 0.04, "unit": "rem" } },
+      "caps":   { "$type": "dimension", "$value": { "value": 0.03, "unit": "em" }, "$description": "The tracking capitals need. In em rather than rem, unlike the four above, because it opens a word in proportion to its own size: text.overline at 12px and overline-sm at 10px both read as the same set of capitals." }
     }
   }
 }

@@ -485,6 +485,56 @@
         "$type": "color",
         "$value": "{color.offdesk-pink.400}",
         "$description": "Hi-vis pink, the brand hex."
+      },
+      "1-strong": {
+        "$type": "color",
+        "$value": "{color.offdesk-yellow.700}",
+        "$description": "chart.N one step deeper on its own ramp (100 further from the page), for a mark that sits on or beside chart.N and has to read as the same colour, darker: a sub-task bar inside its task's bar. Not measured as text."
+      },
+      "2-strong": {
+        "$type": "color",
+        "$value": "{color.offdesk-blue.800}",
+        "$description": "chart.N one step deeper on its own ramp."
+      },
+      "3-strong": {
+        "$type": "color",
+        "$value": "{color.offdesk-orange.700}",
+        "$description": "chart.N one step deeper on its own ramp."
+      },
+      "4-strong": {
+        "$type": "color",
+        "$value": "{color.offdesk-cyan.750}",
+        "$description": "chart.N one step deeper on its own ramp."
+      },
+      "5-strong": {
+        "$type": "color",
+        "$value": "{color.offdesk-purple.750}",
+        "$description": "chart.N one step deeper on its own ramp."
+      },
+      "6-strong": {
+        "$type": "color",
+        "$value": "{color.offdesk-magenta.750}",
+        "$description": "chart.N one step deeper on its own ramp."
+      },
+      "7-strong": {
+        "$type": "color",
+        "$value": "{color.offdesk-teal.750}",
+        "$description": "chart.N one step deeper on its own ramp."
+      },
+      "8-strong": {
+        "$type": "color",
+        "$value": "{color.offdesk-olive.750}",
+        "$description": "chart.N one step deeper on its own ramp."
+      },
+      "9-strong": {
+        "$type": "color",
+        "$value": "{color.offdesk-kraft.750}",
+        "$description": "chart.N one step deeper on its own ramp."
+      },
+      "10-strong": {
+        "$type": "color",
+        "$value": "{color.offdesk-pink.700}",
+        "$description": "chart.N one step deeper on its own ramp."
       }
     },
     "status": {
@@ -497,6 +547,13 @@
         "$type": "color",
         "$value": "{color.amber.700}",
         "$description": "Derived: the light theme's pick."
+      }
+    },
+    "brand": {
+      "ink": {
+        "$type": "color",
+        "$value": "{color.offdesk.ink}",
+        "$description": "The colour an app's wordmark is drawn in: OFFDESK Ink on a light theme, Concrete on a dark one. For a logo or wordmark only, never for text, which is text.default. tn-identity's svg reads it as its fill."
       }
     }
   },
@@ -526,6 +583,19 @@
         }
       ],
       "$description": "None, as elevation.raised explains."
+    },
+    "popover": {
+      "$type": "shadow",
+      "$value": [
+        {
+          "color": "#00000000",
+          "offsetX": "0px",
+          "offsetY": "0px",
+          "blur": "0px",
+          "spread": "0px"
+        }
+      ],
+      "$description": "None, as with overlay: the OFFDESK themes draw no shadows."
     },
     "modal": {
       "$type": "shadow",
