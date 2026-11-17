@@ -14,7 +14,7 @@
      body      an unwrapped slot, for a progress bar or a chart
      footer    a last quiet line
 
-   The accent is a 4px inset down the left edge. Left undefined it draws
+   The accent is a 4px stripe on the left edge. Left undefined it draws
    nothing rather than drawing a grey one, and that difference is the
    point: a grey stripe still reads as a mark, and the reason to leave it
    off is that there is nothing to mark. The padding does not change
@@ -30,7 +30,9 @@
   color: var(--tenon-text-default);
 }
 
-.tenon-card:hover { border-color: var(--tenon-stroke-hovered); }
+/* text.faint rather than stroke.hovered, which sits too close to the resting
+   edge to see on a card: the board found the hover only read at this. */
+.tenon-card:hover { border-color: var(--tenon-text-faint); }
 .tenon-card:focus-visible { outline: 2px solid var(--tenon-stroke-focus); outline-offset: 2px; }
 
 /* --tenon-card-accent is set by the component from its `accent` prop. It is
@@ -41,15 +43,22 @@
    until the flat variant, which sets box-shadow to none, silently erased
    it on every card that did not ask to be raised — the stripe simply
    stopped appearing and nothing said why. The two are separate properties
-   now, so elevation and the mark cannot argue. */
+   now, so elevation and the mark cannot argue.
+
+   It sits on the card's outer edge, over the border, rather than inside it,
+   so the mark is the edge of the card and not a bar laid on its fill. A box
+   one radius wider than the stripe is given the card's outer curve and cut
+   back to 4px, so the stripe's corners follow the card's corners exactly
+   rather than drawing a smaller curve of their own, and the 1px border
+   under it is covered whatever colour a hover gives it. */
 .tenon-card--accent::before {
   content: '';
   position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: var(--tenon-dimension-050);
+  left: -1px; top: -1px; bottom: -1px;
+  width: calc(var(--tenon-dimension-050) + var(--tenon-radius-md));
   background: var(--tenon-card-accent);
-  border-top-left-radius: inherit;
-  border-bottom-left-radius: inherit;
+  border-radius: var(--tenon-radius-md) 0 0 var(--tenon-radius-md);
+  clip-path: inset(0 var(--tenon-radius-md) 0 0);
   pointer-events: none;
 }
 
@@ -63,6 +72,11 @@
 .tenon-card--interactive { cursor: pointer; transition: border-color 120ms ease; }
 .tenon-card--interactive:hover { border-color: var(--tenon-stroke-accent); }
 
+/* Picked out for an action that is about to happen to it: outlined rather
+   than tinted, so it reads as what you are about to do to the card rather
+   than as what the card is. */
+.tenon-card--selected { outline: 2px solid var(--tenon-stroke-accent); outline-offset: 1px; }
+
 /* ---- the rows ---- */
 
 .tenon-card__eyebrow {
@@ -70,9 +84,12 @@
   align-items: center;
   gap: var(--tenon-dimension-075);
   margin-bottom: var(--tenon-dimension-075);
-  font-size: var(--tenon-text-caption-size);
-  font-weight: var(--tenon-text-heading-6-weight);
-  letter-spacing: var(--tenon-text-heading-6-letter-spacing);
+  font-family: var(--tenon-text-overline-sm-family);
+  font-size: var(--tenon-text-overline-sm-size);
+  font-weight: var(--tenon-text-overline-sm-weight);
+  line-height: var(--tenon-text-overline-sm-line-height);
+  letter-spacing: var(--tenon-text-overline-sm-letter-spacing);
+  text-transform: var(--tenon-text-overline-sm-case);
   color: var(--tenon-card-accent, var(--tenon-text-subtle));
 }
 
@@ -91,7 +108,7 @@
   flex: none;
   min-width: 1.6em;
   font-family: var(--tenon-text-code-family);
-  font-size: var(--tenon-text-caption-size);
+  font-size: var(--tenon-text-label-size);
   font-weight: var(--tenon-text-heading-6-weight);
   color: var(--tenon-text-faint);
 }
@@ -116,14 +133,14 @@
   display: flex; flex-wrap: wrap; align-items: baseline;
   gap: var(--tenon-dimension-050);
   margin-top: var(--tenon-dimension-100);
-  font-size: var(--tenon-text-caption-size);
+  font-size: var(--tenon-text-label-size);
   color: var(--tenon-text-faint);
 }
 
 .tenon-card__summary {
-  margin-top: var(--tenon-dimension-075);
+  margin-top: var(--tenon-dimension-125);
   font-size: var(--tenon-text-body-sm-size);
-  line-height: var(--tenon-text-body-sm-line-height);
+  line-height: var(--tenon-typography-line-height-relaxed);
   color: var(--tenon-text-subtle);
 }
 
@@ -131,6 +148,6 @@
 
 .tenon-card__footer {
   margin-top: var(--tenon-dimension-075);
-  font-size: var(--tenon-text-caption-size);
+  font-size: var(--tenon-text-label-size);
   color: var(--tenon-text-faint);
 }

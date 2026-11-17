@@ -7,15 +7,20 @@ import './Input.css';
    range drawn in this skin would be a box pretending to be something else. */
 export type InputType = 'text' | 'email' | 'number' | 'search' | 'url' | 'tel' | 'password';
 
-export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
+export type InputSize = 'md' | 'sm';
+
+export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> {
   type?: InputType;
   invalid?: boolean;
+  /** 'md' is 40px, Textarea's one-row height. 'sm' is 32px, a md Button's,
+   *  for a control in a toolbar. */
+  size?: InputSize;
 }
 
 /* The bare control, Textarea's one-line sibling, for anywhere the label is
    drawn by something else. When there is a label, use Field. */
 export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
-  { type = 'text', invalid, className, ...rest },
+  { type = 'text', invalid, size = 'md', className, ...rest },
   ref,
 ) {
   return (
@@ -23,7 +28,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
       ref={ref}
       type={type}
       aria-invalid={invalid ? true : undefined}
-      className={cx('tenon-input', invalid && 'tenon-input--invalid', className)}
+      className={cx('tenon-input', size === 'sm' && 'tenon-input--sm', invalid && 'tenon-input--invalid', className)}
       {...rest}
     />
   );

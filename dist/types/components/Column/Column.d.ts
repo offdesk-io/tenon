@@ -1,6 +1,7 @@
 import { ReactNode, HTMLAttributes, ElementType } from 'react';
 export type ColumnTone = 'default' | 'accent' | 'success' | 'warning' | 'error' | 'running';
 export type ColumnLayout = 'stack' | 'prose';
+export type ColumnDropState = 'accept' | 'deny';
 export interface ColumnProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
     title: ReactNode;
     /** The title's element. Nothing is styled off it; the page outline is
@@ -32,6 +33,10 @@ export interface ColumnProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> 
      *  into it, and the dash reads because nothing else in the app is
      *  dashed. Keep it to one meaning per app and it keeps working. */
     dashed?: boolean;
+    /** Lights the body while something is dragged over the column: 'accept'
+     *  in the accent, 'deny' in the error colour for a column that will
+     *  refuse what is in the air. Undefined draws nothing. */
+    dropState?: ColumnDropState;
     /** Draws the column as a <details> whose <summary> is the head. */
     collapsible?: boolean;
     /** Only read when `collapsible`. Open unless explicitly false. */
@@ -46,7 +51,7 @@ export interface ColumnProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> 
     bodyProps?: HTMLAttributes<HTMLDivElement>;
     children?: ReactNode;
 }
-export declare function Column({ title, titleAs: Title, titleAfter, hint, sort, count, action, filters, desc, footer, layout, tone, muted, dashed, collapsible, open, collapseKey, className, bodyClassName, bodyProps, children, ...rest }: ColumnProps): import("react").JSX.Element;
+export declare function Column({ title, titleAs: Title, titleAfter, hint, sort, count, action, filters, desc, footer, layout, tone, muted, dashed, dropState, collapsible, open, collapseKey, className, bodyClassName, bodyProps, children, ...rest }: ColumnProps): import("react").JSX.Element;
 export interface ColumnEmptyProps extends HTMLAttributes<HTMLDivElement> {
     /** A dashed box rather than a line of grey text. For a wide column,
      *  where one faint line reads as a column that failed to load. */

@@ -12,8 +12,8 @@
   padding: 0 var(--tenon-dimension-075);
   box-sizing: border-box;
   border-radius: var(--tenon-radius-full);
-  font-family: var(--tenon-text-caption-family);
-  font-size: var(--tenon-text-caption-size);
+  font-family: var(--tenon-text-label-family);
+  font-size: var(--tenon-text-label-size);
   font-weight: var(--tenon-text-heading-1-weight);
   line-height: 1;
   /* So a 1 and a 7 are the same width and a row of badges does not jitter. */

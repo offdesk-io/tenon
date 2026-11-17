@@ -1,0 +1,64 @@
+/* A list of actions under a button, from the task board's Data menu: undo,
+   download a copy, backups, switch list. Dropdown picks a value; this does
+   things, so its items are plain menuitems and nothing stays chosen. The
+   panel is Dropdown's panel, at the width of its longest item rather than
+   its button's, since the button is usually one short word. */
+
+.tenon-menu { position: relative; display: inline-block; }
+
+.tenon-menu__panel {
+  position: absolute;
+  top: calc(100% + var(--tenon-dimension-075));
+  left: 0;
+  z-index: 25;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-width: calc(var(--tenon-dimension-1000) * 2.5);
+  padding: var(--tenon-dimension-050);
+  background: var(--tenon-background-raised);
+  border: 1px solid var(--tenon-stroke-default);
+  border-radius: var(--tenon-radius-md);
+  box-shadow: var(--tenon-elevation-overlay);
+}
+/* A menu off a button at the right-hand end of a bar runs off the window
+   before it runs out of items, so it hangs from its right edge instead. */
+.tenon-menu__panel--end { left: auto; right: 0; }
+
+.tenon-menu__item {
+  display: flex;
+  align-items: center;
+  gap: var(--tenon-dimension-100);
+  width: 100%;
+  padding: var(--tenon-dimension-075) var(--tenon-dimension-100);
+  border: none;
+  border-radius: var(--tenon-radius-default);
+  background: none;
+  color: var(--tenon-text-default);
+  font-family: var(--tenon-text-label-family);
+  font-size: var(--tenon-text-label-size);
+  font-weight: var(--tenon-text-label-weight);
+  line-height: var(--tenon-text-label-line-height);
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.tenon-menu__item:not(:disabled):hover,
+.tenon-menu__item:focus-visible { background: var(--tenon-background-neutral); outline: none; }
+.tenon-menu__item:disabled { color: var(--tenon-text-faint); cursor: default; }
+
+/* A rule with an optional name, for a second half of the menu that answers a
+   different question from the first: which list, rather than what to do. */
+.tenon-menu__divider {
+  margin-top: var(--tenon-dimension-050);
+  padding: var(--tenon-dimension-100) var(--tenon-dimension-100) var(--tenon-dimension-050);
+  border-top: 1px solid var(--tenon-stroke-subtle);
+}
+.tenon-menu__divider:not(:has(.tenon-menu__label)) { padding: 0; margin-block: var(--tenon-dimension-050); }
+.tenon-menu__label {
+  display: block;
+  font-family: var(--tenon-text-label-family);
+  font-size: var(--tenon-text-label-size);
+  font-weight: var(--tenon-text-label-weight);
+  color: var(--tenon-text-subtle);
+}

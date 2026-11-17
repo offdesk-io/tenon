@@ -71,3 +71,16 @@ export const ProseAndCollapsible: Story = {
     ),
   },
 };
+
+export const DropTargets: Story = {
+  render: () => (
+    <div style={{ display: 'grid', gap: 12 }}>
+      <Column title="To do" titleAs="h3" count={1} dropState="accept">
+        <Card accent="var(--tenon-chart-1)" title="Accepts what is dragged over it" />
+      </Column>
+      <Column title="Done" titleAs="h3" count={0} dropState="deny">
+        <ColumnEmpty boxed>Says no while the card is still in the air.</ColumnEmpty>
+      </Column>
+    </div>
+  ),
+};

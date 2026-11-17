@@ -25,3 +25,7 @@ export const Tones: Story = {
     </div>
   ),
 };
+
+export const Hero: Story = {
+  args: { size: 'hero', eyebrow: 'completed', value: 42, caption: 'tasks this month' },
+};

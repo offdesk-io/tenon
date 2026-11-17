@@ -3,7 +3,7 @@ import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'reac
 import { cx } from '../../utils';
 import './Button.css';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger' | 'confirm' | 'destructive';
+export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'dashed' | 'ghost' | 'danger' | 'confirm' | 'destructive';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -11,12 +11,17 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   size?: ButtonSize;
   /** Renders as a square. The label still has to be given, via aria-label. */
   iconOnly?: boolean;
+  /** Toggled on. Sets aria-pressed too, so give it to a button that toggles
+   *  and leave it undefined on one that does not. */
+  pressed?: boolean;
+  /** Fills the width of its row. */
+  block?: boolean;
   startIcon?: ReactNode;
   endIcon?: ReactNode;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
-  { variant = 'secondary', size = 'md', iconOnly = false, startIcon, endIcon, className, children, type = 'button', ...rest },
+  { variant = 'secondary', size = 'md', iconOnly = false, pressed, block = false, startIcon, endIcon, className, children, type = 'button', ...rest },
   ref,
 ) {
   return (
@@ -28,8 +33,11 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
         `tenon-button--${variant}`,
         `tenon-button--${size}`,
         iconOnly && 'tenon-button--icon-only',
+        pressed && 'tenon-button--pressed',
+        block && 'tenon-button--block',
         className,
       )}
+      aria-pressed={pressed}
       {...rest}
     >
       {startIcon}

@@ -15,10 +15,10 @@ export { Tag } from './components/Tag/Tag';
 export type { TagProps, TagTone, TagChart } from './components/Tag/Tag';
 
 export { Column, ColumnEmpty } from './components/Column/Column';
-export type { ColumnProps, ColumnEmptyProps, ColumnTone, ColumnLayout } from './components/Column/Column';
+export type { ColumnProps, ColumnEmptyProps, ColumnTone, ColumnLayout, ColumnDropState } from './components/Column/Column';
 
 export { Stat } from './components/Stat/Stat';
-export type { StatProps, StatTone } from './components/Stat/Stat';
+export type { StatProps, StatTone, StatSize } from './components/Stat/Stat';
 
 export { Field } from './components/Field/Field';
 export type { FieldProps } from './components/Field/Field';
@@ -35,7 +35,7 @@ export type { TextareaProps } from './components/Textarea/Textarea';
 /* Textarea's siblings, for a settings page: one line of text, and a
    native select in the same skin. */
 export { Input } from './components/Input/Input';
-export type { InputProps, InputType } from './components/Input/Input';
+export type { InputProps, InputType, InputSize } from './components/Input/Input';
 
 export { Select } from './components/Select/Select';
 export type { SelectProps } from './components/Select/Select';
@@ -74,6 +74,14 @@ export type { DateButtonProps } from './components/Calendar/DateButton';
 
 export { Dropdown } from './components/Dropdown/Dropdown';
 export type { DropdownProps, DropdownOption } from './components/Dropdown/Dropdown';
+
+/* From the task board in 0.20.0: a list of actions under a button, and a
+   short line that answers an action where the eye already is. */
+export { Menu } from './components/Menu/Menu';
+export type { MenuProps, MenuItemProps, MenuDividerProps } from './components/Menu/Menu';
+
+export { Toaster, toast } from './components/Toast/Toast';
+export type { ToasterProps, ToastOptions, ToastTone } from './components/Toast/Toast';
 
 /* Added for the chat window, which became a React component in the chat
    engine and needed more than the first fourteen had. Each is a thing another

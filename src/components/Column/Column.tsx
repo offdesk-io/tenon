@@ -4,6 +4,7 @@ import './Column.css';
 
 export type ColumnTone = 'default' | 'accent' | 'success' | 'warning' | 'error' | 'running';
 export type ColumnLayout = 'stack' | 'prose';
+export type ColumnDropState = 'accept' | 'deny';
 
 export interface ColumnProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> {
   title: ReactNode;
@@ -36,6 +37,10 @@ export interface ColumnProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> 
    *  into it, and the dash reads because nothing else in the app is
    *  dashed. Keep it to one meaning per app and it keeps working. */
   dashed?: boolean;
+  /** Lights the body while something is dragged over the column: 'accept'
+   *  in the accent, 'deny' in the error colour for a column that will
+   *  refuse what is in the air. Undefined draws nothing. */
+  dropState?: ColumnDropState;
   /** Draws the column as a <details> whose <summary> is the head. */
   collapsible?: boolean;
   /** Only read when `collapsible`. Open unless explicitly false. */
@@ -53,7 +58,7 @@ export interface ColumnProps extends Omit<HTMLAttributes<HTMLElement>, 'title'> 
 
 export function Column({
   title, titleAs: Title = 'h2', titleAfter, hint, sort, count, action, filters,
-  desc, footer, layout = 'stack', tone = 'default', muted, dashed,
+  desc, footer, layout = 'stack', tone = 'default', muted, dashed, dropState,
   collapsible, open, collapseKey, className, bodyClassName, bodyProps, children, ...rest
 }: ColumnProps) {
   const classes = cx(
@@ -62,6 +67,7 @@ export function Column({
     layout !== 'stack' && `tenon-column--${layout}`,
     muted && 'tenon-column--muted',
     dashed && 'tenon-column--dashed',
+    dropState && `tenon-column--drop-${dropState}`,
     className,
   );
 

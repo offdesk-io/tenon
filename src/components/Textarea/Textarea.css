@@ -18,6 +18,9 @@
   resize: vertical;
 }
 
+/* display: block above beats the browser's own rule for the hidden attribute. */
+.tenon-textarea[hidden] { display: none; }
+
 .tenon-textarea::placeholder { color: var(--tenon-text-faint); }
 .tenon-textarea:hover:not(:disabled) { background: var(--tenon-background-input-hovered); border-color: var(--tenon-stroke-hovered); }
 .tenon-textarea:focus-visible {
