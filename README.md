@@ -129,7 +129,7 @@ uses, rounded off the half-pixels it had drifted into; above it the ratio is
 1.2, which is the range a page that is not the task board will want.
 
 Six headings, `heading-1` through `heading-6`, plus stat, body, body-sm, label,
-tag, caption, caption-sm and code. `stat` is the figure in a Stat and `tag` the
+overline, overline-sm, tag, caption, caption-sm and code. `stat` is the figure in a Stat and `tag` the
 words on a Tag, and they are the two styles the build writes no class for,
 since those components own `.tenon-stat` and `.tenon-tag`. They land at the
 small end of the ramp because the task board is a dense UI: `heading-1` is
@@ -164,8 +164,30 @@ the chip's heavier weight, which is 500 in OFFDESK because Plex Mono is loaded
 at 400 and 500 only, and `letter-spacing.pill-caps`, the tracking on a Pill in
 capitals, which keeps the brand's 0.1em in OFFDESK.
 
+`overline` is the label in capitals that names what sits under it: a column
+head, a field label, the name of a hero Stat. 12px, bold, 0.03em apart, and
+`overline-sm` is the same at 10px for a card's eyebrow. The capitals are part
+of the style rather than something each component adds. DTCG's typography type
+has no part for case, so it sits under `$extensions.tenon.textCase`, and the
+build writes it out as a sixth variable, `--tenon-text-overline-case`, which the
+`.tenon-overline` class and every component reading the style turn into
+`text-transform`. Figma's text styles carry case as well, so the resolved copy
+in `tenon.tokens.json` writes `textCase` beside the other five parts and the
+Figma style can match. A theme that replaces a style in capitals has to say its
+case again, and the build checks that it does. The OFFDESK themes set both in
+Plex Mono at 0.1em, as their tags. Its tracking is
+`typography.letter-spacing.caps`, the one step on that scale in `em` rather
+than `rem`, so a word in capitals opens in proportion to its own size.
+
 Weights collapse from the task board's thirteen — which included 520, 560, 570 and
-680, the kind of value that gets typed once and copied forever — to four.
+680, the kind of value that gets typed once and copied forever — to four, the four Inter is loaded at. Fonts come only from the theme: no
+component and nothing in `tn-page.css` names a family, uses the `font`
+shorthand for anything but `inherit`, or asks for a weight between those four.
+Each reads a text style's `-family` and `-weight` or a font token, so a theme
+can change every face in one file, and the build fails on any of the three.
+The task board moves from the system font to Inter with 0.20.0 for this
+reason: its own text was in the system font and every Tenon component on it in
+Inter, so a button and the card under it were two faces.
 
 Text styles are shared by every theme, and a theme can replace some of them.
 `tokens/semantic/typography.<theme>.json` holds only the styles that differ, and
@@ -235,10 +257,10 @@ rows it prints, in light and dark.
 
 ## Components
 
-Twenty-nine: `Button`, `Card`, `Column`, `Badge`, `Tag`, `Stat` and `Field`, then `Modal`, `Textarea`,
+Thirty-one: `Button`, `Card`, `Column`, `Badge`, `Tag`, `Stat` and `Field`, then `Modal`, `Textarea`,
 `Input`, `Select`, `Spinner`, `Pill`, `Alert`, `Switch` and `SegmentedControl`, then `ToggleGroup`, `ToggleChip`, `StepSlider`, `TagChip`, `Calendar` with its `DateButton`, and `Dropdown` (the task board's bucket tabs, filter chip, Impact slider, task tags, date pickers and Delegate to field), then `Window`, `Markdown`,
 `EditableText` and `Disclosure`, then `DragHandle` and `DropLine`, which come with the
-`useReorder` hook. `LinkButton` is `Button`'s anchor form and is not counted
+`useReorder` hook, then `Menu` and `Toast`. `LinkButton` is `Button`'s anchor form and is not counted
 separately. Written in TypeScript so the `.d.ts` gives prop autocomplete in a plain
 JavaScript app too.
 
@@ -339,6 +361,50 @@ side by setting a theme's resolved values as custom properties on a wrapper,
 which is why they read the same whatever the toolbar is set to. The toolbar's
 switch reads the same list, so a new theme gets its column and its switch entry
 from the build's own file.
+
+**0.20.0 moved the task board's own decisions in.** The task board had kept a
+layer of its own over Tenon's components, about 400 lines of it, and a second
+app on these components looked nothing like it because none of that layer
+reached it. Those values are Tenon's now, snapped to the dimension scale and to
+the four loaded weights, so both apps draw the same column and the same card.
+
+- `Column`'s head is set in `overline`, its shadow is `overlay`, it is at least
+  120px tall, and its hint, description and chevron are larger. `dropState`
+  (`'accept'` or `'deny'`) outlines the body while something is dragged over
+  it, in the accent or in red for a column that will refuse what is in the air.
+  `ColumnEmpty boxed` sits on the page fill and reads left to right.
+- `Card`'s accent stripe moves to the outer edge, over the border, and its
+  corners follow the card's own curve. The eyebrow is `overline-sm`, the lead,
+  meta and footer are 12px, and the summary sits further down at a looser line
+  height. `selected` outlines a card in the accent, for one picked out for an
+  action about to happen to it. Its padding is unchanged, so a dashboard's
+  agent cards keep their size and gain only the larger small text and the new stripe.
+- `Button` gains `outline` (secondary with no fill) and `dashed` (the same with
+  a dashed edge, for a button that adds something), `pressed` for a toggle that
+  is on, which sets `aria-pressed` too, and `block` to fill its row. `sm` keeps
+  12px text.
+- `Badge`'s number is 12px. `Stat` takes `size="hero"`, the one figure a view
+  is opened for: title-sized, named in `overline`, on the page fill and as wide
+  as its content. The default size is unchanged for a row of them.
+- `Field`'s label is `overline` in the faint colour. `Input` takes `size="sm"`,
+  32px, to sit beside an md `Button` in a toolbar. `Field` and `Textarea` now
+  hide under the `hidden` attribute, which their own `display` used to beat.
+- `SegmentOption.separatorBefore` draws a hairline before an option, to split a
+  row of views into groups, and is dropped on a phone.
+- `Menu` is a list of actions under a button, the board's Data menu:
+  `<Menu trigger="Data" align="end">` holding `Menu.Item` with an `onSelect`, and
+  `Menu.Divider` with an optional `label` for a second half that answers a
+  different question. `Dropdown` picks a value, and this one does things.
+- `Toast` is a short line that lands where the eye already is: render one
+  `<Toaster/>` near the root and call `toast(text, { tone })` from anywhere,
+  with `default`, `warning`, `error` or `success`. The default is the inverse
+  panel, and a failure is never drawn like it.
+
+Three new tokens came with them: `layout.column-width` (320px), `elevation.popover`
+(the menu and toast shadow, none in OFFDESK) and `brand.ink`, the colour a
+wordmark is drawn in. `chart.1-strong` to `chart.10-strong` are each chart
+colour one step deeper on its own ramp, for a mark that sits on its chart
+colour, such as a sub-task bar inside its task's bar.
 
 **The last seven came from two apps that had each drawn their own.** The chat
 engine supplied the `Modal` (its window), `Textarea` (its composer), `Spinner`
@@ -475,7 +541,8 @@ dark rule on a system set to dark. Adding one is a line in that list and a
 its block and checks it like the others.
 
 An app that sets a theme with fonts of its own imports that theme's sheet
-after `tenon.css`. Today that is only 1984, which adds Fraunces:
+after `tenon.css`. Today that is 1984, which adds Fraunces, and the two OFFDESK
+themes, which add Archivo and IBM Plex Mono:
 
 ```css
 @import "@tiagopedras/tenon/tenon.css";
@@ -581,6 +648,35 @@ adds one small page layer, `design-md/assets/tn-page.css`, which reads only
 Tenon's tokens and is exported as `@tiagopedras/tenon/tn-page.css`. Both ship
 from v0.17.0. `design-md/README.md` explains how it was built and what has been
 checked.
+
+The page layer is also where an app screen's frame lives, and 0.20.0 gave it
+the task board's. `tn-appbar` is the bar along the top, a sibling of the page
+rather than inside it, so its fill and rule reach both edges of the window.
+`tn-page--full` is the page without its 1280px cap, and it is the board's
+sideways scroller: the whole region under the bar scrolls, where a board inside
+a capped page was a box that cut its own columns off. `tn-frame`, on `<body>` or
+an app's root, makes that region run to the bottom of the window, so a board's
+columns run full height. `tn-board` lays its columns out at 320px or more with
+a 12px gap, all the board's height; set `--tn-board-columns` to the count so the
+scroll ends a gutter past the last one. Below 640px each column is the width of
+the screen and snaps, and `tn-tabbar` is the phone's bottom tab bar. A board
+shown as one part of a page, such as a preview, is `tn-board--contained`, which
+is how `tn-board` behaved before.
+
+```html
+<body class="tn-shell tn-frame">
+  <header class="tn-appbar">
+    <a class="tn-identity" href="/">App</a>
+    <span class="tn-appbar-spacer"></span>
+    <button class="tenon-button tenon-button--secondary tenon-button--md">Data</button>
+  </header>
+  <main class="tn-page tn-page--full">
+    <div class="tn-board" style="--tn-board-columns: 7">
+      <section class="tenon-column">…</section>
+    </div>
+  </main>
+</body>
+```
 
 ## Releasing
 
