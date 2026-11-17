@@ -362,6 +362,17 @@ which is why they read the same whatever the toolbar is set to. The toolbar's
 switch reads the same list, so a new theme gets its column and its switch entry
 from the build's own file.
 
+**0.21.0 adds the highlight and spotlight colours.** They are the last of the
+task board's own colours, from its focus prompt and the ring round a card being
+held. `highlight.from`, `highlight.to` and `highlight.end` are a warm gradient.
+`spotlight.*` is a set of eleven for a panel that stays dark in every theme, light
+and OFFDESK included, which `background.inverse` cannot be, since it turns
+light in dark mode. Each is the same in all five themes. Nine sit on ramp steps
+within a few points of the board's values, and two, `base.glow` (#f0b355) and
+`base.spotlight-error` (#d98b86), are new literal primitives because no step
+comes near them. The build's contrast report now measures the spotlight's text
+colours against its own surface, and all of them clear 4.5:1.
+
 **0.20.0 moved the task board's own decisions in.** The task board had kept a
 layer of its own over Tenon's components, about 400 lines of it, and a second
 app on these components looked nothing like it because none of that layer

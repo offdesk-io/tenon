@@ -339,6 +339,8 @@ Page-owned CSS may read only Tenon's semantic tokens:
 - Strokes: `--tenon-stroke-default`, `--tenon-stroke-subtle`, `--tenon-stroke-strong`, `--tenon-stroke-accent`, `--tenon-stroke-focus`, and each status.
 - Data: `--tenon-chart-1` to `--tenon-chart-10`, and `--tenon-chart-1-strong` to `--tenon-chart-10-strong` for a mark drawn on its chart colour.
 - Brand: `--tenon-brand-ink`, for a wordmark only.
+- Highlight: `--tenon-highlight-from`, `--tenon-highlight-to` and `--tenon-highlight-end`, the warm gradient for a ring or glow round something held or in focus. Never a fill for text.
+- Spotlight: a panel that stays dark in every theme. `--tenon-spotlight-surface` is the fill, with `-text`, `-placeholder`, `-border`, `-chip`, `-dot`, `-avatar`, `-working`, `-error`, `-done-surface` and `-done-text` on it. Use it only for one focused panel that has to read the same on a light and a dark page; everything else follows the theme through `--tenon-background-*`.
 - Text styles: `--tenon-text-<style>-size`, `-weight`, `-line-height`, `-family`, `-letter-spacing` for every style above.
 - Shape and space: `--tenon-dimension-*`, `--tenon-radius-*`, `--tenon-elevation-*` (`raised`, `overlay`, `popover`, `modal`), `--tenon-breakpoint-*`, `--tenon-layout-column-width`.
 

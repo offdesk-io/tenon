@@ -1447,6 +1447,16 @@
         "$type": "color",
         "$value": "{color.amber.600}",
         "$description": "In the amber ramp, at a step legible as text. Fills the timeline's due-soon bar and a tag's text colour."
+      },
+      "glow": {
+        "$type": "color",
+        "$value": "#f0b355",
+        "$description": "Warm amber, outside the amber and yellow ramps (nearest is yellow.350, #d0aa56). The start of the highlight gradient."
+      },
+      "spotlight-error": {
+        "$type": "color",
+        "$value": "#d98b86",
+        "$description": "A muted rose, readable on the spotlight surface without the alarm of red.350. No ramp step is close. spotlight.error only."
       }
     },
     "offdesk-orange": {

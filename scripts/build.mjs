@@ -598,6 +598,20 @@ for (const { name: theme } of THEMES) {
     const ratio = contrast(hex, fill);
     if (ratio < 4.5) rows.push({ theme, token: `${key} on background.neutral`, hex, 'worst ratio': ratio.toFixed(2) });
   }
+
+  /* The spotlight set is its own dark surface in every theme, so its text
+     colours are measured against that surface rather than the page's. */
+  for (const [key, on] of [
+    ['spotlight.text', 'spotlight.surface'], ['spotlight.placeholder', 'spotlight.surface'],
+    ['spotlight.working', 'spotlight.surface'], ['spotlight.error', 'spotlight.surface'],
+    ['spotlight.text', 'spotlight.chip'], ['spotlight.done-text', 'spotlight.done-surface'],
+  ]) {
+    const hex = r[key];
+    const fill = r[on];
+    if (!hex || !fill || !/^#[0-9a-f]{6}$/i.test(hex) || !/^#[0-9a-f]{6}$/i.test(fill)) continue;
+    const ratio = contrast(hex, fill);
+    if (ratio < 4.5) rows.push({ theme, token: `${key} on ${on}`, hex, 'worst ratio': ratio.toFixed(2) });
+  }
 }
 
 console.log(`${STAMP}`);

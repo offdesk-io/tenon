@@ -467,6 +467,80 @@
         "$value": "{color.offdesk.ink}",
         "$description": "The colour an app's wordmark is drawn in: OFFDESK Ink on a light theme, Concrete on a dark one. For a logo or wordmark only, never for text, which is text.default. tn-identity's svg reads it as its fill."
       }
+    },
+    "highlight": {
+      "from": {
+        "$type": "color",
+        "$value": "{color.base.glow}",
+        "$description": "The start of the highlight gradient: the ring round a card being held, and the edge of the focus prompt. The same in every theme."
+      },
+      "to": {
+        "$type": "color",
+        "$value": "{color.red.350}",
+        "$description": "The end of the ring and the glow round a held card. red.350, a hair off the board's #ff8a85. The same in every theme."
+      },
+      "end": {
+        "$type": "color",
+        "$value": "{color.red.450}",
+        "$description": "Where the focus prompt's gradient edge finishes, deeper than highlight.to. The same in every theme."
+      }
+    },
+    "spotlight": {
+      "surface": {
+        "$type": "color",
+        "$value": "{color.neutral.900}",
+        "$description": "A panel that stays dark in every theme, light and OFFDESK included, unlike background.inverse, which turns light in dark mode. The task board's focus prompt sits on it. neutral.900, a hair off the board's #1c1f25."
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{color.neutral.50}",
+        "$description": "Text on spotlight.surface. The same in every theme."
+      },
+      "placeholder": {
+        "$type": "color",
+        "$value": "{color.neutral.450}",
+        "$description": "A field's placeholder on spotlight.surface. The same in every theme."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{color.neutral.750}",
+        "$description": "An edge on spotlight.surface, such as a status box. The same in every theme."
+      },
+      "chip": {
+        "$type": "color",
+        "$value": "{color.neutral.800}",
+        "$description": "A chip's fill on spotlight.surface. The same in every theme."
+      },
+      "dot": {
+        "$type": "color",
+        "$value": "{color.blue.350}",
+        "$description": "The dot on a spotlight chip. The same in every theme."
+      },
+      "avatar": {
+        "$type": "color",
+        "$value": "{color.base.white}",
+        "$description": "An avatar tile on spotlight.surface. The same in every theme."
+      },
+      "working": {
+        "$type": "color",
+        "$value": "{color.orange.350}",
+        "$description": "A line saying something is in progress on spotlight.surface. orange.350, near the board's #f0855a. The same in every theme."
+      },
+      "error": {
+        "$type": "color",
+        "$value": "{color.base.spotlight-error}",
+        "$description": "A line saying something failed on spotlight.surface. Literal, since no ramp step is close. The same in every theme."
+      },
+      "done-surface": {
+        "$type": "color",
+        "$value": "{color.green.900}",
+        "$description": "A finished item's fill on spotlight.surface. The same in every theme."
+      },
+      "done-text": {
+        "$type": "color",
+        "$value": "{color.green.400}",
+        "$description": "A finished item's name on spotlight.done-surface, and the outline on what a run changed. The same in every theme."
+      }
     }
   },
   "elevation": {

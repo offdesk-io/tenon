@@ -116,6 +116,12 @@ primitives.base = {
   yellow: { $type: 'color', $value: '#ffff00', $description: 'Full chroma, outside the yellow ramp. The 1984 theme\'s accent: fills, and text on a dark surface only.' },
   urgent: { $type: 'color', $value: '{color.red.550}', $description: 'In the red ramp, at a step legible as text. Fills the timeline\'s overdue bar and a tag\'s text colour.' },
   soon:   { $type: 'color', $value: '{color.amber.600}', $description: 'In the amber ramp, at a step legible as text. Fills the timeline\'s due-soon bar and a tag\'s text colour.' },
+  /* Two colours from the task board's focus prompt and held-card ring that
+     no ramp step comes near, so they stay literal here rather than being
+     forced onto a step that would change how they look. Only highlight.* and
+     spotlight.* read them. */
+  glow:   { $type: 'color', $value: '#f0b355', $description: 'Warm amber, outside the amber and yellow ramps (nearest is yellow.350, #d0aa56). The start of the highlight gradient.' },
+  'spotlight-error': { $type: 'color', $value: '#d98b86', $description: 'A muted rose, readable on the spotlight surface without the alarm of red.350. No ramp step is close. spotlight.error only.' },
 };
 
 /* OFFDESK's brand palette, for the two OFFDESK themes. Each brand colour
