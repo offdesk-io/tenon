@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { groupBy, px, sharedAlias, sharedDescription, tokens } from './data';
+import { THEMES, groupBy, px, sharedAlias, sharedDescription, themeScope, tokens } from './data';
 import './tokens.css';
 
 const meta = {
@@ -16,6 +16,7 @@ const groups = groupBy(
   Object.keys(tokens.primitives).filter((k) => !/^(color|typography)\./.test(k)),
 );
 const radii = Object.keys(tokens.shared).filter((k) => k.startsWith('radius.'));
+const radiusThemes = THEMES.filter((t) => Object.keys(tokens.themeRadius?.[t] ?? {}).length);
 
 /* A bar wider than this is a sentinel rather than a size, like
    dimension.full, and is named rather than drawn. */
@@ -58,7 +59,8 @@ export const Dimensions: Story = {
       <h1 className="tenon-heading-1">Dimensions</h1>
       <p>
         One scale for spacing, border width, icon size and anything else measured in pixels, the same in every
-        theme. Radius names picks off it, and the breakpoints sit beside it.
+        theme. Radius names picks off it, and the breakpoints sit beside it. A theme may replace a radius
+        with another pick, and where one does, its shape sits underneath on a panel in that theme.
       </p>
       {groups.has('dimension') && <Bars group="dimension" keys={groups.get('dimension')!} />}
       <section className="tk-section">
@@ -74,6 +76,18 @@ export const Dimensions: Story = {
                 <span className="tk-code tk-subtle">
                   {tokens.shared[k] as string}{typeof alias === 'string' ? ` (${alias})` : ''}
                 </span>
+                {radiusThemes.filter((t) => tokens.themeRadius[t]?.[k]).map((t) => {
+                  const themeAlias = sharedAlias(k, t);
+                  return (
+                    <div key={t} className="tk-radius tk-radius--theme" style={themeScope(t)}>
+                      <div className="tk-radius__shape" style={{ borderRadius: tokens.themeRadius[t]![k] }} />
+                      <span className="tk-code">{t}</span>
+                      <span className="tk-code tk-subtle">
+                        {tokens.themeRadius[t]![k]}{typeof themeAlias === 'string' ? ` (${themeAlias})` : ''}
+                      </span>
+                    </div>
+                  );
+                })}
               </div>
             );
           })}

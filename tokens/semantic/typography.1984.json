@@ -129,6 +129,17 @@
         "letterSpacing": { "value": 0.04, "unit": "em" }
       }
     },
+    "tag": {
+      "$description": "Caption's 13px Inter with label's regular weight, which is what a Tag and a Pill set in this theme before text.tag existed, so they draw as they did. Letter spacing inherit, as in the shared style.",
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{typography.family.inter}",
+        "fontSize": { "value": 13, "unit": "px" },
+        "fontWeight": "{typography.weight.regular}",
+        "lineHeight": "{typography.line-height.normal}",
+        "letterSpacing": "inherit"
+      }
+    },
     "caption": {
       "$description": "The site's caption at 13px. The site sets no line height on it, so this takes the shared normal.",
       "$type": "typography",

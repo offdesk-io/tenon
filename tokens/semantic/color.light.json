@@ -357,6 +357,47 @@
       "10": {
         "$type": "color",
         "$value": "{color.slate.600}"
+      },
+      "1-solid": {
+        "$type": "color",
+        "$value": "{color.blue.600}",
+        "$description": "The full-strength colour of chart.N, for a mark that carries no text, such as a card's bucket stripe or a legend dot. Not measured as text by the build's contrast report, which reads only text, icon and status tokens. In this theme each is the same colour as its chart.N."
+      },
+      "2-solid": {
+        "$type": "color",
+        "$value": "{color.orange.600}"
+      },
+      "3-solid": {
+        "$type": "color",
+        "$value": "{color.purple.600}"
+      },
+      "4-solid": {
+        "$type": "color",
+        "$value": "{color.green.600}"
+      },
+      "5-solid": {
+        "$type": "color",
+        "$value": "{color.magenta.600}"
+      },
+      "6-solid": {
+        "$type": "color",
+        "$value": "{color.teal.600}"
+      },
+      "7-solid": {
+        "$type": "color",
+        "$value": "{color.brown.600}"
+      },
+      "8-solid": {
+        "$type": "color",
+        "$value": "{color.indigo.600}"
+      },
+      "9-solid": {
+        "$type": "color",
+        "$value": "{color.red.600}"
+      },
+      "10-solid": {
+        "$type": "color",
+        "$value": "{color.slate.600}"
       }
     },
     "status": {
@@ -421,6 +462,34 @@
           "spread": "0px"
         }
       ]
+    }
+  },
+  "text-transform": {
+    "tag": {
+      "$type": "string",
+      "$value": "inherit",
+      "$description": "How a Tag, a Pill and a TagChip set their case. A text style has no part for capitals, so the theme says it here, beside elevation, and parity makes every theme state it. Here it is inherit, so the component takes whatever the text around it sets, as it did before the token existed. A custom property set to inherit has no value at :root, so the var() that reads it is invalid when computed, and an inherited property such as this one then inherits."
+    }
+  },
+  "font-family": {
+    "tag-chip": {
+      "$type": "fontFamily",
+      "$value": "inherit",
+      "$description": "A TagChip's font. Here it is inherit, so the component takes whatever the text around it sets, as it did before the token existed. A custom property set to inherit has no value at :root, so the var() that reads it is invalid when computed, and an inherited property such as this one then inherits."
+    }
+  },
+  "font-weight": {
+    "tag-chip": {
+      "$type": "fontWeight",
+      "$value": "{typography.weight.semibold}",
+      "$description": "A TagChip's weight. Heavier than a Tag because it is something to click. Themeable so a theme whose label face is not loaded at 600 can ask for a weight it has."
+    }
+  },
+  "letter-spacing": {
+    "pill-caps": {
+      "$type": "dimension",
+      "$value": "{typography.letter-spacing.wider}",
+      "$description": "The tracking on a Pill set in capitals (its caps variant). Themeable so a theme whose tags already have tracking of their own keeps it."
     }
   }
 }

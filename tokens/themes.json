@@ -1,0 +1,10 @@
+{
+  "$description": "Every theme the build writes, in the order it writes them. Each needs a tokens/semantic/color.<name>.json holding the same keys as light's, and may add a typography.<name>.json and a radius.<name>.json that replace shared styles and radii inside its own block. Light and dark are the two automatic themes: light sits on :root, and dark follows the system unless [data-theme=\"light\"] is set. Every other theme is never automatic and applies only under :root[data-theme=\"<name>\"], so it needs no selector here. colorScheme is what the browser draws native controls and scrollbars in. A list rather than an object, because an object would put a name made of digits, such as 1984, first.",
+  "themes": [
+    {"name": "light", "title": "Light", "automatic": true, "colorScheme": "light"},
+    {"name": "dark", "title": "Dark", "automatic": true, "colorScheme": "dark"},
+    {"name": "1984", "title": "1984", "automatic": false, "colorScheme": "dark"},
+    {"name": "offdesk", "title": "OFFDESK", "automatic": false, "colorScheme": "light"},
+    {"name": "offdesk-dark", "title": "OFFDESK dark", "automatic": false, "colorScheme": "dark"}
+  ]
+}

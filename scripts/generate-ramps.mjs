@@ -118,6 +118,80 @@ primitives.base = {
   soon:   { $type: 'color', $value: '{color.amber.600}', $description: 'In the amber ramp, at a step legible as text. Fills the timeline\'s due-soon bar and a tag\'s text colour.' },
 };
 
+/* OFFDESK's brand palette, for the two OFFDESK themes. Each brand colour
+   gets a ramp of its own, made the same way as the hues above, so the
+   themes' in-between surfaces and greys come from the brand's own colours
+   rather than from Tenon's grey. The ramps are named offdesk-<colour> so
+   they cannot be mistaken for Tenon's own orange, yellow and blue, and so
+   the primitives page draws each as a row of its own.
+
+   The method only lands near an anchor, since every step takes its lightness
+   from the fixed table. The brand's hex is the brand, so the step nearest
+   the anchor in lightness is pinned to it byte for byte, and its neighbours
+   keep their table lightness. Ink has no ramp of its own: it is the dark end
+   of Raw steel's, pinned at 950, so the brand's neutrals are one scale from
+   steel's lightest tint down to Ink. Source: OFFDESK's brand stylesheet,
+   brand/AGENTS/design-md/assets/ofd-brand.css, 5 Nov 2026. */
+const BRAND = {
+  orange:   { hex: '#e2481c', name: 'Safety orange' },
+  yellow:   { hex: '#f2c500', name: 'Signal yellow' },
+  blue:     { hex: '#2440a8', name: 'IBM blue' },
+  concrete: { hex: '#e7e5e0', name: 'Concrete' },
+  steel:    { hex: '#9a9a96', name: 'Raw steel', also: { ink: { step: 950, hex: '#141414', name: 'Ink' } } },
+  /* Bucket colours 4 to 10, chosen for OFFDESK's board with Tiago,
+     11 Nov 2026. Not in the brand book, which has three colours beside its
+     neutrals; these extend it for a board that needs ten buckets. */
+  cyan:     { hex: '#1a9bd7', name: 'Blueprint cyan' },
+  purple:   { hex: '#6d3fc8', name: 'Radiation purple' },
+  magenta:  { hex: '#c21e8a', name: 'Marker magenta' },
+  teal:     { hex: '#12877b', name: 'Patina teal' },
+  olive:    { hex: '#7f7a1f', name: 'Workwear olive' },
+  kraft:    { hex: '#ae8250', name: 'Kraft' },
+  pink:     { hex: '#ec6f9f', name: 'Hi-vis pink' },
+};
+const anchorStep = {};
+for (const [key, { hex, name, also = {} }] of Object.entries(BRAND)) {
+  const pairs = ramp(hex);
+  const [La] = rgbToOklch(hexToRgb(hex));
+  const at = LIGHTNESS.reduce((best, L, i) => (Math.abs(L - La) < Math.abs(LIGHTNESS[best] - La) ? i : best), 0);
+  const names = { [pairs[at][0]]: name };
+  pairs[at] = [pairs[at][0], hex];
+  anchorStep[key] = pairs[at][0];
+  for (const [extra, pin] of Object.entries(also)) {
+    const i = STEPS.indexOf(pin.step);
+    pairs[i] = [pin.step, pin.hex];
+    names[pin.step] = pin.name;
+    anchorStep[extra] = pin.step;
+  }
+  const pinned = Object.entries(names).map(([step, n]) => `${n} at ${step}`).join(' and ');
+  const group = {
+    $description: `OFFDESK ${name}, generated from ${hex}, with the brand hex pinned for ${pinned}. Do not hand-edit; run scripts/generate-ramps.mjs.`,
+  };
+  for (const [step, value] of pairs) {
+    group[String(step)] = names[step]
+      ? { $type: 'color', $value: value, $description: `${names[step]}, the brand hex.` }
+      : { $type: 'color', $value: value };
+  }
+  primitives[`offdesk-${key}`] = group;
+}
+
+/* The brand's colours by name, for the brand roles the themes state. Each
+   aliases its ramp's pinned step, so Ink is findable as Ink. Raw steel dark
+   is not on the steel ramp (it falls between 700 and 750, and neither is
+   within rounding of it), and Ink raised is a value the brand sheet derives
+   itself and matches no steel step, so both stay literal. White is base.white, the same #ffffff. */
+const at = (key, ramp = key) => `{color.offdesk-${ramp}.${anchorStep[key]}}`;
+primitives.offdesk = {
+  ink:          { $type: 'color', $value: at('ink', 'steel'), $description: 'Ink. All type, all rules, and the contrast surface. The light theme\'s actions and links.' },
+  concrete:     { $type: 'color', $value: at('concrete'), $description: 'Concrete. The default page ground, and type on Ink.' },
+  orange:       { $type: 'color', $value: at('orange'), $description: 'Safety orange, the signal. In the themes it marks focus, the selected thing and one chart colour. Never a button or a link.' },
+  yellow:       { $type: 'color', $value: at('yellow'), $description: 'Signal yellow. Full-bleed grounds in the brand, which Tenon has no token for. The themes read its ramp for one chart colour only.' },
+  steel:        { $type: 'color', $value: at('steel'), $description: 'Raw steel. Hairlines, inactive bars, and captions on Ink.' },
+  'steel-dark': { $type: 'color', $value: '#4a4a48', $description: 'Raw steel\'s stand-in on Concrete, for secondary text and borders. Literal: it is not on the steel ramp.' },
+  blue:         { $type: 'color', $value: at('blue'), $description: 'IBM blue. Technical diagrams and dense data, never beside orange.' },
+  'ink-raised': { $type: 'color', $value: '#1f1f1f', $description: 'Panels on Ink in the dark theme. The brand sheet marks this one derived itself: Ink lifted one step.' },
+};
+
 writeFileSync(OUT, JSON.stringify({
   $schema: 'https://www.designtokens.org/schemas/2025.10/format.json',
   $description: 'Tenon colour primitives. Generated, not authored.',
@@ -126,3 +200,4 @@ writeFileSync(OUT, JSON.stringify({
 
 console.table(report);
 console.log(`\n${Object.keys(HUES).length} hues x ${STEPS.length} steps -> ${OUT}`);
+console.log(`OFFDESK ramps, brand hex pinned at: ${Object.entries(anchorStep).map(([k, v]) => `${k} ${v}`).join(', ')}`);

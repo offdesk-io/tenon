@@ -1,21 +1,27 @@
 /* Reads the token JSON, checks it, and writes dist/.
    Run: node scripts/build.mjs   (add --quiet to drop the contrast table)
 
-   Four checks run before anything is written, and any of them failing
+   Eight checks run before anything is written, and any of them failing
    stops the build:
-     1. theme parity, light, dark and 1984 hold the identical key set
-     2. every {alias} resolves to something that exists
-     3. no semantic token aliases another semantic token
-     4. a theme's typography file only replaces text styles the shared file
+     1. tokens/themes.json is a list the build can write: light first, light
+        and dark the only automatic themes, a colour file for each
+     2. theme parity, every theme in tokens/themes.json holds light's key set
+     3. every {alias} resolves to something that exists
+     4. no semantic token aliases another semantic token
+     5. a theme's typography file only replaces text styles the shared file
         has, and gives all five parts of each
-     5. every font list is a list of Google Fonts families, and no theme
+     6. a theme's radius file only replaces radii the shared file has, with
+        a dimension
+     7. every font list is a list of Google Fonts families, and no theme
         loads a family tenon.css already loads
-   The first is the one that matters. A stylesheet had --accent missing from
+     8. no component CSS reads a colour primitive
+     9. every --tenon- name a component reads is one this build emits
+   Parity is the one that matters. A stylesheet had --accent missing from
    its dark block for months and nothing said a word, because a hand-written
    stylesheet has no way to know a key is absent.
 
-   A sixth check, contrast, reports and does not fail. Some tokens are
-   meant to sit below 4.5:1 and the token file says which.
+   A tenth, contrast, reports and does not fail. Some tokens are meant to
+   sit below 4.5:1 and the token file says which.
    ------------------------------------------------------------------- */
 
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, existsSync, rmSync } from 'node:fs';
@@ -49,11 +55,33 @@ const shared = strip(read('tokens/semantic/typography.json'));
    "colour" twice and reads nothing like the primitive it is meant to be
    told apart from. Primitives keep theirs: --tenon-color-blue-600. */
 const hoistColor = ({ color = {}, ...rest }) => ({ ...color, ...rest });
-const themes = {
-  light: hoistColor(strip(read('tokens/semantic/color.light.json'))),
-  dark: hoistColor(strip(read('tokens/semantic/color.dark.json'))),
-  '1984': hoistColor(strip(read('tokens/semantic/color.1984.json'))),
-};
+
+/* The theme list is a file of its own because Storybook's switch and token
+   pages read it too. Light and dark are the automatic pair and keep the
+   selectors they have always had. Every other theme gets
+   :root[data-theme="<name>"] and nothing else, so no selector is typed by
+   hand: a bare [data-theme] would lose to the automatic dark rule on a
+   system set to dark, which is why :root is there. */
+const THEMES = read('tokens/themes.json').themes;
+const MANUAL = THEMES.filter((t) => !t.automatic);
+const themeErrors = [];
+const auto = THEMES.filter((t) => t.automatic).map((t) => t.name);
+if (THEMES[0]?.name !== 'light' || auto.join() !== 'light,dark') {
+  themeErrors.push(`themes.json: light must come first, and light and dark must be the only automatic themes (automatic: ${auto.join(', ') || 'none'})`);
+}
+for (const t of THEMES) {
+  if (!['light', 'dark'].includes(t.colorScheme)) themeErrors.push(`themes.json: ${t.name} needs a colorScheme of light or dark`);
+  if (!/^[a-z0-9-]+$/.test(t.name)) themeErrors.push(`themes.json: ${t.name} is not a name a data-theme attribute and a file name can both carry`);
+  else if (!existsSync(join(ROOT, `tokens/semantic/color.${t.name}.json`))) themeErrors.push(`themes.json: ${t.name} has no tokens/semantic/color.${t.name}.json`);
+}
+if (themeErrors.length) {
+  console.error('Build failed.\n');
+  for (const e of themeErrors) console.error(`  ${e}`);
+  process.exit(1);
+}
+const themes = Object.fromEntries(
+  THEMES.map((t) => [t.name, hoistColor(strip(read(`tokens/semantic/color.${t.name}.json`)))])
+);
 
 /* ---- flatten ---------------------------------------------------------- */
 
@@ -74,14 +102,20 @@ const flatThemes = Object.fromEntries(
   Object.entries(themes).map(([n, t]) => [n, flatten(t)])
 );
 
-/* A theme may carry its own text styles in tokens/semantic/typography.<theme>.json.
-   Each replaces the shared style of the same name inside that theme's block,
-   and a style it leaves out keeps the shared one, so the file can be partial. */
-const flatTextThemes = {};
-for (const name of Object.keys(themes)) {
-  const file = `tokens/semantic/typography.${name}.json`;
-  if (existsSync(join(ROOT, file))) flatTextThemes[name] = flatten(strip(read(file)));
-}
+/* A theme may carry its own text styles in tokens/semantic/typography.<theme>.json,
+   and its own radii in tokens/semantic/radius.<theme>.json. Each replaces the
+   shared token of the same name inside that theme's block, and one it leaves
+   out keeps the shared value, so either file can be partial. */
+const overrides = (kind) => {
+  const out = {};
+  for (const { name } of THEMES) {
+    const file = `tokens/semantic/${kind}.${name}.json`;
+    if (existsSync(join(ROOT, file))) out[name] = flatten(strip(read(file)));
+  }
+  return out;
+};
+const flatTextThemes = overrides('typography');
+const flatRadiusThemes = overrides('radius');
 
 /* Web fonts, declared beside the text styles that use them, under
    $extensions.tenon.fonts. The shared file's list goes into tenon.css, so
@@ -106,12 +140,11 @@ const baseFonts = Array.isArray(fontLists['typography.json']) ? fontLists['typog
 const errors = [];
 
 const lightKeys = Object.keys(flatThemes.light).sort();
-const darkKeys = Object.keys(flatThemes.dark).sort();
-for (const k of lightKeys) if (!darkKeys.includes(k)) errors.push(`dark is missing ${k}`);
-for (const k of darkKeys) if (!lightKeys.includes(k)) errors.push(`light is missing ${k}`);
-const personalKeys = Object.keys(flatThemes['1984']).sort();
-for (const k of lightKeys) if (!personalKeys.includes(k)) errors.push(`1984 is missing ${k}`);
-for (const k of personalKeys) if (!lightKeys.includes(k)) errors.push(`light is missing ${k}, which 1984 has`);
+for (const { name } of THEMES.slice(1)) {
+  const keys = Object.keys(flatThemes[name]).sort();
+  for (const k of lightKeys) if (!keys.includes(k)) errors.push(`${name} is missing ${k}`);
+  for (const k of keys) if (!lightKeys.includes(k)) errors.push(`light is missing ${k}, which ${name} has`);
+}
 
 const ALIAS = /^\{([^}]+)\}$/;
 
@@ -132,6 +165,17 @@ function resolve(value, seen = []) {
   return resolve(node.$value, [...seen, target]);
 }
 
+/* The theme files are covered by the primitive-only rule below, which an
+   alias to nothing fails as well. Primitives and the shared file are not,
+   and resolve() is otherwise only reached while the resolved copy is written,
+   which is after the last chance to stop. So both are walked here. */
+for (const flat of [flatPrimitives, flatShared]) {
+  for (const node of Object.values(flat)) {
+    const parts = node.$type === 'typography' ? Object.values(node.$value) : [node.$value];
+    for (const v of parts) resolve(v);
+  }
+}
+
 /* A semantic aliasing another semantic is the chain that makes a rename
    break in two places instead of one. */
 for (const [theme, flat] of Object.entries(flatThemes)) {
@@ -143,13 +187,12 @@ for (const [theme, flat] of Object.entries(flatThemes)) {
   }
 }
 
-/* Only the 1984 theme has a CSS block that emits a typography file. Light
-   and dark share :root and a media query with the shared styles, so a file
-   for either would be read and then dropped without a word. */
+/* Light shares :root with the shared styles and radii, so a light file
+   would only be a second copy of the shared one. Changing the shared file is
+   the way to change light. */
 const TEXT_PARTS = ['fontFamily', 'fontSize', 'fontWeight', 'lineHeight', 'letterSpacing'];
-for (const theme of ['light', 'dark']) {
-  if (flatTextThemes[theme]) errors.push(`typography.${theme}.json exists, but only the 1984 theme emits a typography file`);
-}
+if (flatTextThemes.light) errors.push('typography.light.json exists, but light is the shared styles: change typography.json instead');
+if (flatRadiusThemes.light) errors.push('radius.light.json exists, but light is the shared radii: change typography.json instead');
 for (const [theme, flat] of Object.entries(flatTextThemes)) {
   for (const [key, node] of Object.entries(flat)) {
     if (flatShared[key]?.$type !== 'typography') {
@@ -164,6 +207,27 @@ for (const [theme, flat] of Object.entries(flatTextThemes)) {
       if (m && !(m[1] in flatPrimitives)) {
         errors.push(`${theme} typography: ${key}.${part} aliases {${m[1]}}, which is not a primitive`);
       }
+    }
+  }
+}
+
+/* The same rule for radius: a theme may only rename a pick the shared file
+   already makes, so a component reading --tenon-radius-lg finds it in every
+   theme, and a new radius name goes in the shared file first. */
+for (const [theme, flat] of Object.entries(flatRadiusThemes)) {
+  for (const [key, node] of Object.entries(flat)) {
+    if (!key.startsWith('radius.') || flatShared[key]?.$type !== 'dimension') {
+      errors.push(`${theme} radius: ${key} is not a radius in the shared file`);
+      continue;
+    }
+    if (node.$type !== 'dimension') errors.push(`${theme} radius: ${key} has $type ${node.$type}, not dimension`);
+    const m = typeof node.$value === 'string' && node.$value.match(ALIAS);
+    if (m && !(m[1] in flatPrimitives)) {
+      errors.push(`${theme} radius: ${key} aliases {${m[1]}}, which is not a primitive`);
+    } else if (m && flatPrimitives[m[1]].$type !== 'dimension') {
+      errors.push(`${theme} radius: ${key} aliases {${m[1]}}, which is a ${flatPrimitives[m[1]].$type} rather than a dimension`);
+    } else if (!m && !(node.$value && typeof node.$value === 'object' && 'value' in node.$value && 'unit' in node.$value)) {
+      errors.push(`${theme} radius: ${key} is neither an alias nor a dimension with a value and a unit`);
     }
   }
 }
@@ -253,8 +317,9 @@ const partVars = (path, v, opts) => Object.entries({
 
 /* A text style whose name a component already uses as its own class. The
    vars are still written, and the component reads them, but a .tenon-stat
-   text class would put the figure's font on the whole Stat box. */
-const OWNED_BY_COMPONENT = new Set(['text.stat']);
+   text class would put the figure's font on the whole Stat box, and a
+   .tenon-tag text class would be a second rule on Tag's own class. */
+const OWNED_BY_COMPONENT = new Set(['text.stat', 'text.tag']);
 
 const textVars = [];
 const textClasses = [];
@@ -280,9 +345,41 @@ const themeVars = (name) =>
   Object.entries(flatThemes[name]).map(([p, n]) => [cssName(p), cssValue(n)]);
 
 /* The classes above read these vars, so redefining them inside a theme's
-   block restyles every use of the class and every component with no new rule. */
+   block restyles every use of the class and every component with no new rule.
+
+   A theme that is not automatic also writes the shared value of anything
+   dark replaces and it does not. On a system set to dark the automatic dark
+   rule matches under [data-theme="1984"] too, so whatever 1984 left unset
+   would come from dark rather than from the shared file. Colour cannot leak
+   that way, since parity makes every theme set every colour. */
+const MANUAL_NAMES = new Set(MANUAL.map((t) => t.name));
+const replaced = (name, own) => {
+  const mine = own[name] ?? {};
+  if (!MANUAL_NAMES.has(name)) return Object.entries(mine);
+  const fill = Object.keys(own.dark ?? {}).filter((k) => !(k in mine)).map((k) => [k, flatShared[k]]);
+  return [...Object.entries(mine), ...fill];
+};
 const themeTextVars = (name) =>
-  Object.entries(flatTextThemes[name] ?? {}).flatMap(([p, n]) => partVars(p, n.$value));
+  replaced(name, flatTextThemes).flatMap(([p, n]) => partVars(p, n.$value));
+const themeRadiusVars = (name) =>
+  replaced(name, flatRadiusThemes).map(([p, n]) => [cssName(p), cssValue(n)]);
+
+const themeBlock = (name, indent = '  ') => {
+  const sections = [block(themeVars(name), indent)];
+  const text = themeTextVars(name);
+  if (text.length) sections.push(`${indent}/* ---- text styles that replace the shared ones ---- */\n${block(text, indent)}`);
+  const radii = themeRadiusVars(name);
+  if (radii.length) sections.push(`${indent}/* ---- radii that replace the shared ones ---- */\n${block(radii, indent)}`);
+  return sections.join('\n\n');
+};
+
+const manualBlocks = MANUAL.map((t) => `:root[data-theme="${t.name}"] {
+  color-scheme: ${t.colorScheme};
+${themeBlock(t.name)}
+}
+`).join('\n');
+
+const manualList = MANUAL.map((t) => t.name).join(', ');
 
 /* @import has to be the first rule, so it sits above the stamp comment. A
    tool that concatenates CSS files must keep this line at the top of the
@@ -293,16 +390,16 @@ const fontImport = (fonts) => (fonts.length ? `@import url('${fontsUrl(fonts)}')
 
 const css = `${fontImport(baseFonts)}/* ${STAMP}
    Generated by scripts/build.mjs. Do not edit.
-   ${primitiveVars.length} primitives, ${lightKeys.length} semantic tokens per theme, 3 themes.
+   ${primitiveVars.length} primitives, ${lightKeys.length} semantic tokens per theme, ${THEMES.length} themes.
 
    Light is the default. Dark applies when the system asks for it, unless
    [data-theme="light"] is set, and applies unconditionally under
-   [data-theme="dark"]. So a manual toggle needs no rebuild. The
-   1984 theme is never automatic: it applies only under
-   :root[data-theme="1984"], written with :root so it outranks the
-   automatic dark rule above it on a system set to dark. Its own text styles,
-   from typography.1984.json, sit at the end of that block and
-   replace the shared ones of the same name. Fonts a theme needs beyond
+   [data-theme="dark"]. So a manual toggle needs no rebuild. Every other
+   theme (${manualList || 'none today'}) is never automatic: each applies only under
+   :root[data-theme="<name>"], written with :root so it outranks the
+   automatic dark rule above it on a system set to dark. A theme's own text
+   styles and radii, from typography.<name>.json and radius.<name>.json, sit
+   at the end of its block and replace the shared ones of the same name. Fonts a theme needs beyond
    ${baseFonts.map(familyName).join(', ') || 'these'} are in dist/fonts/<theme>.css, imported beside this file. */
 
 :root {
@@ -311,7 +408,7 @@ const css = `${fontImport(baseFonts)}/* ${STAMP}
   /* ---- primitives. Nothing outside this file should read one. ---- */
 ${block(primitiveVars)}
 
-  /* ---- shared semantics: type and radius, the same in every theme ---- */
+  /* ---- shared semantics: type and radius, unless a theme replaces them ---- */
 ${block(textVars)}
 
   /* ---- semantics: light ---- */
@@ -320,22 +417,15 @@ ${block(themeVars('light'))}
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-${block(themeVars('dark'), '    ')}
+${themeBlock('dark', '    ')}
   }
 }
 
 [data-theme="dark"] {
-${block(themeVars('dark'))}
+${themeBlock('dark')}
 }
 
-:root[data-theme="1984"] {
-  color-scheme: dark;
-${block(themeVars('1984'))}
-
-  /* ---- text styles that replace the shared ones ---- */
-${block(themeTextVars('1984'))}
-}
-
+${manualBlocks}
 ${textClasses.join('\n\n')}
 `;
 
@@ -396,13 +486,17 @@ const resolved = {
       [t, Object.fromEntries(Object.entries(f).map(([p, n]) =>
         [p, Object.fromEntries(partVars(p, n.$value, { literal: true }).map(([k, v]) => [k.replace(`${cssName(p)}-`, ''), v]))]))])
   ),
+  themeRadius: Object.fromEntries(
+    Object.entries(flatRadiusThemes).map(([t, f]) =>
+      [t, Object.fromEntries(Object.entries(f).map(([p, n]) => [p, cssValue(n, { literal: true })]))])
+  ),
 };
 writeFileSync(join(ROOT, 'dist', 'tenon.tokens.json'), JSON.stringify(resolved, null, 2) + '\n');
 
 /* ---- contrast report -------------------------------------------------- */
 
 const rows = [];
-for (const theme of ['light', 'dark', '1984']) {
+for (const { name: theme } of THEMES) {
   const r = resolved.themes[theme];
   const surfaces = { 'bg.default': r['background.default'], 'bg.raised': r['background.raised'] };
   for (const [key, hex] of Object.entries(r)) {
@@ -449,12 +543,12 @@ for (const theme of ['light', 'dark', '1984']) {
 }
 
 console.log(`${STAMP}`);
-console.log(`dist/tenon.css          ${primitiveVars.length} primitives, ${lightKeys.length} semantics x 3 themes`);
-console.log(`dist/tenon.tokens.json  resolved values`);
+console.log(`dist/tenon.css               ${primitiveVars.length} primitives, ${lightKeys.length} semantics x ${THEMES.length} themes`);
+console.log(`dist/tenon.tokens.json       resolved values`);
 for (const [theme, fonts] of Object.entries(themeFonts)) {
-  console.log(`${`dist/fonts/${theme}.css`.padEnd(23)} ${fonts.map(familyName).join(', ')}`);
+  console.log(`${`dist/fonts/${theme}.css`.padEnd(28)} ${fonts.map(familyName).join(', ')}`);
 }
-console.log(`\nChecks passed: theme parity (light, dark, 1984), alias targets, no semantic-to-semantic aliases,\n               theme typography files replace only styles that exist, with all five parts,\n               font lists name Google Fonts families, none loaded twice,\n               no component CSS reading a colour primitive,\n               every --tenon- name a component reads is one this build emits.`);
+console.log(`\nChecks passed: a theme list the build can write, theme parity (${THEMES.map((t) => t.name).join(', ')}),\n               alias targets, no semantic-to-semantic aliases,\n               theme typography files replace only styles that exist, with all five parts,\n               theme radius files replace only radii that exist, with a dimension,\n               font lists name Google Fonts families, none loaded twice,\n               no component CSS reading a colour primitive,\n               every --tenon- name a component reads is one this build emits.`);
 if (!QUIET) {
   if (rows.length) {
     console.log(`\n${rows.length} text or icon tokens below 4.5:1 on their own background:`);

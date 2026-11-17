@@ -354,6 +354,47 @@
       "10": {
         "$type": "color",
         "$value": "{color.slate.350}"
+      },
+      "1-solid": {
+        "$type": "color",
+        "$value": "{color.blue.350}",
+        "$description": "The full-strength colour of chart.N, for a mark that carries no text, such as a card's bucket stripe or a legend dot. Not measured as text by the build's contrast report, which reads only text, icon and status tokens. In this theme each is the same colour as its chart.N."
+      },
+      "2-solid": {
+        "$type": "color",
+        "$value": "{color.orange.350}"
+      },
+      "3-solid": {
+        "$type": "color",
+        "$value": "{color.purple.350}"
+      },
+      "4-solid": {
+        "$type": "color",
+        "$value": "{color.green.350}"
+      },
+      "5-solid": {
+        "$type": "color",
+        "$value": "{color.magenta.350}"
+      },
+      "6-solid": {
+        "$type": "color",
+        "$value": "{color.teal.350}"
+      },
+      "7-solid": {
+        "$type": "color",
+        "$value": "{color.brown.350}"
+      },
+      "8-solid": {
+        "$type": "color",
+        "$value": "{color.indigo.350}"
+      },
+      "9-solid": {
+        "$type": "color",
+        "$value": "{color.red.350}"
+      },
+      "10-solid": {
+        "$type": "color",
+        "$value": "{color.slate.350}"
       }
     },
     "status": {
@@ -418,6 +459,30 @@
           "spread": "0px"
         }
       ]
+    }
+  },
+  "text-transform": {
+    "tag": {
+      "$type": "string",
+      "$value": "inherit"
+    }
+  },
+  "font-family": {
+    "tag-chip": {
+      "$type": "fontFamily",
+      "$value": "inherit"
+    }
+  },
+  "font-weight": {
+    "tag-chip": {
+      "$type": "fontWeight",
+      "$value": "{typography.weight.semibold}"
+    }
+  },
+  "letter-spacing": {
+    "pill-caps": {
+      "$type": "dimension",
+      "$value": "{typography.letter-spacing.wider}"
     }
   }
 }

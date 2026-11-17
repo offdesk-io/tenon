@@ -2,6 +2,7 @@ import type { Preview } from '@storybook/react-vite';
 import { addons } from 'storybook/preview-api';
 import '../dist/tenon.css';
 import './preview.css';
+import themeList from '../tokens/themes.json';
 
 /* Every theme's font stylesheet, since the toolbar can switch to any of
    them. A glob rather than one import each, so a theme that gains a font
@@ -16,9 +17,12 @@ import.meta.glob('../dist/fonts/*.css', { eager: true });
    own, and Storybook loads those without the toolbar's globals, so they
    fell back to the system theme. The chosen theme is therefore kept in
    localStorage: an iframe reads it on load, and follows a change through
-   the `storage` event, which fires in every other same-origin document. */
+   the `storage` event, which fires in every other same-origin document.
+
+   The switch lists whatever tokens/themes.json lists, the same file the
+   build reads, so a new theme shows up here with nothing to edit. */
 const KEY = 'tenon-storybook-theme';
-const THEMES = ['light', 'dark', '1984'];
+const THEMES = themeList.themes.map((t) => t.name);
 
 const stored = () => {
   try { return localStorage.getItem(KEY) ?? 'system'; } catch { return 'system'; }
@@ -58,9 +62,7 @@ const preview: Preview = {
         icon: 'mirror',
         items: [
           { value: 'system', title: 'System' },
-          { value: 'light', title: 'Light' },
-          { value: 'dark', title: 'Dark' },
-          { value: '1984', title: '1984' },
+          ...themeList.themes.map((t) => ({ value: t.name, title: t.title })),
         ],
         dynamicTitle: true,
       },
