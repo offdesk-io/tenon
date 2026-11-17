@@ -16,7 +16,8 @@
         loads a family tenon.css already loads
      8. no component CSS reads a colour primitive, and none names a font
         family or a weight Inter is not loaded at
-     9. every --tenon- name a component reads is one this build emits
+     9. every --tenon- name a component or tn-page.css reads is one this
+        build emits
    Parity is the one that matters. A stylesheet had --accent missing from
    its dark block for months and nothing said a word, because a hand-written
    stylesheet has no way to know a key is absent.
@@ -490,7 +491,7 @@ ${textClasses.join('\n\n')}
    made the token preview render on browser defaults, and --tenon-text-2xs
    in the column head. Both looked right. */
 const emitted = new Set(css.match(/^\s*(--tenon-[a-z0-9-]+):/gm)?.map((l) => l.trim().slice(0, -1)) ?? []);
-for (const [file, text] of componentCss) {
+for (const [file, text] of [...componentCss, [PAGE_CSS, readFileSync(PAGE_CSS, 'utf8')]]) {
   for (const m of text.matchAll(/var\(\s*(--tenon-[a-z0-9-]+)/g)) {
     if (!emitted.has(m[1]) && !LOCALS.has(m[1])) {
       errors.push(`${file.replace(ROOT + '/', '')} reads ${m[1]}, which this build does not emit`);
@@ -605,7 +606,7 @@ console.log(`dist/tenon.tokens.json       resolved values`);
 for (const [theme, fonts] of Object.entries(themeFonts)) {
   console.log(`${`dist/fonts/${theme}.css`.padEnd(28)} ${fonts.map(familyName).join(', ')}`);
 }
-console.log(`\nChecks passed: a theme list the build can write, theme parity (${THEMES.map((t) => t.name).join(', ')}),\n               alias targets, no semantic-to-semantic aliases,\n               theme typography files replace only styles that exist, with all five parts,\n               theme radius files replace only radii that exist, with a dimension,\n               font lists name Google Fonts families, none loaded twice,\n               text case one of four values, and restated by a theme that replaces a style in capitals,\n               no component CSS reading a colour primitive, naming a font family or an unloaded weight,\n               every --tenon- name a component reads is one this build emits.`);
+console.log(`\nChecks passed: a theme list the build can write, theme parity (${THEMES.map((t) => t.name).join(', ')}),\n               alias targets, no semantic-to-semantic aliases,\n               theme typography files replace only styles that exist, with all five parts,\n               theme radius files replace only radii that exist, with a dimension,\n               font lists name Google Fonts families, none loaded twice,\n               text case one of four values, and restated by a theme that replaces a style in capitals,\n               no component CSS reading a colour primitive, naming a font family or an unloaded weight,\n               every --tenon- name a component or tn-page.css reads is one this build emits.`);
 if (!QUIET) {
   if (rows.length) {
     console.log(`\n${rows.length} text or icon tokens below 4.5:1 on their own background:`);
