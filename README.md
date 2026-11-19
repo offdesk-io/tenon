@@ -362,6 +362,29 @@ which is why they read the same whatever the toolbar is set to. The toolbar's
 switch reads the same list, so a new theme gets its column and its switch entry
 from the build's own file.
 
+**0.23.0 gives `AppHeader` the rest of the app chrome**, so Bench and Binder
+draw one bar rather than two that drift. The bar now sets its own box sizing,
+text style and a floor on its height (one small search box between the two
+paddings, 53px), where before it took all three from the page, and a bar
+holding only a brand was shorter than one holding search. `signOut` draws
+Sign out after the actions, at the far right: a form posting to
+`/auth/logout`, the route nginx answers in front of both apps, holding a small
+ghost `Button`. It is a prop rather than something each app passes as an
+action because the two apps had drawn it two ways, outline in Bench and ghost
+in Binder. Pass `{ action }` to post somewhere else, and leave it out when the
+app is framed and the host signs out.
+
+The page under the bar is `tenon-app-page`, put on `<body>`. It paints
+`background.sunken`, the recessed surface that makes raised cards read as
+cards, which Binder had set in its own stylesheet and Bench had not. It lives
+in `tenon-react.css` with the bar, since an app on these components loads that
+file and may not load the page layer. Its `:root` prefix lets it outrank
+`tn-shell`, which paints the default surface and loads after it.
+
+`npm test` builds and then renders `AppHeader` from the built files with
+`react-dom/server`, so it checks what a consumer installs. It is the first test
+here and runs on Node's own runner.
+
 **0.22.0 adds `AppHeader` and `Drawer`, from Binder** (untagged). Binder drew
 both after the task board and wrote them to move here, so their behaviour came
 across unchanged and their values were snapped to Tenon's dimension scale and
@@ -384,6 +407,7 @@ interface AppHeaderProps {
   renderLink?: (props: AppHeaderLinkProps) => ReactNode;  // default: <a href={tab.to}>
   search?: ReactNode;
   actions?: ReactNode;
+  signOut?: boolean | { action?: string };               // 0.23.0; true posts to /auth/logout
   className?: string;
 }
 ```

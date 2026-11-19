@@ -49,7 +49,7 @@ export type { MenuProps, MenuItemProps, MenuDividerProps } from './components/Me
 export { Toaster, toast } from './components/Toast/Toast';
 export type { ToasterProps, ToastOptions, ToastTone } from './components/Toast/Toast';
 export { AppHeader } from './components/AppHeader/AppHeader';
-export type { AppHeaderProps, AppHeaderLinkProps, AppTab } from './components/AppHeader/AppHeader';
+export type { AppHeaderProps, AppHeaderLinkProps, AppHeaderSignOut, AppTab } from './components/AppHeader/AppHeader';
 export { Drawer, useDrawerTools } from './components/Drawer/Drawer';
 export type { DrawerProps } from './components/Drawer/Drawer';
 export { Window } from './components/Window/Window';

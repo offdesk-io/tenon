@@ -12,7 +12,7 @@ const meta = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component: 'Sticky along the top: the brand and the view tabs on the left, search and actions on the right. Below 768px the search takes a row of its own. The tabs are plain links unless `renderLink` draws them, which is how a router app plugs its own link in.',
+        component: 'Sticky along the top: the brand and the view tabs on the left, search and actions on the right. Below 768px the search takes a row of its own. The tabs are plain links unless `renderLink` draws them, which is how a router app plugs its own link in. `signOut` draws the same Sign out at the far right in every app. Put `tenon-app-page` on <body> for the recessed page surface under the bar.',
       },
     },
   },
@@ -22,12 +22,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const brand = <a href="#" className="tn-identity">Binder</a>;
-const actions = (
-  <>
-    <Button size="sm" variant="secondary">New</Button>
-    <Button size="sm" variant="ghost">Sign out</Button>
-  </>
-);
+const actions = <Button size="sm" variant="secondary">New</Button>;
 
 export const PlainLinks: Story = {
   args: {
@@ -39,6 +34,7 @@ export const PlainLinks: Story = {
     ],
     search: <Input size="sm" type="search" placeholder="Find an organisation" aria-label="Find" />,
     actions,
+    signOut: true,
   },
 };
 
@@ -61,14 +57,33 @@ function RoutedHeader() {
       {children}
     </a>
   );
-  return <AppHeader brand={brand} tabs={tabs} renderLink={renderLink} actions={actions} />;
+  return <AppHeader brand={brand} tabs={tabs} renderLink={renderLink} actions={actions} signOut />;
 }
 
 export const WithRenderLink: Story = { render: () => <RoutedHeader /> };
 
-export const BrandAndActionsOnly: Story = { args: { brand, actions } };
+export const BrandAndActionsOnly: Story = { args: { brand, actions, signOut: true } };
 
-/* Framed inside another app, whose own bar already carries the brand. */
+/* Sign out posting somewhere other than /auth/logout, with no other action. */
+export const SignOutOnly: Story = { args: { brand, signOut: { action: '/logout' } } };
+
+/* The bar over a page wearing tenon-app-page, the recessed surface the
+   cards sit on. The class goes on <body> in an app; here a wrapper stands in. */
+export const OnTheAppPage: Story = {
+  render: () => (
+    <div className="tenon-app-page" style={{ minHeight: '60vh' }}>
+      <AppHeader
+        brand={brand}
+        tabs={[{ to: '#home', label: 'Home', current: true }, { to: '#pipeline', label: 'Pipeline' }]}
+        actions={actions}
+        signOut
+      />
+    </div>
+  ),
+};
+
+/* Framed inside another app, whose own bar already carries the brand and
+   Sign out. */
 export const Framed: Story = {
   args: {
     tabs: [

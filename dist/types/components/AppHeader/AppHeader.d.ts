@@ -16,6 +16,10 @@ export interface AppHeaderLinkProps {
     current: boolean;
     children: ReactNode;
 }
+export interface AppHeaderSignOut {
+    /** Where the form posts. `/auth/logout` unless given, the route nginx answers in front of Bench and Binder. */
+    action?: string;
+}
 export interface AppHeaderProps {
     /** The wordmark, usually a link home. Left out when the page is framed and the host shows its own. */
     brand?: ReactNode;
@@ -27,6 +31,8 @@ export interface AppHeaderProps {
     search?: ReactNode;
     /** The right-hand end. */
     actions?: ReactNode;
+    /** Draws Sign out after the actions, at the bar's far right: a POST form holding a small ghost button. `true` posts to `/auth/logout`. Left out or false when the app is framed and the host signs out. */
+    signOut?: boolean | AppHeaderSignOut;
     className?: string;
 }
-export declare function AppHeader({ brand, tabs, renderLink, search, actions, className }: AppHeaderProps): import("react").JSX.Element;
+export declare function AppHeader({ brand, tabs, renderLink, search, actions, signOut, className }: AppHeaderProps): import("react").JSX.Element;

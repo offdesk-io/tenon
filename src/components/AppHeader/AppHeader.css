@@ -1,12 +1,19 @@
 /* An app's top bar. Came from Binder, which drew it after the task board's
    header: the same fill, rule and padding as the page layer's tn-appbar, with
    slots rather than loose children, so every app's bar holds the same things
-   in the same order. It stays sticky on a phone, where it shrinks to two rows. */
+   in the same order. It stays sticky on a phone, where it shrinks to two rows.
+
+   Everything that sets the bar's size is set here rather than taken from the
+   page, so two apps draw it the same height: its own box sizing and text
+   style, and a floor of one small search box between the two paddings. A bar
+   holding only a brand is as tall as one holding search. */
 
 .tenon-app-header {
   position: sticky;
   top: 0;
   z-index: 20;
+  box-sizing: border-box;
+  min-height: calc(var(--tenon-dimension-400) + 2 * var(--tenon-dimension-125) + var(--tenon-dimension-012));
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -14,7 +21,17 @@
   padding: var(--tenon-dimension-125) var(--tenon-dimension-200);
   background: var(--tenon-background-raised);
   border-bottom: var(--tenon-dimension-012) solid var(--tenon-stroke-default);
+  color: var(--tenon-text-default);
+  font-family: var(--tenon-text-body-family);
+  font-size: var(--tenon-text-body-size);
+  line-height: var(--tenon-text-body-line-height);
 }
+
+/* The page under the bar sits on the recessed surface, so raised cards read
+   as cards: a tint in light, black in dark. Put it on <body>. :root lifts it
+   over the page layer's tn-shell, which paints the default surface and loads
+   after this file. */
+:root .tenon-app-page { background: var(--tenon-background-sunken); }
 
 .tenon-app-header__brand { display: flex; align-items: center; }
 .tenon-app-header__brand a { display: flex; }
@@ -28,6 +45,8 @@
   gap: var(--tenon-dimension-100);
   margin-left: auto;
 }
+/* Sign out, always last. The form lines its button up with the actions beside it. */
+.tenon-app-header__sign-out { display: flex; margin: 0; }
 
 /* One pill holding the view tabs, the current one raised out of it. */
 .tenon-app-header__tabs {

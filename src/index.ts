@@ -86,7 +86,7 @@ export type { ToasterProps, ToastOptions, ToastTone } from './components/Toast/T
 /* From Binder in 0.22.0, which drew them after the task board: an app's top
    bar, and the side panel a task opens in. */
 export { AppHeader } from './components/AppHeader/AppHeader';
-export type { AppHeaderProps, AppHeaderLinkProps, AppTab } from './components/AppHeader/AppHeader';
+export type { AppHeaderProps, AppHeaderLinkProps, AppHeaderSignOut, AppTab } from './components/AppHeader/AppHeader';
 
 export { Drawer, useDrawerTools } from './components/Drawer/Drawer';
 export type { DrawerProps } from './components/Drawer/Drawer';
