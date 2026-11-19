@@ -1,0 +1,30 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "$description": "Square corners for the OFFDESK theme. The brand book has no radius anywhere: no rounded box, no pills. Every named radius goes to 0 except full, which stays round so a status dot, a switch thumb and a spinner still read as what they are. radius.none is 0 already and is not repeated.",
+  "radius": {
+    "sm": {
+      "$type": "dimension",
+      "$value": "{dimension.0}"
+    },
+    "default": {
+      "$type": "dimension",
+      "$value": "{dimension.0}"
+    },
+    "md": {
+      "$type": "dimension",
+      "$value": "{dimension.0}"
+    },
+    "lg": {
+      "$type": "dimension",
+      "$value": "{dimension.0}"
+    },
+    "xl": {
+      "$type": "dimension",
+      "$value": "{dimension.0}"
+    },
+    "2xl": {
+      "$type": "dimension",
+      "$value": "{dimension.0}"
+    }
+  }
+}

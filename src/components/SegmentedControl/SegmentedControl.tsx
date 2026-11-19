@@ -7,6 +7,8 @@ export interface SegmentOption<V extends string = string> {
   value: V;
   label: ReactNode;
   disabled?: boolean;
+  /** Draws a hairline before this option, to split the row into groups. */
+  separatorBefore?: boolean;
 }
 
 export interface SegmentedControlProps<V extends string = string>
@@ -53,7 +55,7 @@ export function SegmentedControl<V extends string = string>(
             data-value={o.value}
             disabled={o.disabled}
             tabIndex={on ? 0 : -1}
-            className={cx('tenon-segmented__option', on && 'tenon-segmented__option--on')}
+            className={cx('tenon-segmented__option', on && 'tenon-segmented__option--on', o.separatorBefore && 'tenon-segmented__option--sep')}
             onClick={() => onChange(o.value)}
             onKeyDown={(e) => move(e, i)}
           >

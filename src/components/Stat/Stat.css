@@ -44,3 +44,39 @@
 .tenon-stat--success .tenon-stat__value  { color: var(--tenon-text-success); }
 .tenon-stat--warning .tenon-stat__value  { color: var(--tenon-text-warning); }
 .tenon-stat--error .tenon-stat__value    { color: var(--tenon-text-error); }
+
+/* ---- hero: the one figure a view was opened for ----
+
+   Readable from across the desk: the figure at title size, the name of it
+   in capitals above, on the page's own fill rather than a raised panel, and
+   only as wide as what it holds. The default size stays as it is, because a
+   row of Stats in a dashboard wants equal boxes rather than this. */
+.tenon-stat--hero {
+  gap: 0;
+  width: max-content;
+  max-width: 100%;
+  background: var(--tenon-background-default);
+  border-color: transparent;
+  padding: var(--tenon-dimension-200) var(--tenon-dimension-250);
+}
+.tenon-stat--hero .tenon-stat__eyebrow {
+  margin-bottom: var(--tenon-dimension-100);
+  font-family: var(--tenon-text-overline-family);
+  font-size: var(--tenon-text-overline-size);
+  font-weight: var(--tenon-text-overline-weight);
+  line-height: var(--tenon-text-overline-line-height);
+  letter-spacing: var(--tenon-text-overline-letter-spacing);
+  text-transform: var(--tenon-text-overline-case);
+  color: var(--tenon-text-faint);
+}
+.tenon-stat--hero .tenon-stat__value {
+  font-family: var(--tenon-text-title-family);
+  font-size: var(--tenon-text-title-size);
+  font-weight: var(--tenon-text-title-weight);
+  line-height: var(--tenon-text-title-line-height);
+  letter-spacing: var(--tenon-text-title-letter-spacing);
+}
+.tenon-stat--hero .tenon-stat__caption {
+  margin-top: var(--tenon-dimension-100);
+  font-size: var(--tenon-text-label-size);
+}

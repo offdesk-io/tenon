@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Button, LinkButton } from '../src';
 
-const VARIANTS = ['primary', 'secondary', 'ghost', 'danger', 'confirm', 'destructive'] as const;
+const VARIANTS = ['primary', 'secondary', 'outline', 'dashed', 'ghost', 'danger', 'confirm', 'destructive'] as const;
 const SIZES = ['sm', 'md', 'lg'] as const;
 
 const meta = {
@@ -56,5 +56,17 @@ export const AsLink: Story = {
     <LinkButton variant="ghost" href="https://claude.ai" target="_blank" rel="noopener">
       A link that looks like a button
     </LinkButton>
+  ),
+};
+
+export const PressedAndBlock: Story = {
+  render: () => (
+    <div style={{ display: 'grid', gap: 8, width: 280 }}>
+      <div className="sb-row">
+        <Button pressed>Mine</Button>
+        <Button pressed={false}>Everyone's</Button>
+      </div>
+      <Button variant="dashed" block>+ Add a task</Button>
+    </div>
   ),
 };

@@ -1,6 +1,12 @@
 {
   "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
   "$description": "Assembled text styles. Not themed: a heading is the same size in dark mode, so there is one file rather than one per theme. Every value here aliases a primitive, so a size change happens once.",
+  "$extensions": {
+    "tenon": {
+      "$description": "The web fonts every theme loads. Each entry is one Google Fonts family as css2 writes it after family=, and the build turns the list into the @import on the first line of tenon.css. A theme that needs more adds its own list to its typography.<theme>.json and gets a stylesheet of its own in dist/fonts/.",
+      "fonts": ["Inter:wght@400;500;600;700"]
+    }
+  },
   "text": {
     "title": {
       "$description": "One step above heading-1, for a single figure or word that is the whole point of the page. The Reports headline is the only thing reading it.",
@@ -115,6 +121,41 @@
         "letterSpacing": "{typography.letter-spacing.normal}"
       }
     },
+    "overline": {
+      "$description": "A short label in capitals that names what sits under it: a column head, a field label, the name of a Stat. Bold, at label's size, with the tracking capitals need. The capitals are part of the style, under $extensions.tenon.textCase, so the .tenon-overline class, Figma's text style and every component reading the style agree: the build writes --tenon-text-overline-case beside the five parts, and a component sets text-transform from it.",
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{typography.family.sans}",
+        "fontSize": "{typography.size.sm}",
+        "fontWeight": "{typography.weight.bold}",
+        "lineHeight": "{typography.line-height.normal}",
+        "letterSpacing": "{typography.letter-spacing.caps}"
+      },
+      "$extensions": { "tenon": { "textCase": "uppercase" } }
+    },
+    "overline-sm": {
+      "$description": "overline one size down, for a label inside something small: a card's eyebrow, an axis label.",
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{typography.family.sans}",
+        "fontSize": "{typography.size.xs}",
+        "fontWeight": "{typography.weight.bold}",
+        "lineHeight": "{typography.line-height.normal}",
+        "letterSpacing": "{typography.letter-spacing.caps}"
+      },
+      "$extensions": { "tenon": { "textCase": "uppercase" } }
+    },
+    "tag": {
+      "$description": "The words on a Tag, a Pill, and the font, spacing and case of a TagChip. Caption's family, size and line height with label's weight, which is what those components set before the style existed, so they draw as they did. Its letter spacing is inherit for the same reason: those components took the tracking of the text around them, such as a Card eyebrow's. A theme replaces it to give its small labels a voice of their own, and its case comes from text-transform.tag in the theme's colour file, since a text style has no part for capitals. No .tenon-tag class is written for it, because Tag owns that class.",
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{typography.family.sans}",
+        "fontSize": "{typography.size.xs}",
+        "fontWeight": "{typography.weight.medium}",
+        "lineHeight": "{typography.line-height.normal}",
+        "letterSpacing": "inherit"
+      }
+    },
     "caption": {
       "$type": "typography",
       "$value": {
@@ -145,6 +186,14 @@
         "lineHeight": "{typography.line-height.relaxed}",
         "letterSpacing": "{typography.letter-spacing.normal}"
       }
+    }
+  },
+  "layout": {
+    "$description": "Widths a layout is built from, as against the spacing between things. Not themed.",
+    "column-width": {
+      "$type": "dimension",
+      "$value": { "value": 320, "unit": "px" },
+      "$description": "The narrowest a board column gets, and the width it is on a board too wide for the window. 320, on the 8px grid. tn-board reads it, and so does any app that lays out its own row of columns. A literal because the dimension scale stops at 112."
     }
   },
   "radius": {

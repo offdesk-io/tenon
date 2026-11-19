@@ -7,17 +7,22 @@
    dashed edge there says an agent owns the column and you do not drag
    into it; here `dashed` just draws a dashed edge and the app decides
    what it means. The orange tint and turning gear on a running queue
-   became `tone` and a `titleAfter` slot, so the icon is the app's. The
-   head is not uppercase, because nothing in Tenon is. */
+   became `tone` and a `titleAfter` slot, so the icon is the app's.
+
+   The head is set in text.overline, capitals included, since 0.20.0. It was
+   not uppercase before, on the grounds that nothing in Tenon was, and the
+   board kept its own caps on top of the component. One style for every
+   label that names what sits under it is the better rule. */
 
 .tenon-column {
   display: flex;
   flex-direction: column;
-  min-height: var(--tenon-dimension-1200);
+  /* 120, the board's: a column with one card in it still reads as a column. */
+  min-height: calc(var(--tenon-dimension-1200) + var(--tenon-dimension-300));
   background: var(--tenon-background-raised);
   border: 1px solid var(--tenon-stroke-default);
   border-radius: var(--tenon-radius-lg);
-  box-shadow: var(--tenon-elevation-raised);
+  box-shadow: var(--tenon-elevation-overlay);
   color: var(--tenon-text-default);
 }
 
@@ -35,9 +40,12 @@
   display: flex;
   flex-direction: column;
   gap: var(--tenon-dimension-100);
-  font-size: var(--tenon-text-heading-5-size);
-  font-weight: var(--tenon-text-heading-5-weight);
-  letter-spacing: var(--tenon-text-heading-6-letter-spacing);
+  font-family: var(--tenon-text-overline-family);
+  font-size: var(--tenon-text-overline-size);
+  font-weight: var(--tenon-text-overline-weight);
+  line-height: var(--tenon-text-overline-line-height);
+  letter-spacing: var(--tenon-text-overline-letter-spacing);
+  text-transform: var(--tenon-text-overline-case);
   color: var(--tenon-text-subtle);
   /* So a head carrying nothing but a title lines up with one carrying a
      count and a control. */
@@ -63,10 +71,13 @@
   font-size: inherit; font-weight: inherit; letter-spacing: inherit; color: inherit;
 }
 
+/* The hint, count and description sit in the head but are not its label,
+   so each takes back the case and tracking the overline set. */
 .tenon-column__hint {
-  font-size: var(--tenon-text-caption-size);
+  font-size: var(--tenon-text-label-size);
   font-weight: var(--tenon-text-label-weight);
   letter-spacing: var(--tenon-text-body-letter-spacing);
+  text-transform: none;
   color: var(--tenon-text-faint);
 }
 
@@ -74,6 +85,7 @@
   font-weight: var(--tenon-text-heading-5-weight);
   font-size: var(--tenon-text-label-size);
   letter-spacing: var(--tenon-text-body-letter-spacing);
+  text-transform: none;
   color: var(--tenon-text-faint);
   font-variant-numeric: tabular-nums;
 }
@@ -83,10 +95,11 @@
    heading above it has already had its say. */
 .tenon-column__desc {
   margin: 0;
-  font-size: var(--tenon-text-caption-size);
+  font-size: var(--tenon-text-label-size);
   font-weight: var(--tenon-text-label-weight);
   line-height: var(--tenon-text-body-line-height);
   letter-spacing: var(--tenon-text-body-letter-spacing);
+  text-transform: none;
   color: var(--tenon-text-faint);
 }
 
@@ -135,15 +148,37 @@
 
 .tenon-column__footer { padding: 0 var(--tenon-dimension-100) var(--tenon-dimension-125); }
 
+/* ---- drop target ----
+
+   The column lit up while something is dragged over it. The outline goes
+   on the body, which fills the column's inside under the head, so it is
+   drawn flush with the column's own wall rather than pulled into the
+   padding, where it tangled with the cards' borders. Its radius is the
+   column's less its 1px border, as a calc, so it follows radius-lg. Deny
+   is the same shape in the error colour: the column says no while the
+   card is still in the air rather than after it lands. */
+.tenon-column--drop-accept { --tenon-column-drop: var(--tenon-stroke-accent); }
+.tenon-column--drop-deny   { --tenon-column-drop: var(--tenon-text-error); }
+.tenon-column--drop-accept > .tenon-column__body,
+.tenon-column--drop-deny > .tenon-column__body {
+  outline: 2px dashed var(--tenon-column-drop);
+  outline-offset: -1px;
+  border-radius: calc(var(--tenon-radius-lg) - 1px);
+  background: color-mix(in srgb, var(--tenon-column-drop) 7%, transparent);
+}
+
 /* ---- collapsible ---- */
 
 .tenon-column > summary { cursor: pointer; list-style: none; }
 .tenon-column > summary::-webkit-details-marker { display: none; }
 .tenon-column > summary::marker { content: ''; }
 
-.tenon-column__chevron { flex: none; font-size: var(--tenon-text-caption-size); color: var(--tenon-text-faint); line-height: 1; }
+.tenon-column__chevron { flex: none; font-size: var(--tenon-text-body-size); color: var(--tenon-text-faint); line-height: 1; }
 .tenon-column__chevron::before { content: '\25b8'; display: block; transition: transform 120ms ease; }
 .tenon-column[open] > summary .tenon-column__chevron::before { transform: rotate(90deg); }
+/* Shut, the head is the whole column, so a rule under it would be a line
+   along the bottom of a closed box. */
+.tenon-column:not([open]) > summary { border-bottom: 0; }
 
 /* ---- empty ---- */
 
@@ -156,8 +191,8 @@
    column reads as a column that failed to load rather than one with
    nothing in it. */
 .tenon-column-empty--boxed {
+  background: var(--tenon-background-default);
   border: 1px dashed var(--tenon-stroke-default);
   border-radius: var(--tenon-radius-md);
-  padding: var(--tenon-dimension-200);
-  text-align: center;
+  padding: var(--tenon-dimension-125) var(--tenon-dimension-150);
 }

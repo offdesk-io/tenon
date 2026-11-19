@@ -357,6 +357,97 @@
       "10": {
         "$type": "color",
         "$value": "{color.slate.600}"
+      },
+      "1-solid": {
+        "$type": "color",
+        "$value": "{color.blue.600}",
+        "$description": "The full-strength colour of chart.N, for a mark that carries no text, such as a card's bucket stripe or a legend dot. Not measured as text by the build's contrast report, which reads only text, icon and status tokens. In this theme each is the same colour as its chart.N."
+      },
+      "2-solid": {
+        "$type": "color",
+        "$value": "{color.orange.600}"
+      },
+      "3-solid": {
+        "$type": "color",
+        "$value": "{color.purple.600}"
+      },
+      "4-solid": {
+        "$type": "color",
+        "$value": "{color.green.600}"
+      },
+      "5-solid": {
+        "$type": "color",
+        "$value": "{color.magenta.600}"
+      },
+      "6-solid": {
+        "$type": "color",
+        "$value": "{color.teal.600}"
+      },
+      "7-solid": {
+        "$type": "color",
+        "$value": "{color.brown.600}"
+      },
+      "8-solid": {
+        "$type": "color",
+        "$value": "{color.indigo.600}"
+      },
+      "9-solid": {
+        "$type": "color",
+        "$value": "{color.red.600}"
+      },
+      "10-solid": {
+        "$type": "color",
+        "$value": "{color.slate.600}"
+      },
+      "1-strong": {
+        "$type": "color",
+        "$value": "{color.blue.700}",
+        "$description": "chart.N one step deeper on its own ramp (100 further from the page), for a mark that sits on or beside chart.N and has to read as the same colour, darker: a sub-task bar inside its task's bar. Not measured as text."
+      },
+      "2-strong": {
+        "$type": "color",
+        "$value": "{color.orange.700}",
+        "$description": "chart.N one step deeper on its own ramp."
+      },
+      "3-strong": {
+        "$type": "color",
+        "$value": "{color.purple.700}",
+        "$description": "chart.N one step deeper on its own ramp."
+      },
+      "4-strong": {
+        "$type": "color",
+        "$value": "{color.green.700}",
+        "$description": "chart.N one step deeper on its own ramp."
+      },
+      "5-strong": {
+        "$type": "color",
+        "$value": "{color.magenta.700}",
+        "$description": "chart.N one step deeper on its own ramp."
+      },
+      "6-strong": {
+        "$type": "color",
+        "$value": "{color.teal.700}",
+        "$description": "chart.N one step deeper on its own ramp."
+      },
+      "7-strong": {
+        "$type": "color",
+        "$value": "{color.brown.700}",
+        "$description": "chart.N one step deeper on its own ramp."
+      },
+      "8-strong": {
+        "$type": "color",
+        "$value": "{color.indigo.700}",
+        "$description": "chart.N one step deeper on its own ramp."
+      },
+      "9-strong": {
+        "$type": "color",
+        "$value": "{color.red.700}",
+        "$description": "chart.N one step deeper on its own ramp."
+      },
+      "10-strong": {
+        "$type": "color",
+        "$value": "{color.slate.700}",
+        "$description": "chart.N one step deeper on its own ramp."
       }
     },
     "status": {
@@ -368,6 +459,87 @@
       "soon": {
         "$type": "color",
         "$value": "{color.amber.700}"
+      }
+    },
+    "brand": {
+      "ink": {
+        "$type": "color",
+        "$value": "{color.offdesk.ink}",
+        "$description": "The colour an app's wordmark is drawn in: OFFDESK Ink on a light theme, Concrete on a dark one. For a logo or wordmark only, never for text, which is text.default. tn-identity's svg reads it as its fill."
+      }
+    },
+    "highlight": {
+      "from": {
+        "$type": "color",
+        "$value": "{color.base.glow}",
+        "$description": "The start of the highlight gradient: the ring round a card being held, and the edge of the focus prompt. The same in every theme."
+      },
+      "to": {
+        "$type": "color",
+        "$value": "{color.red.350}",
+        "$description": "The end of the ring and the glow round a held card. red.350, a hair off the board's #ff8a85. The same in every theme."
+      },
+      "end": {
+        "$type": "color",
+        "$value": "{color.red.450}",
+        "$description": "Where the focus prompt's gradient edge finishes, deeper than highlight.to. The same in every theme."
+      }
+    },
+    "spotlight": {
+      "surface": {
+        "$type": "color",
+        "$value": "{color.neutral.900}",
+        "$description": "A panel that stays dark in every theme, light and OFFDESK included, unlike background.inverse, which turns light in dark mode. The task board's focus prompt sits on it. neutral.900, a hair off the board's #1c1f25."
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{color.neutral.50}",
+        "$description": "Text on spotlight.surface. The same in every theme."
+      },
+      "placeholder": {
+        "$type": "color",
+        "$value": "{color.neutral.450}",
+        "$description": "A field's placeholder on spotlight.surface. The same in every theme."
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{color.neutral.750}",
+        "$description": "An edge on spotlight.surface, such as a status box. The same in every theme."
+      },
+      "chip": {
+        "$type": "color",
+        "$value": "{color.neutral.800}",
+        "$description": "A chip's fill on spotlight.surface. The same in every theme."
+      },
+      "dot": {
+        "$type": "color",
+        "$value": "{color.blue.350}",
+        "$description": "The dot on a spotlight chip. The same in every theme."
+      },
+      "avatar": {
+        "$type": "color",
+        "$value": "{color.base.white}",
+        "$description": "An avatar tile on spotlight.surface. The same in every theme."
+      },
+      "working": {
+        "$type": "color",
+        "$value": "{color.orange.350}",
+        "$description": "A line saying something is in progress on spotlight.surface. orange.350, near the board's #f0855a. The same in every theme."
+      },
+      "error": {
+        "$type": "color",
+        "$value": "{color.base.spotlight-error}",
+        "$description": "A line saying something failed on spotlight.surface. Literal, since no ramp step is close. The same in every theme."
+      },
+      "done-surface": {
+        "$type": "color",
+        "$value": "{color.green.900}",
+        "$description": "A finished item's fill on spotlight.surface. The same in every theme."
+      },
+      "done-text": {
+        "$type": "color",
+        "$value": "{color.green.400}",
+        "$description": "A finished item's name on spotlight.done-surface, and the outline on what a run changed. The same in every theme."
       }
     }
   },
@@ -403,6 +575,26 @@
         }
       ]
     },
+    "popover": {
+      "$type": "shadow",
+      "$value": [
+        {
+          "color": "#0a0c103d",
+          "offsetX": "0px",
+          "offsetY": "10px",
+          "blur": "28px",
+          "spread": "0px"
+        },
+        {
+          "color": "#0a0c1024",
+          "offsetX": "0px",
+          "offsetY": "2px",
+          "blur": "6px",
+          "spread": "0px"
+        }
+      ],
+      "$description": "A panel that floats over the page and is not tied to the surface under it: a menu, a toast, a hover preview. Heavier than overlay, which a column or dropdown sits on. Taken from the task board, which used this value for every popover and a slightly heavier copy for toasts, folded in here."
+    },
     "modal": {
       "$type": "shadow",
       "$value": [
@@ -421,6 +613,34 @@
           "spread": "0px"
         }
       ]
+    }
+  },
+  "text-transform": {
+    "tag": {
+      "$type": "string",
+      "$value": "inherit",
+      "$description": "How a Tag, a Pill and a TagChip set their case. A text style has no part for capitals, so the theme says it here, beside elevation, and parity makes every theme state it. Here it is inherit, so the component takes whatever the text around it sets, as it did before the token existed. A custom property set to inherit has no value at :root, so the var() that reads it is invalid when computed, and an inherited property such as this one then inherits."
+    }
+  },
+  "font-family": {
+    "tag-chip": {
+      "$type": "fontFamily",
+      "$value": "inherit",
+      "$description": "A TagChip's font. Here it is inherit, so the component takes whatever the text around it sets, as it did before the token existed. A custom property set to inherit has no value at :root, so the var() that reads it is invalid when computed, and an inherited property such as this one then inherits."
+    }
+  },
+  "font-weight": {
+    "tag-chip": {
+      "$type": "fontWeight",
+      "$value": "{typography.weight.semibold}",
+      "$description": "A TagChip's weight. Heavier than a Tag because it is something to click. Themeable so a theme whose label face is not loaded at 600 can ask for a weight it has."
+    }
+  },
+  "letter-spacing": {
+    "pill-caps": {
+      "$type": "dimension",
+      "$value": "{typography.letter-spacing.wider}",
+      "$description": "The tracking on a Pill set in capitals (its caps variant). Themeable so a theme whose tags already have tracking of their own keeps it."
     }
   }
 }

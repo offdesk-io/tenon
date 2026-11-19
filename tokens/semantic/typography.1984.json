@@ -1,6 +1,12 @@
 {
   "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
   "$description": "Text styles for the 1984 theme, taken from the theme's design notes. Each style here replaces the shared style of the same name inside that theme's CSS block; a style not listed keeps the shared one. Sizes, line heights and one letter spacing are literal because the site sits off the shared ladder on purpose (12, 13, 15 and 17px, and fluid clamp() sizes that the dimension type cannot write). Families and weights alias primitives. heading-5, heading-6, label and code have no site original, so they were written for it. The site-only styles quote, logo, label-caps and label-caps-sm are not carried over.",
+  "$extensions": {
+    "tenon": {
+      "$description": "Fonts this theme needs beyond the ones tenon.css loads. The build writes them to dist/fonts/1984.css, which a consumer imports only if it sets the theme. Fraunces at regular only, which is all this theme sets.",
+      "fonts": ["Fraunces:wght@400"]
+    }
+  },
   "text": {
     "title": {
       "$description": "The site's display-hero. Fluid, 32px up to 56px.",
@@ -121,6 +127,17 @@
         "fontWeight": "{typography.weight.regular}",
         "lineHeight": "{typography.line-height.normal}",
         "letterSpacing": { "value": 0.04, "unit": "em" }
+      }
+    },
+    "tag": {
+      "$description": "Caption's 13px Inter with label's regular weight, which is what a Tag and a Pill set in this theme before text.tag existed, so they draw as they did. Letter spacing inherit, as in the shared style.",
+      "$type": "typography",
+      "$value": {
+        "fontFamily": "{typography.family.inter}",
+        "fontSize": { "value": 13, "unit": "px" },
+        "fontWeight": "{typography.weight.regular}",
+        "lineHeight": "{typography.line-height.normal}",
+        "letterSpacing": "inherit"
       }
     },
     "caption": {

@@ -56,9 +56,9 @@ import '@tiagopedras/tenon/tn-page.css';
 Standalone HTML links the tagged files:
 
 ```html
-<link href="https://cdn.jsdelivr.net/gh/tiagopedras/tenon@v0.18.0/dist/tenon.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/gh/tiagopedras/tenon@v0.18.0/dist/tenon-react.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/gh/tiagopedras/tenon@v0.18.0/design-md/assets/tn-page.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/tiagopedras/tenon@v0.20.0/dist/tenon.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/tiagopedras/tenon@v0.20.0/dist/tenon-react.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/tiagopedras/tenon@v0.20.0/design-md/assets/tn-page.css" rel="stylesheet">
 ```
 
 Keep all three on the same tag. If the CDN cannot be reached, copy `design-md/assets/tn-page.css` into the project unchanged. Never emit a `file://` URL, a placeholder URL or a CSS `@import`, and never read the stylesheets into context; use the names documented here.
@@ -117,6 +117,26 @@ Every standalone page uses this shell. Tenon has no logo, so `tn-identity` is th
 
 An app screen with a sidebar replaces `tn-page` with `tn-app`, which holds a `tn-sidebar` and a `tn-main`. Inside `tn-main`, a `tn-toolbar` holds the view's title on the left and its controls on the right.
 
+An app screen that wants the whole window, such as a board, uses the full-width frame instead. `tn-frame` goes on `<body>` beside `tn-shell`. The `tn-appbar` is a sibling of the page, never inside it, and `tn-page--full` drops the 1280px cap:
+
+```html
+<body class="tn-shell tn-frame">
+  <header class="tn-appbar">
+    <a class="tn-identity" href="/">App name</a>
+    <nav aria-label="Main"><ul class="tn-nav">
+      <li><a href="#" aria-current="page">Board</a></li>
+    </ul></nav>
+    <span class="tn-appbar-spacer"></span>
+    <button class="tenon-button tenon-button--secondary tenon-button--md">Export</button>
+  </header>
+  <main id="main" class="tn-page tn-page--full">
+    <div class="tn-board" style="--tn-board-columns: 4">...</div>
+  </main>
+</body>
+```
+
+The app bar sticks to the top and stops sticking below 640px. On a phone, a `tn-tabbar` along the bottom may replace the bar's navigation: a `<nav>` of links or buttons, each a short label in a `<span>`, the current one marked with `aria-current`. It is drawn only below 640px.
+
 The theme follows the system. Do not add a visible theme control unless the caller asks for one, and do not use the 1984 theme unless asked.
 
 #### Grid and alignment
@@ -125,7 +145,7 @@ The theme follows the system. Do not add a visible theme control unless the call
 
 `tn-stack` stacks its children with a 16px gap and `tn-cluster` lays them in a wrapping row with an 8px gap. Use them before writing custom flex rules.
 
-`tn-board` lays `tenon-column` elements side by side and scrolls sideways inside itself on a narrow screen, never pushing the page wider.
+`tn-board` lays `tenon-column` elements side by side, each at least 320px with a 12px gap, all of them the board's full height, on one row whatever the width. Inside a `tn-page--full` the region under the app bar scrolls sideways once the columns no longer fit; set `--tn-board-columns` to the number of columns so the scroll ends a gutter past the last. Below 640px each column is the width of the screen and snaps. A board shown as one part of a longer page, such as a preview, adds `tn-board--contained` and scrolls inside itself instead.
 
 Every object aligns to a shared edge. Tables own the full width of their section. Space comes only from `--tenon-dimension-*` steps; 8px, 12px, 16px and 24px carry most of an app screen.
 
@@ -133,13 +153,14 @@ Every object aligns to a shared edge. Tables own the full width of their section
 
 Tenon is a dense system, and this is the single easiest thing to get wrong. Body text is 14px. `tenon-heading-1` is 28px. A page built on Tenon that reaches for 16px body copy and 40px section headings does not look like Tenon.
 
-- App screens use `tenon-heading-3` to `tenon-heading-5` for view and section titles, `tenon-body` and `tenon-body-sm` for text, `tenon-label` for control and field names, `tenon-caption` for metadata. `tenon-title` never appears on an app screen.
+- App screens use `tenon-heading-3` to `tenon-heading-5` for view and section titles, `tenon-body` and `tenon-body-sm` for text, `tenon-label` for control names, `tenon-caption` for metadata. `tenon-title` never appears on an app screen except as a hero `tenon-stat`'s figure.
+- `tenon-overline` is the label in capitals that names what sits under it: a column head, a field label, the name of a figure. `tenon-overline-sm` is the same at 10px, for a card's eyebrow. Column heads and field labels already use it; never set capitals or tracking by hand.
 - Marketing pages use `tenon-title` (56px) once, for the hero claim, and `tenon-heading-1` or `tenon-heading-2` for section heads. Nothing is ever larger than `tenon-title`.
 - `tenon-code` for code, paths and identifiers only.
 
 `tn-shell` already sets plain `h1` to `h6` and `p` to Tenon's text styles, so semantic HTML lands on the scale without classes. A class on the element overrides it.
 
-Tenon has four weights: 400, 500, 600 and 700. Hierarchy comes from size, weight and colour together: `--tenon-text-default` for content, `--tenon-text-subtle` for secondary text, `--tenon-text-faint` for metadata. `--tenon-text-faint` is the most used text colour in Tenon's own apps; quiet metadata is part of the look.
+Tenon has four weights: 400, 500, 600 and 700, the four Inter is loaded at. Never set a weight between them, and never name a font family: every face comes from a text style's `--tenon-text-<style>-family`, so the theme can change it. Hierarchy comes from size, weight and colour together: `--tenon-text-default` for content, `--tenon-text-subtle` for secondary text, `--tenon-text-faint` for metadata. `--tenon-text-faint` is the most used text colour in Tenon's own apps; quiet metadata is part of the look.
 
 Use `tn-numeric` for figures that line up in columns.
 
@@ -237,7 +258,7 @@ Put `tn-shell` on `<body>`, and `tn-page` or `tn-app` on the element that owns t
 
 The page layer's shell and layout classes are:
 
-`tn-shell`, `tn-page`, `tn-skip-link`, `tn-header`, `tn-identity`, `tn-nav`, `tn-footer`, `tn-app`, `tn-sidebar`, `tn-main`, `tn-toolbar`, `tn-board`, `tn-stack`, `tn-cluster`, `tn-grid`, `tn-col-4`, `tn-col-6`, `tn-col-8`, `tn-col-12`, `tn-split`, `tn-reading`.
+`tn-shell`, `tn-frame`, `tn-page`, `tn-page--full`, `tn-skip-link`, `tn-header`, `tn-appbar`, `tn-appbar-spacer`, `tn-identity`, `tn-nav`, `tn-tabbar`, `tn-footer`, `tn-app`, `tn-sidebar`, `tn-main`, `tn-toolbar`, `tn-board`, `tn-board--contained`, `tn-stack`, `tn-cluster`, `tn-grid`, `tn-col-4`, `tn-col-6`, `tn-col-8`, `tn-col-12`, `tn-split`, `tn-reading`.
 
 The page layer's marketing classes are:
 
@@ -283,22 +304,22 @@ A `tn-stat-strip` holds `tenon-stat` elements. A `tn-bar-list` is a `<ul>` of `t
 </ul>
 ```
 
-Tenon's text style classes, from `tenon.css`, are `tenon-title`, `tenon-heading-1` to `tenon-heading-6`, `tenon-body`, `tenon-body-sm`, `tenon-label`, `tenon-caption`, `tenon-caption-sm` and `tenon-code`.
+Tenon's text style classes, from `tenon.css`, are `tenon-title`, `tenon-heading-1` to `tenon-heading-6`, `tenon-body`, `tenon-body-sm`, `tenon-label`, `tenon-overline`, `tenon-overline-sm`, `tenon-caption`, `tenon-caption-sm` and `tenon-code`.
 
 Tenon's components that work as plain HTML, from `tenon-react.css`, with their modifiers:
 
-- `tenon-button` with `--primary`, `--secondary`, `--ghost`, `--danger`, `--confirm` or `--destructive`, and `--sm`, `--md` or `--lg`. Always give both a variant and a size.
-- `tenon-card` with `--flat` or `--raised`, holding, in this order, an optional `tenon-card__eyebrow`, then `tenon-card__head` > `tenon-card__title`, then optional `tenon-card__summary`, `tenon-card__tags`, `tenon-card__meta`, `tenon-card__body`, `tenon-card__footer`. The summary sits straight under the title.
-- `tenon-column` with an optional tone (`--accent`, `--success`, `--warning`, `--error`, `--running`), holding `tenon-column__head` > `tenon-column__head-row` > `tenon-column__head-start` (with `tenon-column__title`) and `tenon-column__head-end` (with `tenon-column__count`), then `tenon-column__body`.
-- `tenon-stat` with an optional tone, holding `tenon-stat__eyebrow`, `tenon-stat__value`, `tenon-stat__caption`.
+- `tenon-button` with `--primary`, `--secondary`, `--outline`, `--dashed`, `--ghost`, `--danger`, `--confirm` or `--destructive`, and `--sm`, `--md` or `--lg`. Always give both a variant and a size. Add `--pressed` (with `aria-pressed="true"`) for a toggle that is on and `--block` to fill the row.
+- `tenon-card` with `--flat` or `--raised`, `--selected` for a card picked out for an action, holding, in this order, an optional `tenon-card__eyebrow`, then `tenon-card__head` > `tenon-card__title`, then optional `tenon-card__summary`, `tenon-card__tags`, `tenon-card__meta`, `tenon-card__body`, `tenon-card__footer`. The summary sits straight under the title.
+- `tenon-column` with an optional tone (`--accent`, `--success`, `--warning`, `--error`, `--running`) and, while something is dragged over it, `--drop-accept` or `--drop-deny`, holding `tenon-column__head` > `tenon-column__head-row` > `tenon-column__head-start` (with `tenon-column__title`) and `tenon-column__head-end` (with `tenon-column__count`), then `tenon-column__body`.
+- `tenon-stat` with an optional tone and `--hero` for the one figure a view is opened for, holding `tenon-stat__eyebrow`, `tenon-stat__value`, `tenon-stat__caption`.
 - `tenon-tag` with `--neutral`, `--accent`, `--success`, `--warning`, `--error`, `--info`, `--running`, `--urgent` or `--soon`.
 - `tenon-pill` with `--neutral`, `--accent`, `--success`, `--warning` or `--error`.
 - `tenon-badge` with `--accent`, `--neutral`, `--success`, `--warning`, `--error` or `--running`, holding a count.
 - `tenon-alert` with `--neutral`, `--info`, `--success`, `--warning` or `--error`, holding `tenon-alert__title`, `tenon-alert__body` and optional `tenon-alert__actions`.
 - `tenon-field`, holding `tenon-field__label`, `tenon-field__control` and `tenon-field__note`. A select in a field sits in `tenon-field__select`, followed by the chevron `<svg class="tenon-select__chevron" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3 4.5 6 7.5 9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`.
-- `tenon-input`, a bare one-line `<input>` with no label of its own, with `tenon-input--invalid` when wrong.
+- `tenon-input`, a bare one-line `<input>` with no label of its own, with `tenon-input--invalid` when wrong and `tenon-input--sm` for a 32px control in a toolbar.
 - `tenon-select`, a `<span>` holding a `<select class="tenon-select__control">` and the same chevron, with `tenon-select--invalid` on the span when wrong.
-- `tenon-segmented`, a `role="radiogroup"` holding `tenon-segmented__option` buttons, the chosen one with `tenon-segmented__option--on`.
+- `tenon-segmented`, a `role="radiogroup"` holding `tenon-segmented__option` buttons, the chosen one with `tenon-segmented__option--on`, and `tenon-segmented__option--sep` on an option that starts a new group.
 - `tenon-switch`, an empty `<button role="switch">`, with `tenon-switch--on` when on.
 
 ```html
@@ -316,9 +337,12 @@ Page-owned CSS may read only Tenon's semantic tokens:
 - Backgrounds: `--tenon-background-*`, including `default`, `raised`, `sunken`, `subtle`, `hovered`, `selected`, `accent`, `neutral`, `inverse`, `input`, and each status with its `-subtle` tint.
 - Text: `--tenon-text-default`, `--tenon-text-subtle`, `--tenon-text-faint`, `--tenon-text-accent`, `--tenon-text-link`, `--tenon-text-on-accent`, and each status with its `on-` pair.
 - Strokes: `--tenon-stroke-default`, `--tenon-stroke-subtle`, `--tenon-stroke-strong`, `--tenon-stroke-accent`, `--tenon-stroke-focus`, and each status.
-- Data: `--tenon-chart-1` to `--tenon-chart-10`.
+- Data: `--tenon-chart-1` to `--tenon-chart-10`, and `--tenon-chart-1-strong` to `--tenon-chart-10-strong` for a mark drawn on its chart colour.
+- Brand: `--tenon-brand-ink`, for a wordmark only.
+- Highlight: `--tenon-highlight-from`, `--tenon-highlight-to` and `--tenon-highlight-end`, the warm gradient for a ring or glow round something held or in focus. Never a fill for text.
+- Spotlight: a panel that stays dark in every theme. `--tenon-spotlight-surface` is the fill, with `-text`, `-placeholder`, `-border`, `-chip`, `-dot`, `-avatar`, `-working`, `-error`, `-done-surface` and `-done-text` on it. Use it only for one focused panel that has to read the same on a light and a dark page; everything else follows the theme through `--tenon-background-*`.
 - Text styles: `--tenon-text-<style>-size`, `-weight`, `-line-height`, `-family`, `-letter-spacing` for every style above.
-- Shape and space: `--tenon-dimension-*`, `--tenon-radius-*`, `--tenon-elevation-*`, `--tenon-breakpoint-*`.
+- Shape and space: `--tenon-dimension-*`, `--tenon-radius-*`, `--tenon-elevation-*` (`raised`, `overlay`, `popover`, `modal`), `--tenon-breakpoint-*`, `--tenon-layout-column-width`.
 
 Never invent, alias or redeclare a `--tenon-*` token, and never read a `--tenon-color-*` primitive.
 

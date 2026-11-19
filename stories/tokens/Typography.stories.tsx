@@ -2,7 +2,7 @@ import type { CSSProperties } from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Tag } from '../../src';
 import {
-  groupBy, isTextStyle, sharedAlias, sharedDescription, shortAlias, textCss, textParts,
+  THEMES, groupBy, isTextStyle, sharedAlias, sharedDescription, shortAlias, textCss, textParts,
   themeScope, tokens, type TextStyle,
 } from './data';
 import './tokens.css';
@@ -16,7 +16,6 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const styles = Object.entries(tokens.shared).filter((e): e is [string, TextStyle] => isTextStyle(e[1]));
-const replaced = tokens.themeTypography['1984'] ?? {};
 
 const SAMPLE = 'Tokens first, components later';
 const LONG = 'A semantic tier exists so a value can change between themes while the name stays put. That is the whole job.';
@@ -49,9 +48,12 @@ function Parts({ style, aliases }: { style: TextStyle; aliases?: Record<string, 
 }
 
 function TextStyleRow({ name, style }: { name: string; style: TextStyle }) {
-  const override = replaced[name];
   const aliases = sharedAlias(name);
-  const aliases1984 = sharedAlias(name, '1984');
+  /* Every theme that replaces this style, in the theme list's order. */
+  const overrides = THEMES.flatMap((t) => {
+    const override = tokens.themeTypography[t]?.[name];
+    return override ? [{ theme: t, override, aliases: sharedAlias(name, t) }] : [];
+  });
   return (
     <div className="tk-type">
       <div className="tk-type__meta">
@@ -61,15 +63,15 @@ function TextStyleRow({ name, style }: { name: string; style: TextStyle }) {
       </div>
       <div className="tk-type__samples">
         <div className="tk-type__sample" style={textCss(style)}>{sampleFor(name)}</div>
-        {override && (
-          <div className="tk-type__override" style={themeScope('1984')}>
-            <div><Tag tone="accent">1984 replaces this style</Tag></div>
+        {overrides.map(({ theme, override, aliases: themeAliases }) => (
+          <div key={theme} className="tk-type__override" style={themeScope(theme)}>
+            <div><Tag tone="accent">{theme} replaces this style</Tag></div>
             <div className="tk-type__sample" style={textCss(override)}>{sampleFor(name)}</div>
             <div className="tk-type__meta">
-              <Parts style={override} aliases={typeof aliases1984 === 'object' ? aliases1984 : undefined} />
+              <Parts style={override} aliases={typeof themeAliases === 'object' ? themeAliases : undefined} />
             </div>
           </div>
-        )}
+        ))}
       </div>
     </div>
   );
@@ -95,8 +97,8 @@ export const Typography: Story = {
     <div className="tk-page">
       <h1 className="tenon-heading-1">Typography</h1>
       <p>
-        {styles.length} text styles, each drawn with its own values whatever the toolbar says. Where the
-        1984 theme replaces a style, its version sits underneath on a 1984 panel.
+        {styles.length} text styles, each drawn with its own values whatever the toolbar says. Where a
+        theme replaces a style, its version sits underneath on a panel in that theme.
         The brackets name the primitive each part aliases.
       </p>
       <section className="tk-section">

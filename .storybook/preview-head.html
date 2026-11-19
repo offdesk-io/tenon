@@ -1,9 +1,8 @@
-<!-- Tenon names Fraunces and Inter in the 1984 theme but loads
-     neither, so Storybook loads them here. Both are open licence. The site's
-     own Noe Display Trial and Graphik Trial are trial licences, so they live
-     in the gitignored .storybook/fonts-private/ and load from there if it
-     exists. -->
+<!-- Storybook loads the same fonts a consumer does: Inter from tenon.css,
+     and each theme's own from dist/fonts/<theme>.css, which preview.ts
+     imports. The site's own Noe Display Trial and Graphik Trial are trial
+     licences, so they live in the gitignored .storybook/fonts-private/ and
+     load from there if it exists. -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Inter:wght@400..700&display=swap">
 <link rel="stylesheet" href="/fonts-private/fonts.local.css">

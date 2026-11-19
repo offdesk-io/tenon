@@ -39,3 +39,12 @@
 
 .tenon-input--invalid { border-color: var(--tenon-stroke-error); }
 .tenon-input--invalid:focus-visible { outline-color: var(--tenon-stroke-error); }
+
+/* Small, for a control in a toolbar beside md buttons: the same 32px, so a
+   search box and the button next to it agree about their edges. */
+.tenon-input--sm {
+  min-height: var(--tenon-dimension-400);
+  padding: var(--tenon-dimension-050) var(--tenon-dimension-100);
+  border-radius: var(--tenon-radius-default);
+  line-height: var(--tenon-text-body-line-height);
+}

@@ -1,0 +1,52 @@
+/* A short line that lands where the eye already is, for anything that
+   answers an action the user just took: a drag onto a column that refused
+   it, a save. From the task board, where the status line in the header sat
+   too far from the card and read at 12px. Stacked bottom centre, above a
+   drawer's scrim, so an open panel never hides it. */
+
+.tenon-toaster {
+  position: fixed;
+  left: 50%;
+  bottom: var(--tenon-dimension-400);
+  transform: translateX(-50%);
+  z-index: 70;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--tenon-dimension-100);
+  width: max-content;
+  max-width: min(calc(var(--tenon-dimension-1000) * 6), 90vw);
+  pointer-events: none;
+}
+
+/* The default is the inverse panel, which says "done" without a colour. */
+.tenon-toast {
+  box-sizing: border-box;
+  max-width: 100%;
+  padding: var(--tenon-dimension-125) var(--tenon-dimension-200);
+  border: 1px solid transparent;
+  border-radius: var(--tenon-radius-md);
+  background: var(--tenon-background-inverse);
+  color: var(--tenon-text-inverse);
+  font-family: var(--tenon-text-body-sm-family);
+  font-size: var(--tenon-text-body-sm-size);
+  line-height: var(--tenon-text-body-sm-line-height);
+  text-align: center;
+  box-shadow: var(--tenon-elevation-popover);
+  pointer-events: auto;
+  animation: tenon-toast-in 150ms ease-out;
+}
+.tenon-toast--leaving { opacity: 0; transform: translateY(var(--tenon-dimension-075)); transition: opacity 150ms, transform 150ms; }
+
+/* A failure must not look like the plain toast, which reads as a confirmation. */
+.tenon-toast--warning { background: var(--tenon-background-warning-subtle); color: var(--tenon-text-warning); border-color: color-mix(in srgb, var(--tenon-text-warning) 35%, transparent); }
+.tenon-toast--error   { background: var(--tenon-background-error-subtle);   color: var(--tenon-text-error);   border-color: color-mix(in srgb, var(--tenon-text-error) 35%, transparent); }
+.tenon-toast--success { background: var(--tenon-background-success-subtle); color: var(--tenon-text-success); border-color: color-mix(in srgb, var(--tenon-text-success) 35%, transparent); }
+
+@keyframes tenon-toast-in {
+  from { opacity: 0; transform: translateY(var(--tenon-dimension-075)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tenon-toast { animation: none; }
+  .tenon-toast--leaving { transition: none; }
+}

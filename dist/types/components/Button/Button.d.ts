@@ -1,11 +1,16 @@
 import { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from 'react';
-export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger' | 'confirm' | 'destructive';
+export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'dashed' | 'ghost' | 'danger' | 'confirm' | 'destructive';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: ButtonVariant;
     size?: ButtonSize;
     /** Renders as a square. The label still has to be given, via aria-label. */
     iconOnly?: boolean;
+    /** Toggled on. Sets aria-pressed too, so give it to a button that toggles
+     *  and leave it undefined on one that does not. */
+    pressed?: boolean;
+    /** Fills the width of its row. */
+    block?: boolean;
     startIcon?: ReactNode;
     endIcon?: ReactNode;
 }

@@ -33,11 +33,17 @@
 }
 
 /* ---- size ---- */
-.tenon-button--sm { font-size: var(--tenon-text-caption-size); padding: 0 var(--tenon-dimension-100); height: var(--tenon-dimension-300); }
+/* Small keeps md's 12px text since 0.20.0 and loses only height and padding.
+   At 10px a small button's label was smaller than the text beside it. */
+.tenon-button--sm { font-size: var(--tenon-text-label-size); padding: 0 var(--tenon-dimension-100); height: var(--tenon-dimension-300); }
 .tenon-button--md { font-size: var(--tenon-text-label-size);   padding: 0 var(--tenon-dimension-150); height: var(--tenon-dimension-400); }
 .tenon-button--lg { font-size: var(--tenon-text-body-size);    padding: 0 var(--tenon-dimension-200); height: var(--tenon-dimension-500); }
 
 .tenon-button--icon-only { padding: 0; aspect-ratio: 1; }
+
+/* Fills its row, for the one button at the foot of a column or a form. */
+.tenon-button--block { display: flex; width: 100%; }
+
 
 /* ---- variant ---- */
 .tenon-button--primary { background: var(--tenon-background-accent); color: var(--tenon-text-on-accent); }
@@ -47,6 +53,16 @@
 .tenon-button--secondary { background: var(--tenon-background-raised); color: var(--tenon-text-default); border-color: var(--tenon-stroke-default); }
 .tenon-button--secondary:not(:disabled):hover  { background: var(--tenon-background-hovered); border-color: var(--tenon-stroke-hovered); }
 .tenon-button--secondary:not(:disabled):active { background: var(--tenon-background-active); }
+
+/* Secondary with its fill taken away, for a small action that sits on a
+   panel rather than on the page: complete all, add a sub-task. */
+.tenon-button--outline { background: transparent; color: var(--tenon-text-subtle); border-color: var(--tenon-stroke-default); }
+.tenon-button--outline:not(:disabled):hover { color: var(--tenon-text-default); border-color: var(--tenon-text-faint); }
+
+/* The same with a dashed edge, for a button that adds something rather than
+   acting on something: a dashed box reads as a slot waiting to be filled. */
+.tenon-button--dashed { background: transparent; color: var(--tenon-text-subtle); border-color: var(--tenon-stroke-default); border-style: dashed; }
+.tenon-button--dashed:not(:disabled):hover { color: var(--tenon-text-default); border-color: var(--tenon-text-faint); }
 
 .tenon-button--ghost { background: transparent; color: var(--tenon-text-subtle); }
 .tenon-button--ghost:not(:disabled):hover  { background: var(--tenon-background-hovered); color: var(--tenon-text-default); }
@@ -71,3 +87,8 @@
 .tenon-button--destructive { background: var(--tenon-background-error); color: var(--tenon-text-on-error); }
 .tenon-button--destructive:not(:disabled):hover  { background: color-mix(in srgb, var(--tenon-background-error) 88%, var(--tenon-text-default)); }
 .tenon-button--destructive:not(:disabled):active { background: color-mix(in srgb, var(--tenon-background-error) 78%, var(--tenon-text-default)); }
+
+/* Toggled on, such as a filter that is applied. The fill is the neutral one
+   rather than the accent, so a row of pressed buttons does not shout. Last,
+   so it wins over whichever variant it is pressed on. */
+.tenon-button--pressed { background: var(--tenon-background-neutral); border-color: var(--tenon-stroke-default); color: var(--tenon-text-default); font-weight: 600; }

@@ -3,6 +3,8 @@ export interface SegmentOption<V extends string = string> {
     value: V;
     label: ReactNode;
     disabled?: boolean;
+    /** Draws a hairline before this option, to split the row into groups. */
+    separatorBefore?: boolean;
 }
 export interface SegmentedControlProps<V extends string = string> extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange' | 'role'> {
     options: SegmentOption<V>[];

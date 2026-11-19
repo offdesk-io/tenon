@@ -32,3 +32,23 @@
   color: var(--tenon-text-default);
   box-shadow: var(--tenon-elevation-raised);
 }
+
+/* A hairline before an option, splitting a row of views into groups: the
+   board's views on one side, its reports on the other. Drawn from the
+   option rather than as an element between two, so the radiogroup holds
+   radios and nothing else. Gone on a phone, where the row scrolls and a
+   divider only takes room. */
+.tenon-segmented__option--sep { position: relative; margin-left: var(--tenon-dimension-075); }
+.tenon-segmented__option--sep::before {
+  content: '';
+  position: absolute;
+  left: calc(-1 * var(--tenon-dimension-050));
+  top: var(--tenon-dimension-025);
+  bottom: var(--tenon-dimension-025);
+  width: 1px;
+  background: var(--tenon-stroke-default);
+}
+@media (max-width: 639px) {
+  .tenon-segmented__option--sep { margin-left: 0; }
+  .tenon-segmented__option--sep::before { content: none; }
+}

@@ -2,12 +2,19 @@
    the label wired up somewhere else is how a form loses its labels. */
 
 .tenon-field { display: flex; flex-direction: column; gap: var(--tenon-dimension-050); }
+/* display: flex above beats the browser's own rule for the hidden attribute. */
+.tenon-field[hidden] { display: none; }
 
+/* A name, so it reads fine in capitals, and quiet, so the value under it is
+   what the eye lands on. Overline since 0.20.0. */
 .tenon-field__label {
-  font-family: var(--tenon-text-label-family);
-  font-size: var(--tenon-text-label-size);
-  font-weight: var(--tenon-text-label-weight);
-  color: var(--tenon-text-default);
+  font-family: var(--tenon-text-overline-family);
+  font-size: var(--tenon-text-overline-size);
+  font-weight: var(--tenon-text-overline-weight);
+  line-height: var(--tenon-text-overline-line-height);
+  letter-spacing: var(--tenon-text-overline-letter-spacing);
+  text-transform: var(--tenon-text-overline-case);
+  color: var(--tenon-text-faint);
 }
 
 .tenon-field__required { color: var(--tenon-text-error); margin-left: 2px; }
