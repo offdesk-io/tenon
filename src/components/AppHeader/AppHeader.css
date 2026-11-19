@@ -1,0 +1,69 @@
+/* An app's top bar. Came from Binder, which drew it after the task board's
+   header: the same fill, rule and padding as the page layer's tn-appbar, with
+   slots rather than loose children, so every app's bar holds the same things
+   in the same order. It stays sticky on a phone, where it shrinks to two rows. */
+
+.tenon-app-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--tenon-dimension-125) var(--tenon-dimension-175);
+  padding: var(--tenon-dimension-125) var(--tenon-dimension-200);
+  background: var(--tenon-background-raised);
+  border-bottom: var(--tenon-dimension-012) solid var(--tenon-stroke-default);
+}
+
+.tenon-app-header__brand { display: flex; align-items: center; }
+.tenon-app-header__brand a { display: flex; }
+
+.tenon-app-header__gap { flex: 1 1 auto; }
+.tenon-app-header__search { flex: 0 1 200px; min-width: 0; }
+.tenon-app-header__search > * { width: 100%; }
+.tenon-app-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--tenon-dimension-100);
+  margin-left: auto;
+}
+
+/* One pill holding the view tabs, the current one raised out of it. */
+.tenon-app-header__tabs {
+  list-style: none;
+  margin: 0;
+  display: inline-flex;
+  gap: var(--tenon-dimension-037);
+  padding: var(--tenon-dimension-037);
+  background: var(--tenon-background-neutral);
+  border-radius: var(--tenon-radius-md);
+}
+
+.tenon-app-header__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--tenon-dimension-075);
+  white-space: nowrap;
+  padding: var(--tenon-dimension-050) var(--tenon-dimension-150);
+  border-radius: var(--tenon-radius-default);
+  font-family: var(--tenon-text-label-family);
+  font-size: var(--tenon-typography-size-sm);
+  font-weight: var(--tenon-typography-weight-semibold);
+  color: var(--tenon-text-subtle);
+  text-decoration: none;
+}
+.tenon-app-header__tab:hover { color: var(--tenon-text-default); text-decoration: none; }
+.tenon-app-header__tab:focus-visible { outline: 2px solid var(--tenon-stroke-focus); outline-offset: 1px; }
+.tenon-app-header__tab[aria-current="page"] {
+  background: var(--tenon-background-raised);
+  color: var(--tenon-text-default);
+  box-shadow: var(--tenon-elevation-raised);
+}
+
+/* Phone width: the brand and the actions on one row, search across the next. */
+@media (max-width: 767px) {
+  .tenon-app-header__gap { display: none; }
+  .tenon-app-header__actions { margin-left: auto; }
+  .tenon-app-header__search { order: 3; flex: 1 1 100%; }
+}

@@ -83,6 +83,14 @@ export type { MenuProps, MenuItemProps, MenuDividerProps } from './components/Me
 export { Toaster, toast } from './components/Toast/Toast';
 export type { ToasterProps, ToastOptions, ToastTone } from './components/Toast/Toast';
 
+/* From Binder in 0.22.0, which drew them after the task board: an app's top
+   bar, and the side panel a task opens in. */
+export { AppHeader } from './components/AppHeader/AppHeader';
+export type { AppHeaderProps, AppHeaderLinkProps, AppTab } from './components/AppHeader/AppHeader';
+
+export { Drawer, useDrawerTools } from './components/Drawer/Drawer';
+export type { DrawerProps } from './components/Drawer/Drawer';
+
 /* Added for the chat window, which became a React component in the chat
    engine and needed more than the first fourteen had. Each is a thing another
    window, a dashboard or a reader of model output will want too. */

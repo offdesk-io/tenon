@@ -1,0 +1,94 @@
+/* A side panel over the page, the task board's task drawer. Came from Binder.
+   It sits under a Modal (80) and a Toast (70), so a confirmation opened from
+   inside it lands on top, and over a sticky AppHeader (20).
+
+   The scrim and the panel are siblings in document.body rather than one
+   wrapper, so nothing but the scrim catches a click outside the panel. */
+
+.tenon-drawer__scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background: var(--tenon-background-overlay);
+  animation: tenon-drawer-fade 150ms ease;
+}
+
+.tenon-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 31;
+  height: 100%;
+  width: 440px;
+  max-width: 100vw;
+  display: flex;
+  flex-direction: column;
+  background: var(--tenon-background-raised);
+  color: var(--tenon-text-default);
+  border-left: var(--tenon-dimension-012) solid var(--tenon-stroke-default);
+  box-shadow: var(--tenon-elevation-overlay);
+  animation: tenon-drawer-slide 180ms ease;
+  outline: none;
+}
+
+/* Title, tools and Close on one row; the body scrolls under it. */
+.tenon-drawer__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--tenon-dimension-100);
+  padding: var(--tenon-dimension-150) var(--tenon-dimension-175);
+  border-bottom: var(--tenon-dimension-012) solid var(--tenon-stroke-default);
+}
+.tenon-drawer__title {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  font-family: var(--tenon-text-heading-5-family);
+  font-size: var(--tenon-text-heading-5-size);
+  font-weight: var(--tenon-text-heading-5-weight);
+  line-height: var(--tenon-text-heading-5-line-height);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* Filled by content inside the drawer through useDrawerTools. Empty, it
+   takes no room and no gap. */
+.tenon-drawer__tools {
+  display: flex;
+  flex: 0 1 auto;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--tenon-dimension-075);
+}
+.tenon-drawer__tools:empty { display: none; }
+.tenon-drawer__actions {
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--tenon-dimension-075);
+}
+
+.tenon-drawer__body {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: var(--tenon-dimension-150) var(--tenon-dimension-175) var(--tenon-dimension-400);
+  display: flex;
+  flex-direction: column;
+  gap: var(--tenon-dimension-150);
+}
+
+@keyframes tenon-drawer-slide { from { transform: translateX(103%); } to { transform: none; } }
+@keyframes tenon-drawer-fade { from { opacity: 0; } to { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .tenon-drawer, .tenon-drawer__scrim { animation: none; }
+}
+
+/* Phone width: the whole screen, with the title and Close on the first row
+   and the tools on a second. */
+@media (max-width: 767px) {
+  .tenon-drawer { width: 100%; border-left: 0; }
+  .tenon-drawer__tools { order: 3; flex: 1 1 100%; }
+}
