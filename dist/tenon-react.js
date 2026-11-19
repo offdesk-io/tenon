@@ -1146,7 +1146,7 @@ function ke({ brand: e, tabs: t, renderLink: n = Oe, search: r, actions: i, clas
 	return /* @__PURE__ */ p("header", {
 		className: g("tenon-app-header", a),
 		children: [
-			/* @__PURE__ */ f("div", {
+			e && /* @__PURE__ */ f("div", {
 				className: "tenon-app-header__brand",
 				children: e
 			}),

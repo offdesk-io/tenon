@@ -22,8 +22,8 @@ export interface AppHeaderLinkProps {
 }
 
 export interface AppHeaderProps {
-  /** The wordmark, usually a link home. */
-  brand: ReactNode;
+  /** The wordmark, usually a link home. Left out when the page is framed and the host shows its own. */
+  brand?: ReactNode;
   /** The app's views, drawn as one segmented pill of links. Leave them out on a phone if they move to a tab bar. */
   tabs?: AppTab[];
   /** Draws each tab's link. A plain `<a href>` unless given, so a router's link can stand in without Tenon knowing the router. */
@@ -47,7 +47,7 @@ const plainLink = ({ tab, className, current, children }: AppHeaderLinkProps) =>
 export function AppHeader({ brand, tabs, renderLink = plainLink, search, actions, className }: AppHeaderProps) {
   return (
     <header className={cx('tenon-app-header', className)}>
-      <div className="tenon-app-header__brand">{brand}</div>
+      {brand && <div className="tenon-app-header__brand">{brand}</div>}
       {tabs && tabs.length > 0 && (
         <nav aria-label="Main">
           <ul className="tenon-app-header__tabs">

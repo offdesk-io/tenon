@@ -7,7 +7,7 @@ const meta = {
   title: 'Components/AppHeader',
   component: AppHeader,
   tags: ['autodocs'],
-  args: { brand: null },
+  args: {},
   parameters: {
     layout: 'fullscreen',
     docs: {
@@ -67,3 +67,14 @@ function RoutedHeader() {
 export const WithRenderLink: Story = { render: () => <RoutedHeader /> };
 
 export const BrandAndActionsOnly: Story = { args: { brand, actions } };
+
+/* Framed inside another app, whose own bar already carries the brand. */
+export const Framed: Story = {
+  args: {
+    tabs: [
+      { to: '#home', label: 'Home', current: true },
+      { to: '#pipeline', label: 'Pipeline' },
+    ],
+    actions,
+  },
+};

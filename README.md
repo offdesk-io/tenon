@@ -371,14 +371,15 @@ loaded weights.
 a hairline under it, the brand and the view tabs on the left, search and
 actions on the right. The tabs are one pill, the current one raised out of it.
 Below 768px the gap between the two ends goes, and search takes a row of its
-own under the brand and the actions. It is the page layer's `tn-appbar` with
+own under the brand and the actions. `brand` can be left out or null, for an
+app framed inside another whose own bar already shows the brand. It is the page layer's `tn-appbar` with
 slots, for an app on React.
 
 ```ts
 interface AppTab { to: string; label: string; end?: boolean; current?: boolean }
 interface AppHeaderLinkProps { tab: AppTab; className: string; current: boolean; children: ReactNode }
 interface AppHeaderProps {
-  brand: ReactNode;
+  brand?: ReactNode;                                       // left out or null: no brand box
   tabs?: AppTab[];
   renderLink?: (props: AppHeaderLinkProps) => ReactNode;  // default: <a href={tab.to}>
   search?: ReactNode;
