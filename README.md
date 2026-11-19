@@ -257,10 +257,10 @@ rows it prints, in light and dark.
 
 ## Components
 
-Thirty-one: `Button`, `Card`, `Column`, `Badge`, `Tag`, `Stat` and `Field`, then `Modal`, `Textarea`,
+Thirty-three: `Button`, `Card`, `Column`, `Badge`, `Tag`, `Stat` and `Field`, then `Modal`, `Textarea`,
 `Input`, `Select`, `Spinner`, `Pill`, `Alert`, `Switch` and `SegmentedControl`, then `ToggleGroup`, `ToggleChip`, `StepSlider`, `TagChip`, `Calendar` with its `DateButton`, and `Dropdown` (the task board's bucket tabs, filter chip, Impact slider, task tags, date pickers and Delegate to field), then `Window`, `Markdown`,
 `EditableText` and `Disclosure`, then `DragHandle` and `DropLine`, which come with the
-`useReorder` hook, then `Menu` and `Toast`. `LinkButton` is `Button`'s anchor form and is not counted
+`useReorder` hook, then `Menu` and `Toast`, then `AppHeader` and `Drawer`. `LinkButton` is `Button`'s anchor form and is not counted
 separately. Written in TypeScript so the `.d.ts` gives prop autocomplete in a plain
 JavaScript app too.
 
@@ -361,6 +361,87 @@ side by setting a theme's resolved values as custom properties on a wrapper,
 which is why they read the same whatever the toolbar is set to. The toolbar's
 switch reads the same list, so a new theme gets its column and its switch entry
 from the build's own file.
+
+**0.22.0 adds `AppHeader` and `Drawer`, from Binder** (untagged). Binder drew
+both after the task board and wrote them to move here, so their behaviour came
+across unchanged and their values were snapped to Tenon's dimension scale and
+loaded weights.
+
+`AppHeader` is an app's top bar: sticky, full width on the raised surface with
+a hairline under it, the brand and the view tabs on the left, search and
+actions on the right. The tabs are one pill, the current one raised out of it.
+Below 768px the gap between the two ends goes, and search takes a row of its
+own under the brand and the actions. `brand` can be left out or null, for an
+app framed inside another whose own bar already shows the brand. It is the page layer's `tn-appbar` with
+slots, for an app on React.
+
+```ts
+interface AppTab { to: string; label: string; end?: boolean; current?: boolean }
+interface AppHeaderLinkProps { tab: AppTab; className: string; current: boolean; children: ReactNode }
+interface AppHeaderProps {
+  brand?: ReactNode;                                       // left out or null: no brand box
+  tabs?: AppTab[];
+  renderLink?: (props: AppHeaderLinkProps) => ReactNode;  // default: <a href={tab.to}>
+  search?: ReactNode;
+  actions?: ReactNode;
+  className?: string;
+}
+```
+
+Tenon does not depend on a router, so each tab's link is drawn by
+`renderLink`. Without one it is a plain `<a href>`, marked `aria-current="page"`
+when the tab has `current`. A router app passes its own link and puts
+`className` on it; the pill styles the current tab off `aria-current="page"`,
+which react-router's `NavLink` sets by itself, and `end` is passed through for
+it:
+
+```tsx
+<AppHeader
+  brand={brand}
+  tabs={NAV}
+  renderLink={({ tab, className, children }) => (
+    <NavLink to={tab.to} end={tab.end} className={className}>{children}</NavLink>
+  )}
+  search={<SearchBox />}
+  actions={actions}
+/>
+```
+
+`Drawer` is a side panel from the right, 440px wide, as the task board's task
+drawer, and the whole screen below 768px. It is a modal dialog: a scrim on
+`background.overlay`, focus moved in and kept in, and the page scroll locked.
+Escape, the scrim and Close shut it, and focus goes back to the opener, or to
+`returnFocus()` if that gives an element still in the page. Escape is left
+alone while an input method is composing, when something inside has already
+answered it (a `Dropdown` closing), and while a `Modal` is open over the
+drawer, which owns the keys until it closes. The head holds the title, an
+`actions` slot and Close, and the body scrolls under it. The panel carries
+`data-drawer`, so a global shortcut can tell a drawer is open.
+
+```ts
+interface DrawerProps {
+  open: boolean;
+  title: ReactNode;
+  onClose: () => void;
+  actions?: ReactNode;
+  children: ReactNode;
+  returnFocus?: () => HTMLElement | null;
+  className?: string;
+}
+```
+
+The head also has a tools slot, for controls that belong to the content but
+should stay put while it scrolls. Content inside the drawer calls
+`useDrawerTools()` and portals into what it returns, which keeps the state with
+the content. It is `undefined` outside a drawer, so the content can draw its
+tools inline there, and `null` for the first render inside one. On a phone the
+tools take a second row of the head.
+
+Switching Binder over is a change of import and of class names. The
+components' classes are `tenon-app-header*` and `tenon-drawer*` where Binder's
+were `tn-custom-appbar*`, `tn-custom-pill*`, `tn-custom-scrim` and
+`tn-custom-drawer*`, and the scrim keeps `data-testid="drawer-scrim"`. Binder's
+filter chips reuse the pill's classes, so those rules stay in Binder.
 
 **0.21.0 adds the highlight and spotlight colours.** They are the last of the
 task board's own colours, from its focus prompt and the ring round a card being
