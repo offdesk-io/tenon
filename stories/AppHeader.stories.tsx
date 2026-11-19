@@ -12,7 +12,7 @@ const meta = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component: 'Sticky along the top: the brand and the view tabs on the left, search and actions on the right. Below 768px the search takes a row of its own. The tabs are plain links unless `renderLink` draws them, which is how a router app plugs its own link in. `signOut` draws the same Sign out at the far right in every app. Put `tenon-app-page` on <body> for the recessed page surface under the bar.',
+        component: 'Sticky along the top: the brand and the view tabs on the left, search and actions on the right. 53px tall at desktop width whatever the slots hold, with each one centred. Below 768px the search takes a row of its own. The tabs are plain links unless `renderLink` draws them, which is how a router app plugs its own link in. `signOut` draws the same Sign out at the far right in every app. Put `tenon-app-page` on <body> for the recessed page surface under the bar.',
       },
     },
   },
@@ -61,6 +61,17 @@ function RoutedHeader() {
 }
 
 export const WithRenderLink: Story = { render: () => <RoutedHeader /> };
+
+/* A search box taller than Tenon's small input, as Binder's is at 33.6px.
+   The bar stays 53px and centres it. */
+export const TallSearch: Story = {
+  args: {
+    brand,
+    search: <input type="search" placeholder="Search" aria-label="Search" style={{ height: '33.6px', boxSizing: 'border-box', width: '100%' }} />,
+    actions,
+    signOut: true,
+  },
+};
 
 export const BrandAndActionsOnly: Story = { args: { brand, actions, signOut: true } };
 

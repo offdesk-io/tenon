@@ -4,21 +4,30 @@
    in the same order. It stays sticky on a phone, where it shrinks to two rows.
 
    Everything that sets the bar's size is set here rather than taken from the
-   page, so two apps draw it the same height: its own box sizing and text
-   style, and a floor of one small search box between the two paddings. A bar
-   holding only a brand is as tall as one holding search. */
+   page, so two apps draw it the same height: its own box sizing, its text
+   style, and one fixed height that every slot is centred in. The height is a
+   small search box between two 10px paddings and the rule, 53px, but the
+   padding is not what holds it: Binder's search box is taller than Tenon's
+   small input and used to push the bar to 54.6px. Now nothing in a slot can
+   change it, up to 52px of content. The bar stays on one row at desktop
+   width, since a second row would spill out of the fixed height. */
+
+/* Readable by an app that pins something under the bar. */
+:root {
+  --tenon-app-header-height: calc(var(--tenon-dimension-400) + 2 * var(--tenon-dimension-125) + var(--tenon-dimension-012));
+}
 
 .tenon-app-header {
   position: sticky;
   top: 0;
   z-index: 20;
   box-sizing: border-box;
-  min-height: calc(var(--tenon-dimension-400) + 2 * var(--tenon-dimension-125) + var(--tenon-dimension-012));
+  height: var(--tenon-app-header-height);
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   gap: var(--tenon-dimension-125) var(--tenon-dimension-175);
-  padding: var(--tenon-dimension-125) var(--tenon-dimension-200);
+  padding: 0 var(--tenon-dimension-200);
   background: var(--tenon-background-raised);
   border-bottom: var(--tenon-dimension-012) solid var(--tenon-stroke-default);
   color: var(--tenon-text-default);
@@ -80,8 +89,15 @@
   box-shadow: var(--tenon-elevation-raised);
 }
 
-/* Phone width: the brand and the actions on one row, search across the next. */
+/* Phone width: the brand and the actions on one row, search across the next.
+   The two rows set the height here, with the desktop bar as the floor. */
 @media (max-width: 767px) {
+  .tenon-app-header {
+    height: auto;
+    min-height: var(--tenon-app-header-height);
+    flex-wrap: wrap;
+    padding: var(--tenon-dimension-125) var(--tenon-dimension-200);
+  }
   .tenon-app-header__gap { display: none; }
   .tenon-app-header__actions { margin-left: auto; }
   .tenon-app-header__search { order: 3; flex: 1 1 100%; }
