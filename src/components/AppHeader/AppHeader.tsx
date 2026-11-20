@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { cx } from '../../utils';
+import { Button } from '../Button/Button';
 import './AppHeader.css';
 
 export interface AppTab {
@@ -21,6 +22,11 @@ export interface AppHeaderLinkProps {
   children: ReactNode;
 }
 
+export interface AppHeaderSignOut {
+  /** Where the form posts. `/auth/logout` unless given, the route nginx answers in front of Bench and Binder. */
+  action?: string;
+}
+
 export interface AppHeaderProps {
   /** The wordmark, usually a link home. Left out when the page is framed and the host shows its own. */
   brand?: ReactNode;
@@ -32,8 +38,12 @@ export interface AppHeaderProps {
   search?: ReactNode;
   /** The right-hand end. */
   actions?: ReactNode;
+  /** Draws Sign out after the actions, at the bar's far right: a POST form holding a small ghost button. `true` posts to `/auth/logout`. Left out or false when the app is framed and the host signs out. */
+  signOut?: boolean | AppHeaderSignOut;
   className?: string;
 }
+
+const SIGN_OUT_ACTION = '/auth/logout';
 
 const plainLink = ({ tab, className, current, children }: AppHeaderLinkProps) => (
   <a href={tab.to} className={className} aria-current={current ? 'page' : undefined}>{children}</a>
@@ -43,8 +53,11 @@ const plainLink = ({ tab, className, current, children }: AppHeaderLinkProps) =>
    the view tabs on the left, search and actions on the right. Came from
    Binder, which drew it after the task board's header. The tabs are links
    with no router behind them, so a router app passes its own link through
-   `renderLink` and the current tab is whichever one the link marks. */
-export function AppHeader({ brand, tabs, renderLink = plainLink, search, actions, className }: AppHeaderProps) {
+   `renderLink` and the current tab is whichever one the link marks. Sign out
+   is drawn here rather than passed in as an action, so every app's is the
+   same control in the same place. */
+export function AppHeader({ brand, tabs, renderLink = plainLink, search, actions, signOut, className }: AppHeaderProps) {
+  const signOutAction = signOut ? (typeof signOut === 'object' && signOut.action) || SIGN_OUT_ACTION : null;
   return (
     <header className={cx('tenon-app-header', className)}>
       {brand && <div className="tenon-app-header__brand">{brand}</div>}
@@ -61,7 +74,16 @@ export function AppHeader({ brand, tabs, renderLink = plainLink, search, actions
       )}
       <div className="tenon-app-header__gap" />
       {search && <div className="tenon-app-header__search">{search}</div>}
-      {actions && <div className="tenon-app-header__actions">{actions}</div>}
+      {(actions || signOutAction) && (
+        <div className="tenon-app-header__actions">
+          {actions}
+          {signOutAction && (
+            <form className="tenon-app-header__sign-out" method="post" action={signOutAction}>
+              <Button size="sm" variant="ghost" type="submit">Sign out</Button>
+            </form>
+          )}
+        </div>
+      )}
     </header>
   );
 }
